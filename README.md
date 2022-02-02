@@ -29,7 +29,10 @@ The poster is a community site where you can share your Thoughts & Opinions abou
 ### Topics
 
 - /topics/new
-  => Create new TOpic Page
+  => Create new Topic Page
+
+- /topics/random
+  => Watch Random Topic Page
 
 - /topics/:topicname
   => Watch Topic

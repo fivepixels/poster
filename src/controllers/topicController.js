@@ -6,6 +6,10 @@ export const watch = (req, res) => {
   return res.send("Watch Topic Page");
 };
 
+export const random = (req, res) => {
+  return res.send("Watch Random Topics Page");
+};
+
 export const getCreateNewTopic = (req, res) => {
   return res.send("Create new Topic Page");
 };
