@@ -1,13 +1,11 @@
 import express from "express";
+import { getSearch, home, postSearch } from "../controllers/rootController";
 import {
   getJoin,
   getLogin,
-  getSearch,
-  home,
   logout,
   postJoin,
   postLogin,
-  postSearch,
 } from "../controllers/userController";
 
 const rootRouter = express.Router();

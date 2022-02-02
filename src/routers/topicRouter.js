@@ -4,8 +4,9 @@ import {
   psotCreateNewTopic,
   watch,
   random,
+  getEdit,
+  postEdit,
 } from "../controllers/topicController";
-import { getEdit, postEdit } from "../controllers/userController";
 
 const topicRouter = express.Router();
 
