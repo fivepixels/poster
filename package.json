@@ -14,7 +14,7 @@
     "url": "git+https://github.com/Novelier-Webbelier/poster.git"
   },
   "scripts": {
-    "dev": "nodemon --exec babel-node index.js"
+    "dev": "nodemon --exec babel-node src/server.js"
   },
   "dependencies": {
     "express": "^4.17.2"
