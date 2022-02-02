@@ -1,0 +1,19 @@
+{
+  "name": "poster",
+  "version": "1.0.0",
+  "description": "Poster is a community site where you can share your Thoughts & Opinions about topics with others.",
+  "main": "index.js",
+  "author": "Novelier Webbelier<novelier.webbelier@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/Novelier-Webbelier/poster#readme",
+  "bugs": {
+    "url": "https://github.com/Novelier-Webbelier/poster/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Novelier-Webbelier/poster.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
