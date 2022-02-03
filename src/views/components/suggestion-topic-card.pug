@@ -1,0 +1,8 @@
+mixin suggestionTopicCard(suggestionTopic)
+  .sug-topic-card
+    .sug-topic-card__top-bar
+      span.sug-topic-card__title=suggestionTopic.title
+      span.sug-topic-card__description=suggestionTopic.description
+    .sug-topic-card__bottom-bar
+      i.fa.fa-book=suggestionTopic.posters.length
+      i.far.fa-star=suggestionTopic.meta.star
