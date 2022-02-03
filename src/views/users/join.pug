@@ -1,5 +1,22 @@
 extends ../base
-//- https://github.com/signup
 
 block content
-  h1 Join
+  .signup-box
+    //- TODO : Change h2 to image
+    h2 !Poster!
+    h1 Sign in to Poster
+    .login-box__input
+      form(method="POST")
+        label(for="email")  Email address 
+        input(type="text", id="email", name="email")
+        label(for="password")  Password
+        input(type="text", id="password", name="password")
+        label(for="confirm-password")  Confirm Password
+        input(type="text", id="confirm-password", name="confirmPassword")
+        label(for="username")  Username
+        input(type="text", id="username", name="username")
+        input(type="submit", value="Sign in")
+      .create-an-account
+        span New to Poster?
+          a(href="/join") Create an account.
+

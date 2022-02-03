@@ -7,7 +7,11 @@ html(lang="en")
     link(rel="stylesheet", href="https://unpkg.com/mvp.css")
     title #{pageTitle}
   body
-    include ./includes/header
+    if loggedIn
+      include ./includes/header
+    else
+      include ./includes/header-not-login
+
     main
       block content
     script(src="https://kit.fontawesome.com/6478f529f2.js")
