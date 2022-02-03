@@ -1,22 +1,24 @@
-const BASE_PUG_PATH = "../views/topics/";
+const BASE_PUG_PATH = "../views/";
+const TOPIC_PUG_PATH = BASE_PUG_PATH + "topics/";
 const BAD_REQUEST_CODE = 400;
 const NOT_FOUND_CODE = 404;
 const OK_CODE = 200;
 
+export const randomTopic = (req, res) => {
+  return res.render(BASE_PUG_PATH + "random", {
+    pageTitle: "Random TOPIC : TopicName",
+    type: "TOPIC",
+  });
+};
+
 export const watchTopic = (req, res) => {
-  return res.render(BASE_PUG_PATH + "watch", {
+  return res.render(TOPIC_PUG_PATH + "watch", {
     pageTitle: "Topic / TopicName",
   });
 };
 
-export const random = (req, res) => {
-  return res.render(BASE_PUG_PATH + "random", {
-    pageTitle: "Random Topic / TopicName",
-  });
-};
-
 export const getCreateNewTopic = (req, res) => {
-  return res.render(BASE_PUG_PATH + "new", {
+  return res.render(TOPIC_PUG_PATH + "new", {
     pageTitle: "Create a New Topic",
   });
 };
@@ -26,7 +28,7 @@ export const psotCreateNewTopic = (req, res) => {
 };
 
 export const getEditTopic = (req, res) => {
-  return res.render(BASE_PUG_PATH + "edit", {
+  return res.render(TOPIC_PUG_PATH + "edit", {
     pageTitle: "TopicName",
   });
 };

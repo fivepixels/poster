@@ -9,6 +9,7 @@ block content
       .my-posters__search
         .my-posters__title
           span Posters
+          //- TODO : Pug link "/new"
           button
             i.fa.fa-book
             span New
@@ -18,6 +19,7 @@ block content
         for result in [{ title: "HI" }]
           +myPostersLink(result.title)
         else
+          //- TODO : Pug link "/new"
           button
             i.fa.fa-book
             span Create new one!
@@ -29,6 +31,7 @@ block content
         for sugPos in []
           +suggestionPosterCard(sugPos)
         else
+          //- TODO : Pug link "/random/poster"
           button
             i.fas.fa-dice
             span There is no suggestion posters. Watch Random Poster?
@@ -38,6 +41,7 @@ block content
         for sugTo in [ { title: "Suggestion Topic 1", description: "Description \of topic 1", posters: [ {}, {}, {} ], meta: { star: 4, } }, { title: "Suggestion Topic 2", description: "Descriptoin \of 2", posters: [ {}, {}, {}, {}, {} ], meta: { star: 2.4, }}, ]
           +suggestionTopicCard(sugTo)
         else
+          //- TODO : Pug link "/random/topic"
           button
             i.fas.fa-dice
-            span There is no suggestion topics. Watch Random Poster?
+            span There is no suggestion topics. Watch Random Topic?

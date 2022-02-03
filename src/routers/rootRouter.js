@@ -1,9 +1,10 @@
 import express from "express";
+import { home, search } from "../controllers/rootController";
+
 import {
   getCreateNewPoster,
   psotCreateNewPoster,
 } from "../controllers/posterController";
-import { home, getSearch, postSearch } from "../controllers/rootController";
 import {
   getJoin,
   postJoin,
@@ -19,6 +20,6 @@ rootRouter.route("/new").get(getCreateNewPoster).post(psotCreateNewPoster);
 rootRouter.route("/join").get(getJoin).post(postJoin);
 rootRouter.route("/login").get(getLogin).post(postLogin);
 rootRouter.route("/logout").get(logout);
-rootRouter.route("/search").get(getSearch).post(postSearch);
+rootRouter.route("/search").get(search);
 
 export default rootRouter;

@@ -4,6 +4,7 @@ import morgan from "morgan";
 import rootRouter from "./routers/rootRouter";
 import topicRouter from "./routers/topicRouter";
 import userRotuer from "./routers/userRouter";
+import randomRouter from "./routers/randomRouter";
 import apiRouter from "./routers/apiRouter";
 
 import session from "express-session";
@@ -33,7 +34,8 @@ app.use(
 app.use(localsMiddleware);
 app.use("/", rootRouter);
 app.use("/topics", topicRouter);
-app.use("/:username", userRotuer);
 app.use("/api", apiRouter);
+app.use("/random", randomRouter);
+app.use("/:username", userRotuer);
 
 export default app;

@@ -11,12 +11,8 @@ export const home = (req, res) => {
   });
 };
 
-export const getSearch = (req, res) => {
+export const search = (req, res) => {
   return res.render(BASE_PUG_PATH + "search.pug", {
     pageTitle: "Search - SearchedKeyword",
   });
-};
-
-export const postSearch = (req, res) => {
-  return res.end();
 };
