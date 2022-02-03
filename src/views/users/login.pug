@@ -2,4 +2,17 @@ extends ../base
 //- https://github.com/login
 
 block content
-  h1 Login
+  .login-box
+    //- TODO : Change h2 to image
+    h2 !Poster!
+    h1 Sign in to Poster
+    .login-box__input
+      form(method="POST")
+        label(for="usernameOrEmail")  Username or email address
+        input(type="text", id="usernameOrEmail", name="usernameOrEmail")
+        label(for="password")  Password
+        input(type="text", id="password", name="pw")
+        input(type="submit", value="Sign in")
+      .create-an-account
+        span New to Poster?
+          a(href="/join") Create an account.
