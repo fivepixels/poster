@@ -1,28 +1,39 @@
-import dotenv from "dotenv/config";
 import express from "express";
 import morgan from "morgan";
-import "./db";
 
-// Import Routers
 import rootRouter from "./routers/rootRouter";
 import topicRouter from "./routers/topicRouter";
 import userRotuer from "./routers/userRouter";
+import apiRouter from "./routers/apiRouter";
+
+import session from "express-session";
+import MongoStore from "connect-mongo";
+import { localsMiddleware } from "./middlewares";
 
 const app = express();
-const PORT = 4000;
 
+app.use(morgan("dev"));
 app.set("view engine", "pug");
 app.set("views", process.cwd() + "/src/views");
-app.use(morgan("dev"));
 
+app.use(
+  session({
+    secret: process.env.COOKIE_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 604800000,
+    },
+    store: MongoStore.create({
+      mongoUrl: process.env.DB_URL,
+    }),
+  })
+);
+
+app.use(localsMiddleware);
 app.use("/", rootRouter);
 app.use("/topics", topicRouter);
 app.use("/:username", userRotuer);
-
-const handleListening = () => {
-  console.log(`✅ Server listening on PORT http://localhost:${PORT} 🚀`);
-};
-
-app.listen(PORT, handleListening);
+app.use("/api", apiRouter);
 
 export default app;
