@@ -1,16 +1,24 @@
 header.header
   .header__row
-    a(href="/")
-      span Poster
-    a(href="/search")
-      span Search
-    a(href="/topics/random")
-      span Watch Random Topic
+    .header-row__element
+      a(href="/")
+        span Poster
+    .header-row__element
+      a(href="/search")
+        span Search
+    .header-row__element
+      a(href="/topics/random")
+        span Watch Random Topic
 
   .header__row
-    //- TODO : add details-menu with https://github.com/github/details-menu-element
-    details
-      span +
-    details
+    details.sug-create
+      summary
+        i.fa.fa-plus
+      .details__element
+        a(href="/new") Create New Poster
+      .details__element
+        a(href="/topics/new") Create New Topic
+
+    a(href=`/${loggedInUser.username}`)
       //- TODO : Change this from text to image that logged in user
-      span Profile
+      span Your Profile
