@@ -28,7 +28,7 @@ block content
     .sug-posters
       .sug-posters__title
         span Suggestion Posters
-        for sugPos in []
+        for sugPos in [{ title: "Suggestion Poster 1", topic: { title: "suggestions1" }, owner: { username: "Novelier" } }, { title: "Suggestion Poster 2", topic: { title: "suggestions2" }, owner: { username: "Webbelier" } }]
           +suggestionPosterCard(sugPos)
         else
           //- TODO : Pug link "/random/poster"
