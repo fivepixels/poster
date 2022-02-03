@@ -33,12 +33,6 @@ export const watch = (req, res) => {
   });
 };
 
-export const getEdit = (req, res) => {
-  return res.render(BASE_PUG_PATH + "edit", {
-    pageTitle: "Edit / Username",
-  });
-};
-
-export const postEdit = (req, res) => {
+export const editProfile = (req, res) => {
   return res.end();
 };
