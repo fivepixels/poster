@@ -17,6 +17,7 @@
     "dev": "nodemon --exec babel-node src/server.js"
   },
   "dependencies": {
+    "dotenv": "^16.0.0",
     "express": "^4.17.2",
     "morgan": "^1.10.0",
     "pug": "^3.0.2"
