@@ -2,4 +2,25 @@ extends ../base
 //- https://github.com/new
 
 block content
-  h1 Create new Posters
+  .new-poster
+    h1 Create a new poster
+    form.new-poster__inputs
+      .new-poster__inputs-group
+        .new-poster__input
+          label(for="poster-title") Poster title
+          input(type="text", id="poster-title", name="title", placeholder="Write a nice title...")
+          span Can't think of what to cover? 
+            a(href="/random/topic") Choose a topic at random!
+      .new-poster__inputs-group
+        .new-poster__input
+          label(for="poster-description")
+            span Description
+            span (optional)
+          input(type="text", id="poster-description", name="description", placeholder="Write a nice description...")
+        .new-poster__input
+          label(for="poster-unipue-color")
+            span Unique Color
+            span (optional)
+          input(type="color", id="poster-unipue-color", name="uniqeColor")
+      .new-poster__submit
+        input(type="submit", value="Create poster")
