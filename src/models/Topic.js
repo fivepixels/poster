@@ -18,6 +18,11 @@ const topicSchema = new mongoose.Schema({
     required: true,
     default: Date.now,
   },
+  uniqueColor: {
+    type: String,
+    required: false,
+    default: "#ffffff",
+  },
   type: {
     type: String,
     required: true,
