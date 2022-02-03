@@ -4,7 +4,7 @@ import {
   postEditPoster,
   watchPoster,
 } from "../controllers/posterController";
-import { getEdit, postEdit, watch } from "../controllers/userController";
+import { watch } from "../controllers/userController";
 
 const userRotuer = express.Router();
 

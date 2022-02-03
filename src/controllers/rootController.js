@@ -1,3 +1,5 @@
+import Poster from "../models/Poster";
+
 const BASE_PUG_PATH = "../views/";
 const BAD_REQUEST_CODE = 400;
 const NOT_FOUND_CODE = 404;
