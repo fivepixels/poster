@@ -58,5 +58,13 @@ const topicSchema = new mongoose.Schema({
   },
 });
 
+const preventOfError = (text) => {
+  return text.replace("of", "\\of");
+};
+
+topicSchema.static("preventOfError", preventOfError);
+
+topicSchema.pre("save", preventOfError);
+
 const Topic = mongoose.model("Topic", topicSchema);
 export default Topic;

@@ -15,7 +15,7 @@ block content
         .my-posters__input
           input#searchInMyPoster(type="text", placeholder="Find a poster...")
       .my-posters__result
-        each result in [{ title: "HI" }]
+        for result in [{ title: "HI" }]
           +myPostersLink(result.title)
         else
           button
@@ -26,10 +26,18 @@ block content
     .sug-posters
       .sug-posters__title
         span Suggestion Posters
-        for sugPos in [{ title: "Suggestion Poster 1", topic: { title: "suggestions1" }, owner: { username: "Novelier" } }, { title: "Suggestion Poster 2", topic: { title: "suggestions2" }, owner: { username: "Webbelier" } } ]
+        for sugPos in []
           +suggestionPosterCard(sugPos)
+        else
+          button
+            i.fas.fa-dice
+            span There is no suggestion posters. Watch Random Poster?
     .sug-topics
       .sug-topics__title
         span Suggestion Topics
-        for sugTo in [ { title: "Suggestion Topic 1", description: "Description topic \of 1", posters: [ {}, {}, {} ], meta: { star: 4, } }, { title: "Suggestion Topic 2", description: "a", posters: [ {}, {}, {}, {}, {} ], meta: { star: 2.4, }}, ]
+        for sugTo in [ { title: "Suggestion Topic 1", description: "Description \of topic 1", posters: [ {}, {}, {} ], meta: { star: 4, } }, { title: "Suggestion Topic 2", description: "Descriptoin \of 2", posters: [ {}, {}, {}, {}, {} ], meta: { star: 2.4, }}, ]
           +suggestionTopicCard(sugTo)
+        else
+          button
+            i.fas.fa-dice
+            span There is no suggestion topics. Watch Random Poster?

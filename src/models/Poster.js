@@ -57,5 +57,13 @@ const posterSchema = new mongoose.Schema({
   },
 });
 
+const preventOfError = (text) => {
+  return text.replace("of", "\\of");
+};
+
+posterSchema.static("preventOfError", preventOfError);
+
+posterSchema.pre("save", preventOfError);
+
 const Poster = mongoose.model("Poster", posterSchema);
 export default Poster;
