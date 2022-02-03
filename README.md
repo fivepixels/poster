@@ -17,13 +17,13 @@ The poster is a community site where you can share your Thoughts & Opinions abou
 
 ### Posters
 
-- /posters/new
+- /new
   => Create new Poster Page
 
-- /posters/:postername
+- /:username/:postername
   => Watch Poster
 
-- /posters/:postername/edit
+- /:username/:postername/edit
   => Edit Poster
 
 ### Topics

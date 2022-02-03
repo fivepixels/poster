@@ -3,26 +3,34 @@ const BAD_REQUEST_CODE = 400;
 const NOT_FOUND_CODE = 404;
 const OK_CODE = 200;
 
-export const watch = (req, res) => {
-  return res.render(BASE_PUG_PATH + "watch");
+export const watchTopic = (req, res) => {
+  return res.render(BASE_PUG_PATH + "watch", {
+    pageTitle: "Topic / TopicName",
+  });
 };
 
 export const random = (req, res) => {
-  return res.render(BASE_PUG_PATH + "random");
+  return res.render(BASE_PUG_PATH + "random", {
+    pageTitle: "Random Topic / TopicName",
+  });
 };
 
 export const getCreateNewTopic = (req, res) => {
-  return res.render(BASE_PUG_PATH + "new");
+  return res.render(BASE_PUG_PATH + "new", {
+    pageTitle: "Create a New Topic",
+  });
 };
 
 export const psotCreateNewTopic = (req, res) => {
   return res.end();
 };
 
-export const getEdit = (req, res) => {
-  return res.render(BASE_PUG_PATH + "edit");
+export const getEditTopic = (req, res) => {
+  return res.render(BASE_PUG_PATH + "edit", {
+    pageTitle: "TopicName",
+  });
 };
 
-export const postEdit = (req, res) => {
-  return res.send("Edit Topic Page");
+export const postEditTopic = (req, res) => {
+  return res.end();
 };

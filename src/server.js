@@ -1,6 +1,5 @@
 import express from "express";
 import morgan from "morgan";
-import posterRouter from "./routers/posterRouter";
 
 // Import Routers
 import rootRouter from "./routers/rootRouter";
@@ -15,9 +14,8 @@ app.set("views", process.cwd() + "/src/views");
 app.use(morgan("dev"));
 
 app.use("/", rootRouter);
-app.use("/users", userRotuer);
-app.use("/posters", posterRouter);
 app.use("/topics", topicRouter);
+app.use("/:username", userRotuer);
 
 const handleListening = () => {
   console.log(`✅ Server listening on PORT http://localhost:${PORT} 🚀`);

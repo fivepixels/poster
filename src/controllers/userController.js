@@ -4,7 +4,9 @@ const NOT_FOUND_CODE = 404;
 const OK_CODE = 200;
 
 export const getJoin = (req, res) => {
-  return res.render(BASE_PUG_PATH + "join");
+  return res.render(BASE_PUG_PATH + "join", {
+    pageTitle: "Join Poster",
+  });
 };
 
 export const postJoin = (req, res) => {
@@ -12,7 +14,9 @@ export const postJoin = (req, res) => {
 };
 
 export const getLogin = (req, res) => {
-  return res.render(BASE_PUG_PATH + "login");
+  return res.render(BASE_PUG_PATH + "login", {
+    pageTitle: "Sign in to Poster",
+  });
 };
 
 export const postLogin = (req, res) => {
@@ -24,11 +28,15 @@ export const logout = (req, res) => {
 };
 
 export const watch = (req, res) => {
-  return res.render(BASE_PUG_PATH + "profile");
+  return res.render(BASE_PUG_PATH + "profile", {
+    pageTitle: "Username",
+  });
 };
 
 export const getEdit = (req, res) => {
-  return res.render(BASE_PUG_PATH + "edit");
+  return res.render(BASE_PUG_PATH + "edit", {
+    pageTitle: "Edit / Username",
+  });
 };
 
 export const postEdit = (req, res) => {
