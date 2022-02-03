@@ -40,6 +40,11 @@ const posterSchema = new mongoose.Schema({
       required: true,
     },
   },
+  topic: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: "Topic",
+  },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
