@@ -1,4 +1,5 @@
 import Topic from "../models/Topic";
+import User from "../models/User";
 
 const BASE_PUG_PATH = "../views/";
 const TOPIC_PUG_PATH = BASE_PUG_PATH + "topics/";
@@ -15,9 +16,22 @@ export const randomTopic = (req, res) => {
   });
 };
 
-export const watchTopic = (req, res) => {
+export const watchTopic = async (req, res) => {
+  const {
+    params: { topicname },
+  } = req;
+
+  const topic = await Topic.findOne({ title: topicname });
+
+  if (!topic) {
+    return res.status(NOT_FOUND_CODE).render(BASE_PUG_PATH + "404", {
+      type: "Topic",
+    });
+  }
+
   return res.render(TOPIC_PUG_PATH + "watch", {
     pageTitle: "Topic / TopicName",
+    topic,
   });
 };
 
@@ -57,6 +71,8 @@ export const psotCreateNewTopic = async (req, res) => {
       type,
       owner,
     });
+
+    req.session.loggedInUser.topics.push(createdTopic);
 
     return res.status(OK_CODE).redirect(`/topics/${createdTopic.title}`);
   } catch (error) {
