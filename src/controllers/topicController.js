@@ -3,11 +3,8 @@ import User from "../models/User";
 
 const BASE_PUG_PATH = "../views/";
 const TOPIC_PUG_PATH = BASE_PUG_PATH + "topics/";
-const BAD_REQUEST_CODE = 400;
-const NOT_FOUND_CODE = 404;
-const NOT_ACCEPTABLE_CODE = 405;
-const OK_CODE = 200;
-const CREATED_CODE = 201;
+
+import { STATUS_CODE } from "./rootController";
 
 const topicTypes = ["Agree / Disagree", "Opinion", "Many Positions"];
 
@@ -26,19 +23,21 @@ export const watchTopic = async (req, res) => {
   const topic = await Topic.findOne({ title: topicname });
 
   if (!topic) {
-    return res.status(NOT_FOUND_CODE).render(BASE_PUG_PATH + "404", {
-      type: "Topic",
-    });
+    return res
+      .status(STATUS_CODE.NOT_FOUND_CODE)
+      .render(BASE_PUG_PATH + "404", {
+        type: "Topic",
+      });
   }
 
-  return res.status(OK_CODE).render(TOPIC_PUG_PATH + "watch", {
+  return res.status(STATUS_CODE.OK_CODE).render(TOPIC_PUG_PATH + "watch", {
     pageTitle: "Topic / TopicName",
     topic,
   });
 };
 
 export const getCreateNewTopic = (req, res) => {
-  return res.render(TOPIC_PUG_PATH + "new", {
+  return res.status(STATUS_CODE.OK_CODE).render(TOPIC_PUG_PATH + "new", {
     pageTitle: "Create a New Topic",
   });
 };
@@ -50,17 +49,21 @@ export const psotCreateNewTopic = async (req, res) => {
 
   const sameTitleTopic = await Topic.find({ title });
   if (sameTitleTopic === []) {
-    return res.status(BAD_REQUEST_CODE).render(TOPIC_PUG_PATH + "new", {
-      pageTitle: "Create a New Topic",
-      errorMessage: `Topic Title : ${title} is already taken. Please choose another title`,
-    });
+    return res
+      .status(STATUS_CODE.BAD_REQUEST_CODE)
+      .render(TOPIC_PUG_PATH + "new", {
+        pageTitle: "Create a New Topic",
+        errorMessage: `Topic Title : ${title} is already taken. Please choose another title`,
+      });
   }
 
   if (!type in topicTypes) {
-    return res.status(BAD_REQUEST_CODE).render(TOPIC_PUG_PATH + "new", {
-      pageTitle: "Create a New Topic",
-      errorMessage: `Topic Type : ${type} was not provided. Please select one ot Agree / Disagree, Opinion, and Many Position`,
-    });
+    return res
+      .status(STATUS_CODE.BAD_REQUEST_CODE)
+      .render(TOPIC_PUG_PATH + "new", {
+        pageTitle: "Create a New Topic",
+        errorMessage: `Topic Type : ${type} was not provided. Please select one ot Agree / Disagree, Opinion, and Many Position`,
+      });
   }
 
   const owner = req.session.loggedInUser._id;
@@ -76,12 +79,16 @@ export const psotCreateNewTopic = async (req, res) => {
 
     req.session.loggedInUser.topics.push(createdTopic);
 
-    return res.status(OK_CODE).redirect(`/topics/${createdTopic.title}`);
+    return res
+      .status(STATUS_CODE.CREATED_CODE)
+      .redirect(`/topics/${createdTopic.title}`);
   } catch (error) {
-    return res.status(BAD_REQUEST_CODE).render(TOPIC_PUG_PATH + "new", {
-      pageTitle: "Create a New Topic",
-      errorMessage: `Error : ${error}`,
-    });
+    return res
+      .status(STATUS_CODE.BAD_REQUEST_CODE)
+      .render(TOPIC_PUG_PATH + "new", {
+        pageTitle: "Create a New Topic",
+        errorMessage: `Error : ${error}`,
+      });
   }
 };
 
@@ -93,17 +100,19 @@ export const getEditTopic = async (req, res) => {
   const topic = await Topic.findOne({ title: topicname });
 
   if (String(topic.owner._id) !== String(req.session.loggedInUser._id)) {
-    return res.status(NOT_ACCEPTABLE_CODE).render(BASE_PUG_PATH + "not-allow", {
-      pageTitle: "NOT ALLOW",
-      errorMessage: "You are not a owner of the topic.",
-      sug: {
-        text: "Write a poster with this topic?",
-        location: "/new?topic=topicName",
-      },
-    });
+    return res
+      .status(STATUS_CODE.NOT_ACCEPTABLE_CODE)
+      .render(BASE_PUG_PATH + "not-allow", {
+        pageTitle: "NOT ALLOW",
+        errorMessage: "You are not a owner of the topic.",
+        sug: {
+          text: "Write a poster with this topic?",
+          location: `/new?topic=${topicname}`,
+        },
+      });
   }
 
-  return res.render(TOPIC_PUG_PATH + "edit", {
+  return res.status(STATUS_CODE.OK_CODE).render(TOPIC_PUG_PATH + "edit", {
     pageTitle: "TopicName",
     topic,
   });
@@ -111,20 +120,20 @@ export const getEditTopic = async (req, res) => {
 
 export const postEditTopic = async (req, res) => {
   const {
-    body: { description, uniqueColor },
+    body: { title, description },
     params: { topicname },
   } = req;
 
   const topic = await Topic.findOne({ title: topicname });
 
   if (String(topic.owner._id) !== String(req.session.loggedInUser._id)) {
-    return res.sendStatus(NOT_ACCEPTABLE_CODE);
+    return res.sendStatus(STATUS_CODE.NOT_ACCEPTABLE_CODE);
   }
 
-  const updatedTopic = await Topic.findOneAndUpdate({
+  await Topic.findOneAndUpdate({
+    title,
     description,
-    uniqueColor,
   });
 
-  return res.status(CREATED_CODE).redirect(`/topics/${updatedTopic.title}`);
+  return res.status(STATUS_CODE.UPDATED_CODE).redirect(`/topics/${title}`);
 };
