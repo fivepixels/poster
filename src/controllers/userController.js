@@ -33,6 +33,8 @@ const notUsernameArray = [
   "}",
 ];
 
+const keywordsArray = ["new", "join", "login", "logout", "search"];
+
 export const getJoin = (req, res) => {
   return res.render(USER_PUG_PATH + "join", {
     pageTitle: "Sign up to Poster",
@@ -73,7 +75,7 @@ export const postJoin = async (req, res) => {
   let no = false;
   for (let i = 0; i < username.length; i++) {
     const element = username[i];
-    if (element in notUsernameArray) {
+    if (element in notUsernameArray || element in keywordsArray) {
       no = true;
       break;
     }
@@ -154,9 +156,16 @@ export const logout = (req, res) => {
   return res.redirect("/");
 };
 
-export const watch = (req, res) => {
+export const watch = async (req, res) => {
+  const {
+    params: { username },
+  } = req;
+
+  const user = await User.find({ username });
+
   return res.render(USER_PUG_PATH + "profile", {
     pageTitle: "Username",
+    user,
   });
 };
 
