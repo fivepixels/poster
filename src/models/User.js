@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
-console.log(typeof new Date().toLocaleDateString());
 
 const userSchema = new mongoose.Schema({
   username: {
