@@ -48,7 +48,7 @@ export const psotCreateNewTopic = async (req, res) => {
   } = req;
 
   const sameTitleTopic = await Topic.find({ title });
-  if (sameTitleTopic === []) {
+  if (sameTitleTopic.length !== 0) {
     return res
       .status(STATUS_CODE.BAD_REQUEST_CODE)
       .render(TOPIC_PUG_PATH + "new", {
@@ -66,7 +66,7 @@ export const psotCreateNewTopic = async (req, res) => {
       });
   }
 
-  const owner = req.session.loggedInUser._id;
+  const user = await User.findById(req.session.loggedInUser._id);
 
   try {
     const createdTopic = await Topic.create({
@@ -74,10 +74,14 @@ export const psotCreateNewTopic = async (req, res) => {
       description,
       uniqueColor,
       type,
-      owner,
+      owner: user,
     });
 
     req.session.loggedInUser.topics.push(createdTopic);
+    await User.findByIdAndUpdate(
+      req.session.loggedInUser._id,
+      req.session.loggedInUser.topics
+    );
 
     return res
       .status(STATUS_CODE.CREATED_CODE)
@@ -98,6 +102,14 @@ export const getEditTopic = async (req, res) => {
   } = req;
 
   const topic = await Topic.findOne({ title: topicname });
+
+  if (!topic) {
+    return res
+      .status(STATUS_CODE.NOT_FOUND_CODE)
+      .render(BASE_PUG_PATH + "404", {
+        type: "Topic",
+      });
+  }
 
   if (String(topic.owner._id) !== String(req.session.loggedInUser._id)) {
     return res
@@ -127,13 +139,32 @@ export const postEditTopic = async (req, res) => {
   const topic = await Topic.findOne({ title: topicname });
 
   if (String(topic.owner._id) !== String(req.session.loggedInUser._id)) {
-    return res.sendStatus(STATUS_CODE.NOT_ACCEPTABLE_CODE);
+    return res
+      .status(STATUS_CODE.NOT_ACCEPTABLE_CODE)
+      .render(BASE_PUG_PATH + "not-allow", {
+        pageTitle: "NOT ALLOW",
+        errorMessage: "You are not a owner of the topic.",
+        sug: {
+          text: "Write a poster with this topic?",
+          location: `/new?topic=${topicname}`,
+        },
+      });
   }
 
-  await Topic.findOneAndUpdate({
+  const updatedTopic = await Topic.findOneAndUpdate({
     title,
     description,
   });
+
+  req.session.loggedInUser.topics.title = createdTopic.title;
+  req.session.loggedInUser.topics.description = createdTopic.description;
+
+  const user = await User.findById(req.session.loggedInUser);
+
+  user.topics.title = updatedTopic.title;
+  user.topics.description = updatedTopic.description;
+
+  await User.findByIdAndUpdate(req.session.loggedInUser._id, user);
 
   return res.status(STATUS_CODE.UPDATED_CODE).redirect(`/topics/${title}`);
 };

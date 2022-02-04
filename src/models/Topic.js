@@ -17,7 +17,6 @@ const topicSchema = new mongoose.Schema({
   uniqueColor: {
     type: String,
     required: true,
-    default: "#ffffff",
   },
   type: {
     type: String,
