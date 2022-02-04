@@ -5,7 +5,9 @@ const BASE_PUG_PATH = "../views/";
 const TOPIC_PUG_PATH = BASE_PUG_PATH + "topics/";
 const BAD_REQUEST_CODE = 400;
 const NOT_FOUND_CODE = 404;
+const NOT_ACCEPTABLE_CODE = 405;
 const OK_CODE = 200;
+const CREATED_CODE = 201;
 
 const topicTypes = ["Agree / Disagree", "Opinion", "Many Positions"];
 
@@ -83,12 +85,46 @@ export const psotCreateNewTopic = async (req, res) => {
   }
 };
 
-export const getEditTopic = (req, res) => {
+export const getEditTopic = async (req, res) => {
+  const {
+    params: { topicname },
+  } = req;
+
+  const topic = await Topic.findOne({ title: topicname });
+
+  if (String(topic.owner._id) !== String(req.session.loggedInUser._id)) {
+    return res.status(NOT_ACCEPTABLE_CODE).render(BASE_PUG_PATH + "not-allow", {
+      pageTitle: "NOT ALLOW",
+      errorMessage: "You are not a owner of the topic.",
+      sug: {
+        text: "Write a poster with this topic?",
+        location: "/new?topic=topicName",
+      },
+    });
+  }
+
   return res.render(TOPIC_PUG_PATH + "edit", {
     pageTitle: "TopicName",
+    topic,
   });
 };
 
-export const postEditTopic = (req, res) => {
-  return res.end();
+export const postEditTopic = async (req, res) => {
+  const {
+    body: { description, uniqueColor },
+    params: { topicname },
+  } = req;
+
+  const topic = await Topic.findOne({ title: topicname });
+
+  if (String(topic.owner._id) !== String(req.session.loggedInUser._id)) {
+    return res.sendStatus(NOT_ACCEPTABLE_CODE);
+  }
+
+  const updatedTopic = await Topic.findOneAndUpdate({
+    description,
+    uniqueColor,
+  });
+
+  return res.status(CREATED_CODE).redirect(`/topics/${updatedTopic.title}`);
 };
