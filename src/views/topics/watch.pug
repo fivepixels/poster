@@ -9,10 +9,11 @@ block content
         .watch-main__title__top-bar
           div
             i.far.fa-lightbulb
-              h1 Topics
+              h1=topic.title
+              p=topic.description
           div
             div
-              i.far.fa-eyes
+              i.far.fa-eye
               span=topic.meta.views
             div
               i.far.fa-star

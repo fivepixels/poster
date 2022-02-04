@@ -31,7 +31,7 @@ export const watchTopic = async (req, res) => {
     });
   }
 
-  return res.render(TOPIC_PUG_PATH + "watch", {
+  return res.status(OK_CODE).render(TOPIC_PUG_PATH + "watch", {
     pageTitle: "Topic / TopicName",
     topic,
   });
