@@ -2,4 +2,38 @@ extends ../base
 //- https://github.com/new
 
 block content
-  h1 Create New Topics
+  .new-topic
+    h1 Create a new topic
+    form(method="POST", autocomplete="off").new-topic__inputs
+      .new-topic__inputs-group
+        span TODO : Checking if a topic exists through the API
+        label(for="topic-title") Topic title
+        input(type="text", id="topic", name="topicTitle", required=true)
+        span.new-topic__error-message Topic already does exist
+        span TODO : add link after ?
+        span https://mine-it-record.tistory.com/278
+        a(href="/new?") Write a poster with this topic &rarr;
+      .new-topic__inputs-group
+        .new-topic__input
+          label(for="topic-description")
+            span Description
+            span (optional)
+          input(type="text", id="topic-description", name="description", placeholder="Write a nice description...", maxlength=300, required=true)
+        .new-topic__input
+          label(for="topic-unipue-color")
+            span Unique Color
+            span (optional)
+          input(type="color", id="topic-unipue-color", name="uniqeColor", required=true)
+          span TODO : Choose random color if user click this btn
+          button(type="button") Choose random color
+      .new-topic__inputs-group
+        .new-topic__input
+          span TODO : TODOTODOTODOTODO!!!!!!!!!
+          label(for="types") Types
+          button(type="button", id="types", required=true) Agree / Disagree
+          button(type="button", id="types", required=true) Many Positions
+          button(type="button", id="types", required=true) Opinion
+          .new-topic__input__explain
+            input(type="text", required=true)
+      .new-topic__submit
+        input(type="submit", value="Create topic")
