@@ -111,8 +111,36 @@ export const getLogin = (req, res) => {
   });
 };
 
-export const postLogin = (req, res) => {
-  return res.end();
+export const postLogin = async (req, res) => {
+  const {
+    body: { usernameOrEmail, password },
+  } = req;
+
+  // The code below will be replaced by the API
+  // true = username / false = email
+  let type = true;
+  for (let i = 0; i < usernameOrEmail.length; i++) {
+    const element = usernameOrEmail[i];
+    if (element === "@") {
+      type = false;
+      break;
+    }
+  }
+  let user;
+
+  if (type) {
+    user = await User.find({ username: usernameOrEmail });
+  } else if (type === false) {
+    user = await User.find({ email: usernameOrEmail });
+  }
+
+  const samePassword = bcrypt.compare(user.password, password);
+
+  if (samePassword) {
+    req.session.loggedIn = true;
+    req.session.user = user;
+    return res.status(OK_CODE).redirect("/");
+  }
 };
 
 export const logout = (req, res) => {
