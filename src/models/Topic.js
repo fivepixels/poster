@@ -14,11 +14,6 @@ const topicSchema = new mongoose.Schema({
     maxlength: 300,
     trim: true,
   },
-  createdAt: {
-    type: Date,
-    required: true,
-    default: Date.now,
-  },
   uniqueColor: {
     type: String,
     required: true,
@@ -34,6 +29,11 @@ const topicSchema = new mongoose.Schema({
       required: false,
     },
   ],
+  createdAt: {
+    type: Date,
+    required: true,
+    default: new Date().toLocaleDateString,
+  },
   meta: {
     views: {
       type: Number,

@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
+console.log(typeof new Date().toLocaleDateString());
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -13,6 +15,7 @@ const userSchema = new mongoose.Schema({
   socialOnly: {
     type: Boolean,
     default: false,
+    required: true,
   },
   email: {
     type: String,
@@ -30,6 +33,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "/uploads/avatars/base-user.png",
     required: false,
+  },
+  joinedAt: {
+    type: Date,
+    default: Date.now,
+    required: true,
   },
   posters: [
     {
