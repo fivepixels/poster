@@ -21,14 +21,19 @@ const topicSchema = new mongoose.Schema({
   },
   uniqueColor: {
     type: String,
-    required: false,
+    required: true,
     default: "#ffffff",
-    unique: true,
   },
   type: {
     type: String,
     required: true,
   },
+  positions: [
+    {
+      type: String,
+      required: false,
+    },
+  ],
   meta: {
     views: {
       type: Number,
