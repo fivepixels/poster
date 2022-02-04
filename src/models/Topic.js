@@ -32,7 +32,7 @@ const topicSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     required: true,
-    default: new Date().toLocaleDateString,
+    default: Date.now,
   },
   meta: {
     views: {
@@ -65,13 +65,9 @@ const topicSchema = new mongoose.Schema({
   },
 });
 
-const preventOfError = (text) => {
-  return text.replace("of", "\\of");
-};
-
-topicSchema.static("preventOfError", preventOfError);
-
-topicSchema.pre("save", preventOfError);
+topicSchema.pre("save", function () {
+  this.description.replace(" of ", "\\of");
+});
 
 const Topic = mongoose.model("Topic", topicSchema);
 export default Topic;

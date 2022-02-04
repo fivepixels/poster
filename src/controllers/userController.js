@@ -147,7 +147,7 @@ export const postLogin = async (req, res) => {
   }
 
   req.session.loggedIn = true;
-  req.session.loggedInUser = user;
+  req.session.loggedInUser = user[0];
   return res.status(OK_CODE).redirect("/");
 };
 

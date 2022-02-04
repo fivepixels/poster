@@ -32,8 +32,6 @@ export const psotCreateNewTopic = async (req, res) => {
     body: { title, description, uniqueColor, type },
   } = req;
 
-  // TODO : Get loggedInUser
-
   const sameTitleTopic = await Topic.find({ title });
   if (sameTitleTopic === []) {
     return res.status(BAD_REQUEST_CODE).render(TOPIC_PUG_PATH + "new", {
@@ -42,12 +40,14 @@ export const psotCreateNewTopic = async (req, res) => {
     });
   }
 
-  if (!type in topicTypes === false) {
+  if (!type in topicTypes) {
     return res.status(BAD_REQUEST_CODE).render(TOPIC_PUG_PATH + "new", {
       pageTitle: "Create a New Topic",
       errorMessage: `Topic Type : ${type} was not provided. Please select one ot Agree / Disagree, Opinion, and Many Position`,
     });
   }
+
+  const owner = req.session.loggedInUser._id;
 
   try {
     const createdTopic = await Topic.create({
@@ -55,6 +55,7 @@ export const psotCreateNewTopic = async (req, res) => {
       description,
       uniqueColor,
       type,
+      owner,
     });
 
     return res.status(OK_CODE).redirect(`/topics/${createdTopic.title}`);
