@@ -2,4 +2,39 @@ extends ../base
 //- https://github.com/topics/topics
 
 block content
-  h1 Watch Topic
+  include ../components/poster-card
+  .watch
+    .watch-main
+      .watch-main__title
+        .watch-main__title__top-bar
+          div
+            i.far.fa-lightbulb
+              h1 Topics
+          div
+            div
+              i.far.fa-eyes
+              span=topic.meta.views
+            div
+              i.far.fa-star
+              span=topic.meta.star
+            div
+              if 0 <= topic.meta.raiting &&  topic.meta.raiting < 1
+                i.far.fa-tired
+              else if 1 <= topic.meta.raiting && topic.meta.raiting < 2
+                i.far.fa-frown-open
+              else if 2 <= topic.meta.raiting && topic.meta.raiting <= 3
+                i.far.fa-meh
+              else if 3 < topic.meta.raiting && topic.meta.raiting <= 4
+                i.far.fa-laugh
+              else if 4 < topic.meta.raiting && topic.meta.raiting <= 5
+                i.far.fa-grin-squint
+              span=topic.meta.raiting
+        .watch-main__title__bottom-bar
+          span Here are #{topic.posters.length} posters matching this topic...
+      .watch-main__posters
+        each poster in topic.posters
+          +posterCard(poster)
+    .watch-side-bar
+      div
+        h4
+          a(href=`/new?topic=${topic.title}`) Would you like to make a poster on this topic?

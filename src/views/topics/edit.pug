@@ -10,12 +10,12 @@ block content
           label(for="topic-description")
             span Description
             span (optional)
-          input(type="text", id="topic-description", name="description", placeholder="Write a nice description...", maxlength=300, required=true)
+          input(type="text", id="topic-description", name="description", placeholder="Write a nice description...", maxlength=300, required=true, value=topic.description)
         .new-topic__input
           label(for="topic-unipue-color")
             span Unique Color
             span (optional)
-          input(type="color", id="topic-unipue-color", name="uniqeColor", required=true)
+          input(type="color", id="topic-unipue-color", name="uniqeColor", required=true, value=topic.unipueColor)
           span TODO : Choose random color if user click this btn
           button(type="button") Choose random color
       .new-topic__submit

@@ -23,7 +23,7 @@ const posterSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     required: true,
-    default: Date.now,
+    default: new Date().toLocaleDateString,
   },
   uniqueColor: {
     type: String,
