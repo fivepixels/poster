@@ -6,6 +6,7 @@ const topicSchema = new mongoose.Schema({
     requried: true,
     maxlength: 25,
     trim: true,
+    unique: true,
   },
   description: {
     type: String,
@@ -22,6 +23,7 @@ const topicSchema = new mongoose.Schema({
     type: String,
     required: false,
     default: "#ffffff",
+    unique: true,
   },
   type: {
     type: String,

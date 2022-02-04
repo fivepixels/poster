@@ -6,6 +6,7 @@ const posterSchema = new mongoose.Schema({
     required: true,
     maxlength: 25,
     trim: true,
+    unique: true,
   },
   description: {
     type: String,
@@ -17,6 +18,7 @@ const posterSchema = new mongoose.Schema({
     type: String,
     required: true,
     maxlength: 5000,
+    unique: true,
   },
   createdAt: {
     type: Date,
@@ -27,6 +29,7 @@ const posterSchema = new mongoose.Schema({
     type: String,
     required: false,
     default: "#ffffff",
+    unique: true,
   },
   meta: {
     views: {
