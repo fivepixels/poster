@@ -12,12 +12,14 @@ html(lang="en")
         span TODO : Change h2 to logo
         h2 !Poster!
         h1 Sign in to Poster
+        if errorMessage
+          span=errorMessage
         .login-box__input
           form(method="POST")
             label(for="usernameOrEmail")  Username or email address
             input(type="text", id="usernameOrEmail", name="usernameOrEmail")
             label(for="password")  Password
-            input(type="password", id="password", name="pw")
+            input(type="password", id="password", name="password")
             input(type="submit", value="Sign in")
           .create-an-account
             span New to Poster?

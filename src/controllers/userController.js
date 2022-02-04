@@ -126,6 +126,7 @@ export const postLogin = async (req, res) => {
       break;
     }
   }
+
   let user;
 
   if (type) {
@@ -134,13 +135,18 @@ export const postLogin = async (req, res) => {
     user = await User.find({ email: usernameOrEmail });
   }
 
-  const samePassword = bcrypt.compare(user.password, password);
+  const samePassword = await bcrypt.compare(password, user[0].password);
 
-  if (samePassword) {
-    req.session.loggedIn = true;
-    req.session.user = user;
-    return res.status(OK_CODE).redirect("/");
+  if (!samePassword) {
+    return res.status(BAD_REQUEST_CODE).render(USER_PUG_PATH + "login", {
+      pageTitle: "Sign up to Poster",
+      errorMessage: `Password  : "${password}" does not match.`,
+    });
   }
+
+  req.session.loggedIn = true;
+  req.session.loggedInUser = user;
+  return res.status(OK_CODE).redirect("/");
 };
 
 export const logout = (req, res) => {
