@@ -2,4 +2,21 @@ extends ../base
 //- https://github.com/new
 
 block content
-  h1 Edit Topic
+  .new-topic
+    h1 Edit a new topic
+    form(method="POST", autocomplete="off").new-topic__inputs
+      .new-topic__inputs-group
+        .new-topic__input
+          label(for="topic-description")
+            span Description
+            span (optional)
+          input(type="text", id="topic-description", name="description", placeholder="Write a nice description...", maxlength=300, required=true)
+        .new-topic__input
+          label(for="topic-unipue-color")
+            span Unique Color
+            span (optional)
+          input(type="color", id="topic-unipue-color", name="uniqeColor", required=true)
+          span TODO : Choose random color if user click this btn
+          button(type="button") Choose random color
+      .new-topic__submit
+        input(type="submit", value="Create topic")
