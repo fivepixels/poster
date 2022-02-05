@@ -1,3 +1,5 @@
+include ../components/info
+
 mixin posterCard(poster)
   //- CSS TODO : add invert color style to text
   .poster-card(style=`background-color: ${poster.uniqeColor};`)
@@ -8,20 +10,7 @@ mixin posterCard(poster)
         h2
           a(href=`/${poster.owner.username}/${poster.title}`)=poster.title
       .poster-card__top-bar__info
-        .poster-card__top-bar__info__star
-          i.fa.fa-star
-          span=poster.meta.star
-          if 0 <= poster.meta.raiting &&  poster.meta.raiting < 1
-            i.far.fa-tired
-          else if 1 <= poster.meta.raiting && poster.meta.raiting < 2
-            i.far.fa-frown-open
-          else if 2 <= poster.meta.raiting && poster.meta.raiting <= 3
-            i.far.fa-meh
-          else if 3 < poster.meta.raiting && poster.meta.raiting <= 4
-            i.far.fa-laugh
-          else if 4 < poster.meta.raiting && poster.meta.raiting <= 5
-            i.far.fa-grin-squint
-          span=poster.meta.raiting
+        +info(poster.meta.views, poster.meta.rating, poster.meta.star)
     .poster-card__bottom-bar
       .poster-card__bottom-bar__description
         p=poster.description

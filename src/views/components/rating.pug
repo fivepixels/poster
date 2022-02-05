@@ -1,0 +1,13 @@
+mixin rating(rating)
+  .rating
+    if 0 <= rating &&  rating < 1
+      i.far.fa-tired
+    else if 1 <= rating && rating < 2
+      i.far.fa-frown-open
+    else if 2 <= rating && rating <= 3
+      i.far.fa-meh
+    else if 3 < rating && rating <= 4
+      i.far.fa-laugh
+    else if 4 < rating && rating <= 5
+      i.far.fa-grin-squint
+    span=rating

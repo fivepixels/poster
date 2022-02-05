@@ -1,4 +1,5 @@
 extends ../base
+include ../components/info
 //- https://github.com/topics/topics
 
 block content
@@ -11,25 +12,7 @@ block content
             i.far.fa-lightbulb
               h1=topic.title
               p=topic.description
-          div
-            div
-              i.far.fa-eye
-              span=topic.meta.views
-            div
-              i.far.fa-star
-              span=topic.meta.star
-            div
-              if 0 <= topic.meta.raiting &&  topic.meta.raiting < 1
-                i.far.fa-tired
-              else if 1 <= topic.meta.raiting && topic.meta.raiting < 2
-                i.far.fa-frown-open
-              else if 2 <= topic.meta.raiting && topic.meta.raiting <= 3
-                i.far.fa-meh
-              else if 3 < topic.meta.raiting && topic.meta.raiting <= 4
-                i.far.fa-laugh
-              else if 4 < topic.meta.raiting && topic.meta.raiting <= 5
-                i.far.fa-grin-squint
-              span=topic.meta.raiting
+          +info(topic.meta.views, topic.meta.rating, topic.meta.star)
         .watch-main__title__bottom-bar
           span Here are #{topic.posters.length} posters matching this topic...
       .watch-main__posters
