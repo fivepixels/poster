@@ -28,7 +28,7 @@ export const getCreateNewPoster = (req, res) => {
 
 export const psotCreateNewPoster = async (req, res) => {
   const {
-    body: { topic, title, description, uniqueColor },
+    body: { topic, title, description },
   } = req;
 
   const topicOfPoster = await Topic.findOne({ title: topic });
@@ -70,7 +70,6 @@ export const psotCreateNewPoster = async (req, res) => {
   const createdPoster = await Poster.create({
     title,
     description,
-    uniqueColor,
     topic: topicOfPoster._id,
     owner: req.session.loggedInUser._id,
   });

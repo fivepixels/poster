@@ -14,10 +14,6 @@ const topicSchema = new mongoose.Schema({
     maxlength: 300,
     trim: true,
   },
-  uniqueColor: {
-    type: String,
-    required: true,
-  },
   type: {
     type: String,
     required: true,

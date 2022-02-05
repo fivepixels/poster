@@ -25,10 +25,6 @@ const posterSchema = new mongoose.Schema({
     required: true,
     default: Date.now,
   },
-  uniqueColor: {
-    type: String,
-    required: false,
-  },
   meta: {
     views: {
       type: Number,
