@@ -4,6 +4,8 @@ extends ../base
 block content
   .new-poster
     h1 Create a new poster
+    if errorMessage
+      span=errorMessage
     form(method="POST").new-poster__inputs
       .new-poster__inputs-group
         span TODO : Checking if a topic exists through the API
@@ -26,7 +28,7 @@ block content
           label(for="poster-unipue-color")
             span Unique Color
             span (optional)
-          input(type="color", id="poster-unipue-color", name="uniqeColor")
+          input(type="color", id="poster-unipue-color", name="uniqueColor")
           span TODO : Choose random color if user click this btn
           input(type="button", value="Choose random color")
       .new-poster__submit

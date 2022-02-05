@@ -6,7 +6,6 @@ const posterSchema = new mongoose.Schema({
     required: true,
     maxlength: 25,
     trim: true,
-    unique: true,
   },
   description: {
     type: String,
@@ -18,18 +17,17 @@ const posterSchema = new mongoose.Schema({
     type: String,
     required: true,
     maxlength: 5000,
+    default: " ",
     unique: true,
   },
   createdAt: {
     type: Date,
     required: true,
-    default: new Date().toLocaleDateString,
+    default: Date.now,
   },
   uniqueColor: {
     type: String,
     required: false,
-    default: "#ffffff",
-    unique: true,
   },
   meta: {
     views: {
@@ -60,13 +58,10 @@ const posterSchema = new mongoose.Schema({
   },
 });
 
-const preventOfError = (text) => {
-  return text.replace("of", "\\of");
-};
-
-posterSchema.static("preventOfError", preventOfError);
-
-posterSchema.pre("save", preventOfError);
+posterSchema.pre("save", function () {
+  console.log(this);
+  this.text = this.text.replace(" of ", "\\of");
+});
 
 const Poster = mongoose.model("Poster", posterSchema);
 export default Poster;
