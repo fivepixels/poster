@@ -78,10 +78,9 @@ export const psotCreateNewTopic = async (req, res) => {
     });
 
     req.session.loggedInUser.topics.push(createdTopic);
-    await User.findByIdAndUpdate(
-      req.session.loggedInUser._id,
-      req.session.loggedInUser.topics
-    );
+    await User.findByIdAndUpdate(req.session.loggedInUser._id, {
+      topics: req.session.loggedInUser.topics,
+    });
 
     return res
       .status(STATUS_CODE.CREATED_CODE)
