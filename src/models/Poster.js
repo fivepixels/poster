@@ -18,7 +18,6 @@ const posterSchema = new mongoose.Schema({
     required: true,
     maxlength: 5000,
     default: " ",
-    unique: true,
   },
   createdAt: {
     type: Date,

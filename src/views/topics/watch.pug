@@ -4,21 +4,24 @@ include ../components/info
 
 block content
   include ../components/poster-card
-  .watch
-    .watch-main
-      .watch-main__title
-        .watch-main__title__top-bar
+  .watch-topic
+    .watch-topic__main
+      .watch-topic__main__title
+        .watch-topic__main__title__top-bar
           div
             i.far.fa-lightbulb
-              h1=topic.title
+              h1
+                a(href=`/${topic.owner.username}`)=topic.owner.username
+                span / 
+                a(href=`/topic/${topic.username}`)=topic.title
               p=topic.description
           +info(topic.meta.views, topic.meta.rating, topic.meta.star)
-        .watch-main__title__bottom-bar
+        .watch-topic__main__title__bottom-bar
           span Here are #{topic.posters.length} posters matching this topic...
-      .watch-main__posters
+      .watch-topic__main__posters
         each poster in topic.posters
           +posterCard(poster)
-    .watch-side-bar
+    .watch-topic-side-bar
       div
         h4
           a(href=`/new?topic=${topic.title}`) Would you like to make a poster on this topic?

@@ -20,7 +20,14 @@ export const watchTopic = async (req, res) => {
     params: { topicname },
   } = req;
 
-  const topic = await Topic.findOne({ title: topicname });
+  const topic = await Topic.findOne({ title: topicname })
+    .populate({
+      path: "posters",
+      populate: {
+        path: "owner",
+      },
+    })
+    .populate("owner");
 
   if (!topic) {
     return res
@@ -31,7 +38,7 @@ export const watchTopic = async (req, res) => {
   }
 
   return res.status(STATUS_CODE.OK_CODE).render(TOPIC_PUG_PATH + "watch", {
-    pageTitle: "Topic / TopicName",
+    pageTitle: `Topic | ${topic.title}`,
     topic,
   });
 };
@@ -44,7 +51,7 @@ export const getCreateNewTopic = (req, res) => {
 
 export const psotCreateNewTopic = async (req, res) => {
   const {
-    body: { title, description, uniqueColor, type },
+    body: { title, description, type },
   } = req;
 
   const sameTitleTopic = await Topic.find({ title });
@@ -72,7 +79,6 @@ export const psotCreateNewTopic = async (req, res) => {
     const createdTopic = await Topic.create({
       title,
       description,
-      uniqueColor,
       type,
       owner: user,
     });
