@@ -44,6 +44,7 @@ export const postJoin = async (req, res) => {
     body: { email, password, confirmPassword, username, name, location },
   } = req;
 
+  // Check Password
   if (password !== confirmPassword) {
     return res
       .status(STATUS_CODE.BAD_REQUEST_CODE)
@@ -54,8 +55,9 @@ export const postJoin = async (req, res) => {
   }
 
   // The code below will be replaced by the API
+  // Check Email
   const sameEmailUser = await User.find({ email });
-  if (sameEmailUser !== []) {
+  if (sameEmailUser.length !== 0) {
     return res
       .status(STATUS_CODE.BAD_REQUEST_CODE)
       .render(USER_PUG_PATH + "join", {
@@ -66,7 +68,7 @@ export const postJoin = async (req, res) => {
 
   // The code below will be replaced by the API
   const sameUsernameUser = await User.find({ username });
-  if (sameUsernameUser !== []) {
+  if (sameUsernameUser.length !== 0) {
     return res
       .status(STATUS_CODE.BAD_REQUEST_CODE)
       .render(USER_PUG_PATH + "join", {
