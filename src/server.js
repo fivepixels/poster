@@ -10,6 +10,7 @@ import apiRouter from "./routers/apiRouter";
 import session from "express-session";
 import MongoStore from "connect-mongo";
 import { localsMiddleware } from "./middlewares";
+import { home } from "./controllers/rootController";
 
 const app = express();
 
@@ -38,6 +39,5 @@ app.use("/", rootRouter);
 app.use("/topics", topicRouter);
 app.use("/api", apiRouter);
 app.use("/random", randomRouter);
-app.use("/:username", userRotuer);
 
 export default app;
