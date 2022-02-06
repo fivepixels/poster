@@ -34,10 +34,11 @@ app.use(
   })
 );
 
+// app.use(privateMiddleware);
 app.use(localsMiddleware);
-app.use("/", rootRouter);
 app.use("/topics", topicRouter);
 app.use("/api", apiRouter);
 app.use("/random", randomRouter);
+app.use("/", rootRouter);
 
 export default app;

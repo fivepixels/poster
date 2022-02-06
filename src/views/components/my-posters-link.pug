@@ -1,4 +1,4 @@
-mixin myPostersLink(posterName)
+mixin myPostersLink(poster)
   #myPosterLink
-    a(href=`/${loggedInUser.username}/${posterName}`)
-      span=posterName
+    a(href=`/${loggedInUser.username}/${poster.title}`)
+      span=poster.title
