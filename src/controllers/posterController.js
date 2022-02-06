@@ -19,7 +19,17 @@ export const watchPoster = async (req, res) => {
     params: { postername },
   } = req;
 
-  const poster = await Poster.findOne({ title: postername }).populate("owner");
+  const poster = await Poster.findOne({ title: postername })
+    .populate("owner")
+    .populate("topic");
+
+  if (!poster) {
+    return res
+      .status(STATUS_CODE.NOT_FOUND_CODE)
+      .render(BASE_PUG_PATH + "404", {
+        type: "Poster",
+      });
+  }
 
   return res.status(STATUS_CODE.OK_CODE).render(POSTER_PUG_PATH + "watch", {
     pageTitle: `${poster.owner.username} | ${poster.title}`,

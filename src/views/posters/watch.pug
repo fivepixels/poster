@@ -1,8 +1,26 @@
 extends ../base
+include ../components/info
+include ../components/top-bar
 //- https://github.com/Novelier-Webbelier/Novelier-Webbelier
 
 block content
   .watch-poster
+    +topBar(poster)
     .watch-poster__main
+      #poster
+        //- TODO : Render the readme
+          https://docs.github.com/en/rest/reference/markdown#render-a-markdown-document-in-raw-mode
+        article#mark-down 
     .watch-poster__side-bar
       .element
+        .element__about.element__element
+          h4 About
+          p=poster.description
+        .element__info.element__element
+          +info(poster.meta.views, poster.meta.rating, poster.meta.star)
+        .element__link.element__element
+          //- TODO : (v.JS)
+          span Copy this url of the poster?
+        .element__type.element__element
+          h4 Types
+          span=poster.topic.type
