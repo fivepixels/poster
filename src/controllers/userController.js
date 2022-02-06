@@ -173,10 +173,26 @@ export const watch = async (req, res) => {
     params: { username },
   } = req;
 
-  const user = await User.find({ username });
+  const user = await User.findOne({ username })
+    .populate({
+      path: "posters",
+      populate: {
+        path: "topic",
+      },
+    })
+    .populate("topics");
 
+  if (!user) {
+    return res
+      .status(STATUS_CODE.NOT_FOUND_CODE)
+      .render(BASE_PUG_PATH + "404", {
+        type: "User",
+      });
+  }
+
+  console.log(user);
   return res.status(STATUS_CODE.OK_CODE).render(USER_PUG_PATH + "profile", {
-    pageTitle: "Username",
+    pageTitle: `${user.username}`,
     user,
   });
 };

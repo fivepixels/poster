@@ -1,0 +1,12 @@
+mixin pinPoster(allPoster)
+  #myPosters
+    each poster in allPoster
+      div
+        div
+          i.fa.fa-book
+          h4=poster.title
+        div
+          p=poster.description
+        div
+          i.fa.fa-lightbulb
+          span=poster.topic.title

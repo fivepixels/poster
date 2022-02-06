@@ -1,5 +1,39 @@
 extends ../base
+include ../components/pin-poster
+include ../components/pin-topic
 //- https://github.com/Novelier-Webbelier
 
 block content
-  h1 Profile
+  .top-bar
+    nav
+      ul
+        li
+          a(href=`/${user.username}`) Overview
+        li
+          a(href=`/${user.username}?tab=posters`) Posters
+        li
+          a(href=`/${user.username}?tab=topics`) Topics
+        li
+          a(href=`/${user.username}?tab=stars`) Stars
+  .profile
+    .user-info
+      //- TODO : Change this text to image
+      span User Image
+      div
+        h1=user.name
+        span=user.username
+      div
+        p=user.bio
+      //- TODO : Edit Profile
+      if String(user._id) === String(loggedInUser._id)
+        div
+          button Edit Profile
+      div
+        i.fa.fa-book
+        span #{user.posters.length} Posters
+        i.far.fa-lightbulb
+        span #{user.topics.length} Topics
+    .main
+      #overview
+        +pinPoster(user.posters)
+        +pinTopic(user.topics)

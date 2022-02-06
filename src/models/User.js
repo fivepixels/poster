@@ -11,6 +11,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  bio: {
+    type: String,
+    required: false,
+    trim: true,
+  },
   socialOnly: {
     type: Boolean,
     default: false,
