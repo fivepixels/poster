@@ -12,6 +12,9 @@ header.header
     .header-row__element
       a(href="/random/poster")
         span Watch Random Poster
+    .header-row__element
+      a(href="/logout")
+        span Logout
 
   .header__row
     details.sug-create
@@ -23,5 +26,6 @@ header.header
         a(href="/topics/new") Create New Topic
 
     a(href=`/${loggedInUser.username}`)
-      span TODO : Change this from text to image that logged in user
+      //- TODO : Change this from text to image that logged in user
+      span=String(loggedInUser)
       span !Your Profile!

@@ -14,9 +14,16 @@ export const randomPoster = (req, res) => {
   });
 };
 
-export const watchPoster = (req, res) => {
+export const watchPoster = async (req, res) => {
+  const {
+    params: { postername },
+  } = req;
+
+  const poster = await Poster.findOne({ title: postername }).populate("owner");
+
   return res.status(STATUS_CODE.OK_CODE).render(POSTER_PUG_PATH + "watch", {
-    pageTitle: "Username / PosterName",
+    pageTitle: `${poster.owner.username} | ${poster.title}`,
+    poster,
   });
 };
 
@@ -43,7 +50,7 @@ export const psotCreateNewPoster = async (req, res) => {
       });
   }
 
-  const user = await User.findById(req.session.loggedInUser._id).populate(
+  const user = await User.findById(res.locals.loggedInUser._id).populate(
     "posters"
   );
 
