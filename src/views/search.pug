@@ -1,5 +1,22 @@
 extends base
+include ./components/search-poster-card
 //- https://github.com/search?q=a
 
 block content
   h1 Search
+
+  .review
+    //- TODO : Add link (v.JS)
+    div
+      span Posters
+    div
+      span Topics
+
+  .result
+    //- TODO : Visible or invisible according to the queryString of the URL - Google Translator (v.JS)
+    .posters
+      for poster in searchPoster
+        +searchPosterCard(poster)
+    .topics
+      for topic in searchTopic
+        +searchTopicCard(topic)
