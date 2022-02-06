@@ -1,0 +1,30 @@
+mixin searchPosterCard(poster)
+  include ./star
+  #searchPosterCard
+    div
+      i.fa.fa-book
+      a(href=`/${poster.owner.username}`)=poster.owner.username
+      span / 
+      a(href=`/${poster.title}`)=poster.title
+    div
+      p=poster.description
+    div
+      div
+        i.fa.fa-lightbulb
+        a(href=`/topics/${poster.topic.title}`)
+          span=poster.topic.title
+      +star(poster.meta.star)
+      div
+        span=poster.createdAt
+
+mixin searchTopicCard(topic)
+  include ./star
+  #searchTopicCard
+    div
+      div
+        i.fa.fa-lightbulb
+        a(href=`/topics/${topic.title}`)=topic.title
+      div
+        span #{topic.posters.length} Posters
+    div
+      +star(topic.meta.star)

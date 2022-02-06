@@ -10,3 +10,12 @@ mixin suggestionPosterCard(suggestionPoster)
       button
         i.far.fa-eye
         span Watch
+
+mixin suggestionTopicCard(suggestionTopic)
+  #sugTopicCard
+    .sug-topic-card__top-bar
+      span=suggestionTopic.title
+      span=suggestionTopic.description
+    .sug-topic-card__bottom-bar
+      i.fa.fa-book=suggestionTopic.posters.length
+      i.far.fa-star=suggestionTopic.meta.star
