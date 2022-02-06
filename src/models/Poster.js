@@ -58,8 +58,11 @@ const posterSchema = new mongoose.Schema({
 });
 
 posterSchema.pre("save", function () {
-  console.log(this);
   this.text = this.text.replace(" of ", "\\of");
+});
+
+posterSchema.static("setTitle", function () {
+  console.log(this);
 });
 
 const Poster = mongoose.model("Poster", posterSchema);
