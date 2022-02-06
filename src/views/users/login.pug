@@ -13,7 +13,7 @@ html(lang="en")
         h2 !Poster!
         h1 Sign in to Poster
         if errorMessage
-          span=errorMessage
+          span#errorMessage=errorMessage
         .login-box__input
           form(method="POST")
             label(for="usernameOrEmail")  Username or email address

@@ -5,8 +5,8 @@ block content
   .new-poster
     h1 Create a new poster
     if errorMessage
-      span=errorMessage
-    form(method="POST").new-poster__inputs
+      span#errorMessage=errorMessage
+    form(method="POST")
       .new-poster__inputs-group
         span TODO : Checking if a topic exists through the API
         label(for="topic") Topic

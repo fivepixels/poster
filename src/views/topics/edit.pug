@@ -4,14 +4,16 @@ extends ../base
 block content
   .new-topic
     h1 Edit a new topic
-    form(method="POST", autocomplete="off").new-topic__inputs
+    if errorMessage
+      span#errorMessage=errorMessage
+    form(method="POST", autocomplete="off")
       .new-topic__inputs-group
         .new-topic__input
           span TODO : Checking if a topic exists through the API(v.JS)
           label(for="topic-title") Topic title
           span TODO : Checking for space in the title(v.JS)
           input(type="text", id="topic", name="title", required=true, value=topic.title)
-          span.new-topic__error-message Topic already does exist
+          span.error-message Topic already does exist
           span TODO : add link after ?(v.JS)
           a(href=`/new?topic=${topicTitle}`) Write a poster with this topic &rarr;
         .new-topic__input

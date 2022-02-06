@@ -5,8 +5,8 @@ block content
   .new-topic
     h1 Create a new topic
     if errorMessage
-      span=errorMessage
-    form(method="POST", autocomplete="off").new-topic__inputs
+      span#errorMessage=errorMessage
+    form(method="POST", autocomplete="off")
       .new-topic__inputs-group
         .new-topic__input
           span TODO : Checking if a topic exists through the API(v.JS)

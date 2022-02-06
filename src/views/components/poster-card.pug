@@ -2,17 +2,17 @@ include ../components/info
 
 mixin posterCard(poster)
   //- CSS TODO : add invert color style to text
-  .poster-card(style=`background-color: ${poster.uniqeColor};`)
+  #posterCard(style=`background-color: ${poster.uniqeColor};`)
     .poster-card__top-bar
-      .poster-card__top-bar__title
+      div
         i.fa.fa-book
         a(href=`/${poster.owner.username}`)=poster.owner.username
         span /
         a(href=`/${poster.owner.username}/${poster.title}`)=poster.title
-      .poster-card__top-bar__info
+      div
         +info(poster.meta.views, poster.meta.rating, poster.meta.star)
     .poster-card__bottom-bar
-      .poster-card__bottom-bar__description
+      div
         p=poster.description
-      .poster-card__bottom-bar__created-at
+      div
         span=poster.createdAt
