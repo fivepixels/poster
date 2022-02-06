@@ -1,6 +1,6 @@
 import express from "express";
 
-import { home, search } from "../controllers/rootController";
+import { getSearch, postSearch, home } from "../controllers/rootController";
 
 import {
   getCreateNewPoster,
@@ -24,7 +24,7 @@ rootRouter.route("/new").get(getCreateNewPoster).post(psotCreateNewPoster);
 rootRouter.route("/join").get(getJoin).post(postJoin);
 rootRouter.route("/login").get(getLogin).post(postLogin);
 rootRouter.route("/logout").get(logout);
-rootRouter.route("/search").get(search);
+rootRouter.route("/search").get(getSearch).post(postSearch);
 rootRouter.use(userRotuer);
 
 export default rootRouter;

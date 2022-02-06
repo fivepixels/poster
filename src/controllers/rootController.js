@@ -1,6 +1,6 @@
-import { isValidObjectId } from "mongoose";
 import Poster from "../models/Poster";
 import Topic from "../models/Topic";
+import User from "../models/User";
 
 const BASE_PUG_PATH = "../views/";
 
@@ -36,8 +36,29 @@ export const home = async (req, res) => {
   });
 };
 
-export const search = (req, res) => {
-  return res.render(BASE_PUG_PATH + "search.pug", {
-    pageTitle: "Search - SearchedKeyword",
+export const getSearch = async (req, res) => {
+  const {
+    query: { q },
+  } = req;
+
+  const searchRegExp = new RegExp(`${q}`);
+
+  const searchPoster = await Poster.find({ search: searchRegExp })
+    .populate("owner")
+    .populate("topic");
+
+  const searchTopic = await Topic.find({ search: searchRegExp }).populate(
+    "posters"
+  );
+
+  const searchUser = await User.find({ search: searchRegExp });
+
+  return res.status(STATUS_CODE.OK_CODE).render(BASE_PUG_PATH + "search", {
+    pageTitle: `Search | ${q}`,
+    searchPoster,
+    searchTopic,
+    searchUser,
   });
 };
+
+export const postSearch = (req, res) => {};
