@@ -1,5 +1,19 @@
 extends ../base
+include ../components/top-bar
 //- https://github.com/Novelier-Webbelier/poster/edit/master/README.md
 
 block content
-  h1 Edit Posters
+  .edit-poster
+    +topBar(poster)
+    .edit-poster__main
+      .edit-poster__address
+        span
+          a(href=`/${loggedInUser.username}`)=loggedInUser.username
+        span / 
+        span
+          a(href=`/${loggedInUser.username}/${poster.title}`)=poster.title
+      #edit
+        form(method="POST")
+          //- TODO : Render the edit poster section
+      .edit-poster__submit
+        input(type="submit", value="Save changes")
