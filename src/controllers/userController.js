@@ -34,7 +34,7 @@ const notUsernameArray = [
 const keywordsArray = ["new", "join", "login", "logout", "search"];
 
 export const getJoin = (req, res) => {
-  return res.status(200).render(USER_PUG_PATH + "join", {
+  return res.status(STATUS_CODE.OK_CODE).render(USER_PUG_PATH + "join", {
     pageTitle: "Sign up to Poster",
   });
 };
@@ -165,7 +165,7 @@ export const postLogin = async (req, res) => {
 
 export const logout = (req, res) => {
   req.session.destroy();
-  return res.status(STATUS_CODE.OK_CODE).redirect("/");
+  return res.redirect("/");
 };
 
 export const watch = async (req, res) => {
