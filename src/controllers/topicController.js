@@ -8,10 +8,21 @@ import { STATUS_CODE } from "./rootController";
 
 const topicTypes = ["Agree / Disagree", "Opinion", "Many Positions"];
 
-export const randomTopic = (req, res) => {
-  return res.render(BASE_PUG_PATH + "random", {
-    pageTitle: "Random TOPIC : TopicName",
-    type: "TOPIC",
+export const randomTopic = async (req, res) => {
+  const topics = await Topic.find({})
+    .populate({
+      path: "posters",
+      populate: {
+        path: "owner",
+      },
+    })
+    .populate("owner");
+
+  const topic = topics[Math.floor(Math.random() * topics.length)];
+
+  return res.status(STATUS_CODE.OK_CODE).render(TOPIC_PUG_PATH + "watch", {
+    pageTitle: `RANDOM TOPIC | ${topic.title}`,
+    topic,
   });
 };
 
