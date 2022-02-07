@@ -17,7 +17,6 @@ const posterSchema = new mongoose.Schema({
     type: String,
     required: true,
     maxlength: 5000,
-    default: " ",
   },
   createdAt: {
     type: Date,
@@ -59,10 +58,6 @@ const posterSchema = new mongoose.Schema({
 
 posterSchema.pre("save", function () {
   this.text = this.text.replace(" of ", "\\of");
-});
-
-posterSchema.static("setTitle", function () {
-  console.log(this);
 });
 
 const Poster = mongoose.model("Poster", posterSchema);

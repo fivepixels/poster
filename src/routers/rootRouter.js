@@ -4,7 +4,7 @@ import { home, search } from "../controllers/rootController";
 
 import {
   getCreateNewPoster,
-  psotCreateNewPoster,
+  postCreateNewPoster,
 } from "../controllers/posterController";
 
 import {
@@ -20,7 +20,7 @@ import userRotuer from "./userRouter";
 const rootRouter = express.Router();
 
 rootRouter.route("/").get(home);
-rootRouter.route("/new").get(getCreateNewPoster).post(psotCreateNewPoster);
+rootRouter.route("/new").get(getCreateNewPoster).post(postCreateNewPoster);
 rootRouter.route("/join").get(getJoin).post(postJoin);
 rootRouter.route("/login").get(getLogin).post(postLogin);
 rootRouter.route("/logout").get(logout);

@@ -47,7 +47,7 @@ export const getCreateNewPoster = (req, res) => {
   });
 };
 
-export const psotCreateNewPoster = async (req, res) => {
+export const postCreateNewPoster = async (req, res) => {
   const {
     body: { topic, title, description },
   } = req;
@@ -73,24 +73,21 @@ export const psotCreateNewPoster = async (req, res) => {
   for (let i = 0; i < user.posters.length; i++) {
     const element = user.posters[i];
     if (element.title === title) {
-      no = true;
-      break;
+      return res
+        .status(STATUS_CODE.BAD_REQUEST_CODE)
+        .render(POSTER_PUG_PATH + "new", {
+          pageTitle: "Create a New Poster",
+          errorMessage: `Poster Title : ${title} is already taken in your posters. Please choose another poster title.`,
+        });
     }
   }
 
-  if (no) {
-    return res
-      .status(STATUS_CODE.BAD_REQUEST_CODE)
-      .render(POSTER_PUG_PATH + "new", {
-        pageTitle: "Create a New Poster",
-        errorMessage: `Poster Title : ${title} is already taken in your posters. Please choose another poster title.`,
-      });
-  }
-
   // Create a Poster.
+  const text = `# ${title}`;
   const createdPoster = await Poster.create({
     title,
     description,
+    text,
     topic: topicOfPoster._id,
     owner: req.session.loggedInUser._id,
   });
