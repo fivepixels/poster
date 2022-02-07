@@ -36,7 +36,7 @@ export const home = async (req, res) => {
   });
 };
 
-export const getSearch = async (req, res) => {
+export const search = async (req, res) => {
   const {
     query: { q },
   } = req;
@@ -60,5 +60,3 @@ export const getSearch = async (req, res) => {
     searchUser,
   });
 };
-
-export const postSearch = (req, res) => {};
