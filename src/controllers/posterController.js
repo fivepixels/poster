@@ -114,9 +114,48 @@ export const postCreateNewPoster = async (req, res) => {
     .redirect(`/${req.session.loggedInUser.username}/${createdPoster.title}`);
 };
 
-export const getEditPoster = (req, res) => {
+export const getEditPoster = async (req, res) => {
+  const {
+    params: { username, postername },
+  } = req;
+
+  const writeUser = await User.findOne({ username });
+
+  if (String(writeUser._id) !== String(req.session.loggedInUser._id)) {
+    return res
+      .status(STATUS_CODE.NOT_ACCEPTABLE_CODE)
+      .render(BASE_PUG_PATH + "not-allow", {
+        pageTitle: "NOT ALLOW",
+        errorMessage: "You do not have permission to edit this poster.",
+        sug: {
+          location: `/${username}/${postername}`,
+          text: "Watch Poster",
+        },
+      });
+  }
+
+  const user = await writeUser.populate("posters");
+  let poster;
+
+  for (let i = 0; i < user.posters.length; i++) {
+    const element = user.posters[i];
+    if (element.title === postername) {
+      poster = element;
+      break;
+    }
+  }
+
+  if (!poster) {
+    return res
+      .status(STATUS_CODE.NOT_FOUND_CODE)
+      .render(BASE_PUG_PATH + "404", {
+        type: "Poster",
+      });
+  }
+
   return res.status(STATUS_CODE.OK_CODE).render(POSTER_PUG_PATH + "edit", {
-    pageTitle: "Username / PosterName",
+    pageTitle: `Edit | ${postername}`,
+    poster,
   });
 };
 
