@@ -15,11 +15,16 @@ block content
       .side-bar__about
         h4 About
         p=poster.description
-      .side-bar__info
+      .side-bar
         +info(poster.meta.views, poster.meta.rating, poster.meta.star)
-      .side-bar__link
+      .side-bar
         //- TODO : (v.JS)
         span Copy this url of the poster?
-      .side-bar__type
+      .side-bar
         h4 Types
         span=poster.topic.type
+      if String(poster.owner._id) === String(loggedInUser._id)
+        .side-bar
+          span Want to make this poster better?
+          span
+            a(href=`${poster.title}/edit`) If so, edit your poster!
