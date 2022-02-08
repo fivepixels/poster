@@ -1,30 +1,32 @@
 extends ../base
 include ../components/info
 include ../components/top-bar
+include ../includes/readme
 //- https://github.com/Novelier-Webbelier/Novelier-Webbelier
 
 block content
-  .watch-poster
-    +topBar(poster)
-    .watch-poster__main
-      #poster
-        //- TODO : Render the readme
-          https://docs.github.com/en/rest/reference/markdown#render-a-markdown-document-in-raw-mode
-        article#mark-down 
-    .watch-poster__side-bar
-      .side-bar__about
-        h4 About
-        p=poster.description
-      .side-bar
-        +info(poster.meta.views, poster.meta.rating, poster.meta.star)
-      .side-bar
-        //- TODO : (v.JS)
-        span Copy this url of the poster?
-      .side-bar
-        h4 Types
-        span=poster.topic.type
-      if String(poster.owner._id) === String(loggedInUser._id)
+  if errorMessage
+    span#errorMessage=errorMessage
+  else
+    .watch-poster
+      +topBar(poster)
+      .watch-poster__main
+        #poster
+          //- Print markdown...bb
+      .watch-poster__side-bar
+        .side-bar__about
+          h4 About
+          p=poster.description
         .side-bar
-          span Want to make this poster better?
-          span
-            a(href=`${poster.title}/edit`) If so, edit your poster!
+          +info(poster.meta.views, poster.meta.rating, poster.meta.star)
+        .side-bar
+          //- TODO : (v.JS)
+          span Copy this url of the poster?
+        .side-bar
+          h4 Types
+          span=poster.topic.type
+        if String(poster.owner._id) === String(loggedInUser._id)
+          .side-bar
+            span Want to make this poster better?
+            span
+              a(href=`${poster.title}/edit`) If so, edit your poster!
