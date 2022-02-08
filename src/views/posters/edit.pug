@@ -15,5 +15,5 @@ block content
       #edit
         form(method="POST")
           //- TODO : Render the edit poster section
-      .edit-poster__submit
-        input(type="submit", value="Save changes")
+          textarea(name="content", cols="30", rows="10")=poster.text
+          input(type="submit", value="Save changes")
