@@ -75,7 +75,6 @@ export const postCreateNewPoster = async (req, res) => {
 
   const topicOfPoster = await Topic.findOne({ title: topic });
 
-  // Check if the topic of the poster does not exist.
   if (!topicOfPoster) {
     return res
       .status(STATUS_CODE.NOT_FOUND_CODE)
@@ -89,7 +88,6 @@ export const postCreateNewPoster = async (req, res) => {
     "posters"
   );
 
-  // Check if the poster title doss already taken in all of the posters which are written by the user.
   let no = false;
   for (let i = 0; i < user.posters.length; i++) {
     const element = user.posters[i];
@@ -103,7 +101,6 @@ export const postCreateNewPoster = async (req, res) => {
     }
   }
 
-  // Create a Poster.
   const text = `# ${title}`;
   const createdPoster = await Poster.create({
     title,
@@ -113,10 +110,8 @@ export const postCreateNewPoster = async (req, res) => {
     owner: req.session.loggedInUser._id,
   });
 
-  // Add poster to User which is in the session.
   req.session.loggedInUser.posters.push(createdPoster);
 
-  // Update user in the database.
   const updatedUser = await User.findByIdAndUpdate(
     req.session.loggedInUser._id,
     {
@@ -124,7 +119,6 @@ export const postCreateNewPoster = async (req, res) => {
     }
   );
 
-  // Update topic in the database.
   topicOfPoster.posters.push(createdPoster);
   const updatedTopic = await Topic.findByIdAndUpdate(topicOfPoster._id, {
     posters: topicOfPoster.posters,
@@ -156,15 +150,10 @@ export const getEditPoster = async (req, res) => {
   }
 
   const user = await writeUser.populate("posters");
-  let poster;
-
-  for (let i = 0; i < user.posters.length; i++) {
-    const element = user.posters[i];
-    if (element.title === postername) {
-      poster = element;
-      break;
-    }
-  }
+  const poster = await Poster.findOne({
+    title: postername,
+    owner: req.session.loggedInUser._id,
+  });
 
   if (!poster) {
     return res
@@ -173,6 +162,8 @@ export const getEditPoster = async (req, res) => {
         type: "Poster",
       });
   }
+
+  await poster.populate("owner");
 
   return res.status(STATUS_CODE.OK_CODE).render(POSTER_PUG_PATH + "edit", {
     pageTitle: `Edit | ${postername}`,
@@ -193,22 +184,13 @@ export const postEditPoster = async (req, res) => {
   }
 
   const user = await writeUser.populate("posters");
-  let poster;
-
-  for (let i = 0; i < user.posters.length; i++) {
-    const element = user.posters[i];
-    if (element.title === postername) {
-      poster = element;
-      break;
-    }
-  }
+  const poster = await Poster.findOne({
+    title: postername,
+    owner: req.session.loggedInUser._id,
+  });
 
   if (!poster) {
-    return res
-      .status(STATUS_CODE.NOT_FOUND_CODE)
-      .render(BASE_PUG_PATH + "404", {
-        type: "Poster",
-      });
+    return res.sendStatus(STATUS_CODE.NOT_FOUND_CODE);
   }
 
   const editedPoster = await Poster.findOneAndUpdate(
