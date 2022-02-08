@@ -196,10 +196,3 @@ export const watch = async (req, res) => {
     user,
   });
 };
-
-/**
- * API
- */
-export const editProfile = (req, res) => {
-  return res.end();
-};

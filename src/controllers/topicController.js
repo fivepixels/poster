@@ -111,6 +111,3 @@ export const psotCreateNewTopic = async (req, res) => {
       });
   }
 };
-
-// API
-export const edit = async (req, res) => {};
