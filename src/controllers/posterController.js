@@ -180,6 +180,45 @@ export const getEditPoster = async (req, res) => {
   });
 };
 
-export const postEditPoster = (req, res) => {
-  return res.end();
+export const postEditPoster = async (req, res) => {
+  const {
+    params: { username, postername },
+    body: { content },
+  } = req;
+
+  const writeUser = await User.findOne({ username });
+
+  if (String(writeUser._id) !== String(req.session.loggedInUser._id)) {
+    return res.sendStatus(STATUS_CODE.NOT_ACCEPTABLE_CODE);
+  }
+
+  const user = await writeUser.populate("posters");
+  let poster;
+
+  for (let i = 0; i < user.posters.length; i++) {
+    const element = user.posters[i];
+    if (element.title === postername) {
+      poster = element;
+      break;
+    }
+  }
+
+  if (!poster) {
+    return res
+      .status(STATUS_CODE.NOT_FOUND_CODE)
+      .render(BASE_PUG_PATH + "404", {
+        type: "Poster",
+      });
+  }
+
+  const editedPoster = await Poster.findOneAndUpdate(
+    { title: postername },
+    {
+      text: content,
+    }
+  );
+
+  return res
+    .status(STATUS_CODE.UPDATED_CODE)
+    .redirect(`/${username}/${postername}`);
 };
