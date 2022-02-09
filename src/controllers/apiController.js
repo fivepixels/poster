@@ -6,8 +6,6 @@ import { STATUS_CODE } from "./rootController";
 
 const BASE_PUG_PATH = "../views/";
 
-export const editProfile = (req, res) => {
-  return res.end();
-};
+export const editProfile = (req, res) => {};
 
 export const editTopic = async (req, res) => {};

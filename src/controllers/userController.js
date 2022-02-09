@@ -190,7 +190,6 @@ export const watch = async (req, res) => {
       });
   }
 
-  console.log(user);
   return res.status(STATUS_CODE.OK_CODE).render(USER_PUG_PATH + "profile", {
     pageTitle: `${user.username}`,
     user,
