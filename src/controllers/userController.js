@@ -195,3 +195,7 @@ export const watch = async (req, res) => {
     user,
   });
 };
+
+export const getEditProfile = (req, res) => {};
+
+export const postEditProfile = (req, res) => {};

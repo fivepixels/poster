@@ -6,7 +6,11 @@ import {
   watchPoster,
 } from "../controllers/posterController";
 
-import { watch } from "../controllers/userController";
+import {
+  getEditProfile,
+  postEditProfile,
+  watch,
+} from "../controllers/userController";
 
 const userRotuer = express.Router();
 
@@ -16,5 +20,7 @@ userRotuer
   .route("/:username/:postername/edit")
   .get(getEditPoster)
   .post(postEditPoster);
+
+userRotuer.route("/edit").get(getEditProfile).post(postEditProfile);
 
 export default userRotuer;
