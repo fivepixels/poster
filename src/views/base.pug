@@ -4,7 +4,7 @@ html(lang="en")
     meta(charset="UTF-8")
     meta(http-equiv="X-UA-Compatible", content="IE=edge")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    link(rel="stylesheet", href="https://unpkg.com/mvp.css")
+    link(rel="stylesheet", href="/static/css/styles.css")
     title #{pageTitle}
   body
     if loggedIn
@@ -14,6 +14,8 @@ html(lang="en")
 
     main
       block content
-    script(src="https://kit.fontawesome.com/6478f529f2.js")
+
     block scripts
+    script(src="https://kit.fontawesome.com/6478f529f2.js")
+    script(src="/static/js/main.js")
   include ./includes/footer

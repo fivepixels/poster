@@ -15,7 +15,7 @@
   },
   "scripts": {
     "dev:server": "nodemon",
-    "dev:assets": "webpack --mode=development -w"
+    "dev:assets": "webpack"
   },
   "dependencies": {
     "@octokit/core": "^3.5.1",

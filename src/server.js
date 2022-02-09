@@ -34,7 +34,7 @@ app.use(
   })
 );
 
-// app.use(privateMiddleware);
+app.use("/static", express.static("assets"));
 app.use(localsMiddleware);
 app.use("/topics", topicRouter);
 app.use("/api", apiRouter);
