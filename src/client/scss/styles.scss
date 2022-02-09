@@ -1,6 +1,11 @@
-@import "./configuration/_variables.scss";
-@import "./configuration/_reset.scss";
+// Configuration
 
-body {
-  background-color: $light;
-}
+@import "./configuration/_variables";
+@import "./configuration/_reset";
+@import "./configuration/_default";
+
+// Components
+
+@import "./components/header.scss";
+
+// Screens

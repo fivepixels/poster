@@ -9,7 +9,7 @@ block content
       .edit-poster__address
         span
           a(href=`/${loggedInUser.username}`)=loggedInUser.username
-        span / 
+        span.separator / 
         span
           a(href=`/${loggedInUser.username}/${poster.title}`)=poster.title
       #edit

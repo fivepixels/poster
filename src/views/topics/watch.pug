@@ -12,7 +12,7 @@ block content
             i.far.fa-lightbulb
               h1
                 a(href=`/${topic.owner.username}`)=topic.owner.username
-                span / 
+                span.separator / 
                 a(href=`/topic/${topic.username}`)=topic.title
               p=topic.description
           +info(topic.meta.views, topic.meta.rating, topic.meta.star)

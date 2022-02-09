@@ -1,0 +1,17 @@
+body {
+  font-family: "system-ui";
+  color: $text-color;
+  background-color: $brand-color;
+  a {
+    color: $link-color;
+  }
+  .span.separator {
+    color: $defocus-color;
+  }
+  input {
+    transition: width 2s ease-in-out;
+    &:focus {
+      outline: 1px solid rgba($color: $link-color, $alpha: 1);
+    }
+  }
+}

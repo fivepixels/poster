@@ -2,19 +2,16 @@ header
   .header__row
     .header-row__element
       a(href="/")
-        span Poster
+        span.logo P
     .header-row__element
-      form
-        input(type="text")
+      input(type="text", placeholder="Search or jump to...")
     .header-row__element
       a(href="/random/topic")
-        span Watch Random Topic
+        span Random Topic
     .header-row__element
       a(href="/random/poster")
-        span Watch Random Poster
+        span Random Poster
     .header-row__element
-      a(href="/logout")
-        span Logout
 
   .header__row
     details.sug-create
@@ -25,6 +22,16 @@ header
       .details__element
         a(href="/topics/new") Create New Topic
 
-    a(href=`/${loggedInUser.username}`)
-      //- TODO : Change this from text to image that logged in user
-      span !Your Profile!
+    details.sug-profile
+      summary
+        span Your Profile
+      .details__element
+        a(href=`/${loggedInUser.username}`) Signed in as '#{loggedInUser.username}'
+      .details__element
+        a(href="/new") Create New Poster
+      .details__element
+        a(href="/topics/new") Create New Topic
+      .details__element
+        a(href="/logout")
+          span Logout
+

@@ -7,7 +7,7 @@ mixin posterCard(poster)
       div
         i.fa.fa-book
         a(href=`/${poster.owner.username}`)=poster.owner.username
-        span /
+        span.separator /
         a(href=`/${poster.owner.username}/${poster.title}`)=poster.title
       div
         +info(poster.meta.views, poster.meta.rating, poster.meta.star)

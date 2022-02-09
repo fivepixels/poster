@@ -34,8 +34,8 @@ app.use(
   })
 );
 
-app.use("/static", express.static("assets"));
 app.use(localsMiddleware);
+app.use("/static", express.static("assets"));
 app.use("/topics", topicRouter);
 app.use("/api", apiRouter);
 app.use("/random", randomRouter);
