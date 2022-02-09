@@ -1,29 +1,17 @@
-doctype html
-html(lang="en")
-  head
-    meta(charset="UTF-8")
-    meta(http-equiv="X-UA-Compatible", content="IE=edge")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    link(rel="stylesheet", href="https://unpkg.com/mvp.css")
-    title #{pageTitle}
-  body
-    main
-      .signin-box
-        span TODO : Change h2 to logo
-        h2 !Poster!
-        h1 Sign in to Poster
-        if errorMessage
-          span#errorMessage=errorMessage
-        .login-box__input
-          form(method="POST")
-            label(for="usernameOrEmail")  Username or email address
-            input(type="text", id="usernameOrEmail", name="usernameOrEmail")
-            label(for="password")  Password
-            input(type="password", id="password", name="password")
-            input(type="submit", value="Sign in")
-          .create-an-account
-            span New to Poster?
-              a(href="/join") Create an account.
-    script(src="https://kit.fontawesome.com/6478f529f2.js")
-    block scripts
-  include ../includes/footer
+extends ../base
+
+block content
+  .signin-box
+    h1 Sign in to Poster
+    if errorMessage
+      span#errorMessage=errorMessage
+    .login-box__input
+      form(method="POST")
+        label(for="usernameOrEmail")  Username or email address
+        input(type="text", id="usernameOrEmail", name="usernameOrEmail")
+        label(for="password")  Password
+        input(type="password", id="password", name="password")
+        input(type="submit", value="Sign in")
+      .create-an-account
+        span New to Poster?
+          a(href="/join") Create an account.

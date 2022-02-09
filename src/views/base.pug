@@ -7,10 +7,7 @@ html(lang="en")
     link(rel="stylesheet", href="/static/css/styles.css")
     title #{pageTitle}
   body
-    if loggedIn
-      include ./includes/header
-    else
-      include ./includes/header-not-login
+    include ./includes/header
 
     main
       block content

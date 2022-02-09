@@ -13,25 +13,33 @@ header
         span Random Poster
     .header-row__element
 
-  .header__row
-    details.sug-create
-      summary
-        i.fa.fa-plus
-      .details__element
-        a(href="/new") Create New Poster
-      .details__element
-        a(href="/topics/new") Create New Topic
+  if loggedIn
+    .header__row
+      details.sug-create
+        summary
+          i.fa.fa-plus
+        .details__element
+          a(href="/new") Create New Poster
+        .details__element
+          a(href="/topics/new") Create New Topic
 
-    details.sug-profile
-      summary
-        span Your Profile
-      .details__element
-        a(href=`/${loggedInUser.username}`) Signed in as '#{loggedInUser.username}'
-      .details__element
-        a(href="/new") Create New Poster
-      .details__element
-        a(href="/topics/new") Create New Topic
-      .details__element
-        a(href="/logout")
-          span Logout
-
+      details.sug-profile
+        summary
+          span Your Profile
+        .details__element
+          a(href=`/${loggedInUser.username}`) Signed in as '#{loggedInUser.username}'
+        .details__element
+          a(href="/new") Create New Poster
+        .details__element
+          a(href="/topics/new") Create New Topic
+        .details__element
+          a(href="/logout")
+            span Logout
+  else
+    .header__row
+      .header-row__element
+        a(href="/login")
+          span Sign in
+      .header-row__element
+        a(href="/join")
+          span Sign up
