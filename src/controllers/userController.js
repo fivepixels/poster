@@ -196,6 +196,89 @@ export const watch = async (req, res) => {
   });
 };
 
-export const getEditProfile = (req, res) => {};
+export const getEditProfile = (req, res) => {
+  return res.render(USER_PUG_PATH + "edit", {
+    pageTitle: "Edit Profile",
+  });
+};
 
-export const postEditProfile = (req, res) => {};
+export const postEditProfile = async (req, res) => {
+  const {
+    session: { loggedInUser },
+    body: {
+      name,
+      username,
+      bio,
+      email,
+      location,
+      oldPassword,
+      newPassword,
+      confirmNewPassword,
+    },
+    file,
+  } = req;
+
+  const user = await User.findById(loggedInUser._id);
+
+  if (oldPassword !== "" || newPassword !== "" || confirmNewPassword !== "") {
+    if (newPassword !== confirmNewPassword) {
+      return res
+        .status(STATUS_CODE.BAD_REQUEST_CODE)
+        .render(USER_PUG_PATH + "edit", {
+          pageTitle: "Edit Profile",
+          errorMessage: "Password does not match.",
+        });
+    }
+
+    const hashedOldPassword = await bcrypt.hash(oldPassword, 5);
+    const match = await bcrypt.compare(oldPassword, user.password);
+
+    if (!match) {
+      return res
+        .status(STATUS_CODE.BAD_REQUEST_CODE)
+        .render(USER_PUG_PATH + "edit", {
+          pageTitle: "Edit Profile",
+          errrorMessage: "Old password does not match.",
+        });
+    }
+  }
+
+  const sameUsernameUser = await User.findOne({ username });
+
+  if (sameUsernameUser) {
+    if (String(sameUsernameUser._id) !== String(loggedInUser._id)) {
+      return res
+        .status(STATUS_CODE.BAD_REQUEST_CODE)
+        .render(USER_PUG_PATH + "edit", {
+          pageTitle: "Edit Profile",
+          errrorMessage: `Username : ${username} is already taken.`,
+        });
+    }
+  }
+
+  const sameEmailUser = await User.findOne({ email });
+  if (sameEmailUser) {
+    if (String(sameEmailUser._id) !== String(loggedInUser._id)) {
+      return res
+        .status(STATUS_CODE.BAD_REQUEST_CODE)
+        .render(USER_PUG_PATH + "edit", {
+          pageTitle: "Edit Profile",
+          errorMessage: `Email:  ${email} is already taken.`,
+        });
+    }
+  }
+
+  const updatedUser = await User.findByIdAndUpdate(loggedInUser._id, {
+    name,
+    username,
+    bio,
+    email,
+    avatarUrl: file ? file.path : user.avatarUrl,
+    location,
+    password: newPassword ? newPassword : loggedInUser.password,
+  });
+
+  req.session.loggedInUser = updatedUser;
+
+  return res.status(STATUS_CODE.UPDATED_CODE).redirect(`/${username}`);
+};

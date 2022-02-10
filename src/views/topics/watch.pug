@@ -13,7 +13,7 @@ block content
               h1
                 a(href=`/${topic.owner.username}`)=topic.owner.username
                 span.separator / 
-                a(href=`/topic/${topic.username}`)=topic.title
+                a(href=`/topics/${topic.title}`)=topic.title
               p=topic.description
           +info(topic.meta.views, topic.meta.rating, topic.meta.star)
         .watch-topic__main__title__bottom-bar
