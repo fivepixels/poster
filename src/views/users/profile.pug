@@ -24,34 +24,13 @@ block content
         p=user.bio
       if String(user._id) === String(loggedInUser._id)
         div
-          button#edit-profile-btn.none-display Edit Profile
+          button#edit-profile-btn Edit Profile
       div
         i.fa.fa-book
         span #{user.posters.length} Posters
         i.far.fa-lightbulb
         span #{user.topics.length} Topics
-      #edit-info.none-display
-        form(method="POST", enctype="multipart/form-data")
-          label(for="name") Name
-          input(type="text", id="name", name="name")
-          label(for="username") Username
-          input(type="text", id="username", name="username")
-          label(for="bio") Bio
-          input(type="text", id="bio", name="bio")
-          label(for="avatar") Avatar
-          input(type="file", id="avatar", name="avatar", accept="image/*")
-          label(for="email") Email
-          input(type="text", id="email", name="email")
-          label(for="location") Location
-          input(type="text", id="location", name="location")
-          .btns
-            button.good-button.submit Save
-            button.cancel-button.cancel Cancel
     .main
       #overview
         +pinPoster(user.posters)
         +pinTopic(user.topics)
-
-block scripts
-  //- if String(user._id) === String(loggedInUser._id)
-  script(src="/static/js/editprofile.js")

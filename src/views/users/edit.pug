@@ -1,0 +1,28 @@
+extends ../base
+
+block content
+  h1 Edit your profile
+
+  if errorMessage
+    span=errorMessage
+
+  form(method="POST", enctype="multipart/form-data")
+    label(for="name") Name
+    input(type="text", id="name", name="name", value=loggedInUser.name, required)
+    label(for="username") Username
+    input(type="text", id="username", name="username", value=loggedInUser.username, required)
+    label(for="old-password") Old password
+    input(type="password", id="old-password", name="oldPassword")
+    label(for="new-password") New password
+    input(type="password", id="new-password", name="newPassword")
+    label(for="confirm-new-password") Confirm new password
+    input(type="password", id="confirm-new-password", name="confirmNewPassword")
+    label(for="bio") Bio
+    input(type="text", id="bio", name="bio", value=loggedInUser.bio)
+    label(for="email") Email address
+    input(type="email", id="email", name="email", value=loggedInUser.email, required)
+    label(for="avatar") Avatar
+    input(type="file", id="avatar", name="avatar", accept="image/*")
+    label(for="location") Location
+    input(type="text", id="location", name="location", value=loggedInUser.location, required)
+    input(type="submit", value="Save")
