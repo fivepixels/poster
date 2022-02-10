@@ -1,4 +1,5 @@
 import Topic from "../models/Topic";
+import Poster from "../models/Poster";
 import User from "../models/User";
 
 const BASE_PUG_PATH = "../views/";
@@ -19,6 +20,14 @@ export const randomTopic = async (req, res) => {
     .populate("owner");
 
   const topic = topics[Math.floor(Math.random() * topics.length)];
+
+  if (!topic) {
+    return res
+      .status(STATUS_CODE.NOT_FOUND_CODE)
+      .render(BASE_PUG_PATH + "404", {
+        type: "topic",
+      });
+  }
 
   return res.status(STATUS_CODE.OK_CODE).render(TOPIC_PUG_PATH + "watch", {
     pageTitle: `RANDOM TOPIC | ${topic.title}`,

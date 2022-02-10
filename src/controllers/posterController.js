@@ -19,6 +19,14 @@ export const randomPoster = async (req, res) => {
 
   const poster = posters[Math.floor(Math.random() * posters.length)];
 
+  if (!poster) {
+    return res
+      .status(STATUS_CODE.NOT_FOUND_CODE)
+      .render(BASE_PUG_PATH + "404", {
+        type: "poster",
+      });
+  }
+
   return res.status(STATUS_CODE.OK_CODE).render(POSTER_PUG_PATH + "watch", {
     pageTitle: `RANDOM POSTER | ${poster.title}`,
     poster,
