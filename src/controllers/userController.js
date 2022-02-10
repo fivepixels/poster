@@ -275,7 +275,9 @@ export const postEditProfile = async (req, res) => {
     email,
     avatarUrl: file ? file.path : user.avatarUrl,
     location,
-    password: newPassword ? newPassword : loggedInUser.password,
+    password: newPassword
+      ? await bcrypt.hash(newPassword, 5)
+      : loggedInUser.password,
   });
 
   req.session.loggedInUser = updatedUser;
