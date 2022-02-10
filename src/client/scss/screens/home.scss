@@ -1,0 +1,43 @@
+#home {
+  display: flex;
+  .side-bar {
+    padding: 0px 32px;
+    max-width: 330px;
+    width: 20vw;
+    height: 100vh;
+    background-color: $brand-color-light;
+    border-right: 1px solid rgba($color: $defocus-color, $alpha: 0.8);
+    .my-posters {
+      padding: 25px 0px;
+      .my-posters__search {
+        .my-posters__search__title {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          span {
+            &:first-child {
+              font-weight: 400;
+              font-size: 16px;
+            }
+          }
+        }
+        .my-posters__search__input {
+          margin: 10px 0px;
+          input {
+            width: 90%;
+          }
+        }
+      }
+      .my-posters__result {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px 0px;
+        span {
+          margin-bottom: 20px;
+        }
+      }
+    }
+  }
+}
