@@ -1,0 +1,11 @@
+input {
+  background-color: $brand-color;
+  padding: 6px 14px;
+  color: $text-color;
+  border-radius: 5px;
+  border: 1px solid rgba($color: $defocus-color, $alpha: 1);
+  transition: width 2s ease-in-out;
+  &:focus {
+    outline: 0.8px solid rgba($color: $link-color, $alpha: 1);
+  }
+}

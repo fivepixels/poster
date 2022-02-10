@@ -6,6 +6,7 @@ const BASE_JS_PATH = "./src/client/js/";
 module.exports = {
   entry: {
     main: `${BASE_JS_PATH}main.js`,
+    link: `${BASE_JS_PATH}link.js`,
   },
   plugins: [
     new MiniCssExtractPlugin({

@@ -14,6 +14,9 @@ block content
             span New
         .my-posters__input
           input#searchInMyPoster(type="text", placeholder="Find a poster...")
+            button.new-btn#createNewPosterBtn
+              i.fa.fa-book
+              span New
 
       .my-posters__result
         for myPoster in myPosters
