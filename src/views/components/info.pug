@@ -1,8 +1,12 @@
 mixin info(views, rating, star)
-  include ../components/star
-  include ../components/rating
-  include ../components/views
+  include ../components/info-info
   #info
     +views(views)
     +rating(rating)
+    +star(star)
+
+mixin topicInfo(posters, star)
+  include ../components/info-info
+  #topicInfo
+    +book(posters)
     +star(star)

@@ -18,6 +18,18 @@ block content
         .my-posters__result
           for myPoster in myPosters
             +myPostersLink(myPoster, myPoster.owner.avatarUrl)
+            +myPostersLink(myPoster, myPoster.owner.avatarUrl)
+            +myPostersLink(myPoster, myPoster.owner.avatarUrl)
+            +myPostersLink(myPoster, myPoster.owner.avatarUrl)
+            +myPostersLink(myPoster, myPoster.owner.avatarUrl)
+            +myPostersLink(myPoster, myPoster.owner.avatarUrl)
+            +myPostersLink(myPoster, myPoster.owner.avatarUrl)
+            +myPostersLink(myPoster, myPoster.owner.avatarUrl)
+            +myPostersLink(myPoster, myPoster.owner.avatarUrl)
+            +myPostersLink(myPoster, myPoster.owner.avatarUrl)
+            +myPostersLink(myPoster, myPoster.owner.avatarUrl)
+            +myPostersLink(myPoster, myPoster.owner.avatarUrl)
+            +myPostersLink(myPoster, myPoster.owner.avatarUrl)
           else
             span You have no posters. 
             button.new-btn#createNewPosterBtn
@@ -31,6 +43,19 @@ block content
             span Suggestion Posters
           for sugPoster in sugPosters
             +suggestionPosterCard(sugPoster)
+            +suggestionPosterCard(sugPoster)
+            +suggestionPosterCard(sugPoster)
+            +suggestionPosterCard(sugPoster)
+            +suggestionPosterCard(sugPoster)
+            +suggestionPosterCard(sugPoster)
+            +suggestionPosterCard(sugPoster)
+            +suggestionPosterCard(sugPoster)
+            +suggestionPosterCard(sugPoster)
+            +suggestionPosterCard(sugPoster)
+            +suggestionPosterCard(sugPoster)
+            +suggestionPosterCard(sugPoster)
+            +suggestionPosterCard(sugPoster)
+            +suggestionPosterCard(sugPoster)
 
           else
             //- TODO : Pug link "/random/poster"
@@ -40,8 +65,25 @@ block content
 
       .sug-topics
         .sug-topics__title
-          span Suggestion Topics
+          .sug-topics__title__title
+            span Suggestion Topics
           for sugTopic in sugTopics
+            +suggestionTopicCard(sugTopic)
+            +suggestionTopicCard(sugTopic)
+            +suggestionTopicCard(sugTopic)
+            +suggestionTopicCard(sugTopic)
+            +suggestionTopicCard(sugTopic)
+            +suggestionTopicCard(sugTopic)
+            +suggestionTopicCard(sugTopic)
+            +suggestionTopicCard(sugTopic)
+            +suggestionTopicCard(sugTopic)
+            +suggestionTopicCard(sugTopic)
+            +suggestionTopicCard(sugTopic)
+            +suggestionTopicCard(sugTopic)
+            +suggestionTopicCard(sugTopic)
+            +suggestionTopicCard(sugTopic)
+            +suggestionTopicCard(sugTopic)
+            +suggestionTopicCard(sugTopic)
             +suggestionTopicCard(sugTopic)
           else
             //- TODO : Pug link "/random/topic"

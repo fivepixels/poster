@@ -15,12 +15,19 @@ mixin suggestionPosterCard(suggestionPoster)
         p.description=suggestionPoster.description
       .sug-posters-card__info
         +info(suggestionPoster.meta.views, suggestionPoster.meta.rating, suggestionPoster.meta.star)
+    hr(noshade)
 
 mixin suggestionTopicCard(suggestionTopic)
+  include ./info
   #sugTopicCard
     .sug-topic-card__top-bar
-      span=suggestionTopic.title
-      span=suggestionTopic.description
+      a(href=`/${suggestionTopic.owner.username}`)
+        span=suggestionTopic.owner.username
+      span.separator  / 
+      a(href=`/${suggestionTopic.owner.username}/${suggestionTopic.title}`)
+        span=suggestionTopic.title
+    .sug-topic-card__description
+      p.description=suggestionTopic.description
     .sug-topic-card__bottom-bar
-      i.fa.fa-book=suggestionTopic.posters.length
-      i.far.fa-star=suggestionTopic.meta.star
+      +topicInfo(suggestionTopic.posters, suggestionTopic.meta.star)
+    hr(noshade)

@@ -62,11 +62,19 @@
         span {
           &:first-child {
             margin-bottom: 30px;
-            font-size: 18px;
+            font-size: 16px;
           }
         }
         .sug-posters__title__title {
           margin-bottom: 30px;
+          span {
+            font-size: 18px;
+          }
+        }
+      }
+      .sug-posters-card__bottom {
+        p {
+          font-size: 13px;
         }
       }
       .sug-posters-card__info {
@@ -76,7 +84,19 @@
       }
     }
     .sug-topics {
-      min-width: 350px;
+      min-width: 300px;
+      padding: 20px 20px;
+      .sug-topics__title {
+        .sug-topics__title__title {
+          margin: {
+            bottom: 30px;
+            top: 20px;
+          }
+          span {
+            font-size: 15px;
+          }
+        }
+      }
     }
   }
 }

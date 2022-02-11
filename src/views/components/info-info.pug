@@ -1,0 +1,33 @@
+mixin star(star)
+  #star.infos
+    if 0 <= star && star < 2
+      i.far.fa-star
+    if 2 <= star && star < 4
+      i.far.fa-star-half-alt
+    if 4 <= star && star <= 5
+      i.fas.fa-star
+    span=star
+
+mixin rating(rating)
+  #rating.infos
+    if 0 <= rating &&  rating < 1
+      i.far.fa-tired
+    else if 1 <= rating && rating < 2
+      i.far.fa-frown-open
+    else if 2 <= rating && rating <= 3
+      i.far.fa-meh
+    else if 3 < rating && rating <= 4
+      i.far.fa-laugh
+    else if 4 < rating && rating <= 5
+      i.far.fa-grin-squint
+    span=rating
+
+mixin views(views)
+  #views.infos
+    i.far.fa-eye
+    span=views
+
+mixin book(book)
+  #book.infos
+    i.fa.fa-book
+    span=book.length

@@ -33,7 +33,7 @@ export const home = async (req, res) => {
   }).populate("owner");
 
   const sugPosters = await Poster.find({}).populate("owner");
-  const sugTopics = await Topic.find({});
+  const sugTopics = await Topic.find({}).populate("owner");
 
   return res.status(STATUS_CODE.OK_CODE).render(BASE_PUG_PATH + "home", {
     pageTitle: "Poster",

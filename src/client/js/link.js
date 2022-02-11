@@ -1,6 +1,5 @@
 const createNewPosterBtn = document.querySelectorAll("#createNewPosterBtn");
 
-console.log(createNewPosterBtn);
 const handleNewClick = () => {
   window.location.href = "/new";
 };
