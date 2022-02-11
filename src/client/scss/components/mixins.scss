@@ -62,3 +62,36 @@
   }
 }
 
+#sugTopicCard {
+  background-color: green;
+}
+
+.separator {
+  color: $separator-color;
+  margin: 0;
+}
+
+.description {
+  color: $description-color;
+}
+
+#star {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  span {
+    text-align: center;
+  }
+  i {
+    margin-right: 3px;
+  }
+}
+
+#info {
+  div {
+    margin: 0px 3px;
+    i {
+      margin-right: 5px;
+    }
+  }
+}

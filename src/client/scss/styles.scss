@@ -1,15 +1,11 @@
 // Configuration
 
-@import "./configuration/_variables";
-@import "./configuration/_reset";
-@import "./configuration/_default";
+@import "./configuration/_variables.scss", "./configuration/_reset.scss", "./configuration/_default.scss";
 
 // Components
 
-@import "./components/header.scss";
-@import "./components/button.scss";
-@import "./components/inputs.scss";
-@import "./components/new.scss";
+@import "./components/header.scss", "./components/button.scss", "./components/inputs.scss", "./components/new.scss",
+  "./components/mixins.scss";
 
 // Screens
 
