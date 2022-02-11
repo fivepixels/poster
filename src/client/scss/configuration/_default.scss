@@ -1,10 +1,12 @@
 html {
   body {
     width: 100vw;
-    height: 100vh;
     font-family: "system-ui";
     color: $text-color;
     background-color: $brand-color;
+    main {
+      margin-top: 60px;
+    }
     a {
       color: $link-color;
     }

@@ -1,0 +1,24 @@
+#myPosterLink {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 5px 0px;
+  img {
+    width: 25px;
+    height: 25px;
+    border-radius: 100000000000px;
+    margin-right: 10px;
+  }
+  a {
+    color: $text-color;
+    text-decoration: none;
+    transition: color 0.4s ease-in-out;
+    &:hover {
+      color: $link-color;
+    }
+  }
+  span {
+    font-size: 15px;
+  }
+}
+

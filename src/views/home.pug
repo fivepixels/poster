@@ -17,9 +17,8 @@ block content
 
         .my-posters__result
           for myPoster in myPosters
-            +myPostersLink(myPoster)
+            +myPostersLink(myPoster, myPoster.owner.avatarUrl)
           else
-            //- TODO : Pug link "/new"
             span You have no posters. 
             button.new-btn#createNewPosterBtn
               i.fa.fa-book

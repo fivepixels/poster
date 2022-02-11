@@ -22,10 +22,17 @@ export const home = async (req, res) => {
       });
   }
 
+  const {
+    session: { loggedInUser },
+  } = req;
+
+  const user = User.findById(loggedInUser._id);
+
   const myPosters = await Poster.find({
-    owner: req.session.loggedInUser._id,
-  });
-  const sugPosters = await Poster.find({});
+    owner: loggedInUser._id,
+  }).populate("owner");
+
+  const sugPosters = await Poster.find({}).populate("owner");
   const sugTopics = await Topic.find({});
 
   return res.status(STATUS_CODE.OK_CODE).render(BASE_PUG_PATH + "home", {
@@ -33,6 +40,7 @@ export const home = async (req, res) => {
     myPosters,
     sugPosters,
     sugTopics,
+    user,
   });
 };
 
