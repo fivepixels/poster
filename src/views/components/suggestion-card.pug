@@ -1,15 +1,20 @@
 mixin suggestionPosterCard(suggestionPoster)
+  include ./info
   #sugPostersCard
     .sug-posters-card__top-bar
-      //- TODO : Change this from text to image of creator
-      span !#{suggestionPoster.owner.username}!
-      span=suggestionPoster.owner.username
+      img(src=suggestionPoster.owner.avatarUrl)
+      span=suggestionPoster.owner.username 
     .sug-posters-card__main
-      span=suggestionPoster.title
-      span Topic : #{suggestionPoster.topic.title}
-      button
-        i.far.fa-eye
-        span Watch
+      .sug-posters-card__main__title
+        a(href=`/${suggestionPoster.owner.username}`)
+          span=suggestionPoster.owner.username
+        span.separator  / 
+        a(href=`/${suggestionPoster.owner.username}/${suggestionPoster.title}`)
+          span=suggestionPoster.title
+      .sug-posters-card__bottom
+        p.description=suggestionPoster.description
+      .sug-posters-card__info
+        +info(suggestionPoster.meta.views, suggestionPoster.meta.rating, suggestionPoster.meta.star)
 
 mixin suggestionTopicCard(suggestionTopic)
   #sugTopicCard

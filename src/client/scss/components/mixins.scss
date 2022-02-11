@@ -22,3 +22,43 @@
   }
 }
 
+#sugPostersCard {
+  width: 100%;
+  .sug-posters-card__top-bar {
+    display: flex;
+    align-items: center;
+    img {
+      width: 35px;
+      height: 35px;
+      border-radius: 100000000000px;
+      margin-right: 8px;
+    }
+  }
+  .sug-posters-card__main {
+    width: calc(100% - 50px);
+    left: 30px;
+    background-color: $light;
+    border-radius: 8px;
+    border: 2px solid rgba($color: $border-color, $alpha: 1);
+    padding: 13px 15px;
+    margin-left: 35px;
+    .sug-posters-card__main__title {
+      font-size: 18px;
+      a {
+        color: $text-color;
+        text-decoration: none;
+        transition: color 0.3s ease-in-out;
+        &:hover {
+          text-decoration: underline;
+          color: $link-color;
+        }
+      }
+    }
+    .sug-posters-card__bottom {
+      p {
+        margin: 8px 0px;
+      }
+    }
+  }
+}
+

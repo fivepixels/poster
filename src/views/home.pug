@@ -27,9 +27,11 @@ block content
     .home-main
       .sug-posters
         .sug-posters__title
-          span Suggestion Posters
+          .sug-posters__title__title
+            span Suggestion Posters
           for sugPoster in sugPosters
             +suggestionPosterCard(sugPoster)
+
           else
             //- TODO : Pug link "/random/poster"
             button
