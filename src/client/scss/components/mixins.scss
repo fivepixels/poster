@@ -104,7 +104,7 @@
 
 .separator {
   color: $separator-color;
-  margin: 0;
+  margin: 0px 2.5px;
 }
 
 .description {
@@ -146,4 +146,8 @@
   i {
     margin-right: 3px;
   }
+}
+
+.optional {
+  font-weight: 600;
 }

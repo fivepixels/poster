@@ -22,5 +22,8 @@ html {
         cursor: pointer;
       }
     }
+    .danger {
+      color: $danger-color;
+    }
   }
 }
