@@ -2,27 +2,42 @@ extends ../base
 //- https://github.com/new
 
 block content
-  .new-poster
-    h1 Create a new poster
-    if errorMessage
-      span#errorMessage=errorMessage
-    form(method="POST")
-      .new-poster__inputs-group
-        span TODO : Checking if a topic exists through the API
-        label(for="topic") Topic
-        input(type="text", id="topic", name="topic", required=true)
-        span.new-poster__error-message Topic does not exist
-      .new-poster__inputs-group
-        .new-poster__input
-          label(for="poster-title") Poster title
-          input(type="text", id="poster-title", name="title", placeholder="Write a nice title...", maxlength=25, required=true)
-          span.new-poster__error-message Can't think of what the topic will be?
-            a(href="/random/topic") Choose a topic at random!
-      .new-poster__inputs-group
-        .new-poster__input
-          label(for="poster-description")
-            span Description
-            span (optional)
-          input(type="text", id="poster-description", name="description", placeholder="Write a nice description...", maxlength=300, required=true)
-      .new-poster__submit
-        input(type="submit", value="Create poster")
+  .new-poster-main
+    .new-poster
+      .new-poster__title
+        h1 Create a new poster
+      hr(noshade)
+      if errorMessage
+        span#errorMessage=errorMessage
+      form(method="POST", autocomplete="off")
+        .new-poster__inputs-group
+          .new-poster__input__top
+            .new-poster__input__top__top
+              div
+                label(for="owner") Owner
+                  span.danger  *
+                button(type="button",id="owner")
+                  img(src=loggedInUser.avatarUrl)
+                  span=loggedInUser.username
+
+              span.separator  / 
+
+              div
+                label(for="postername") Poster name
+                  span.danger  *
+                input(type="text", placeholder="Awesome poster...", id="poster-name", name="posterTitle", required, maxLength=25)
+            .new-poster__input__top__mid
+              label(for="description") Description 
+                span.separator.optional (optional)
+              input(type="text", id="description", name="posterDescription", maxLength=300)
+              hr(noshade)
+          .new-poster__input__bottom
+            label(for="topic") Topic
+              span.danger  *
+            input(type="text", id="topic", name="topicName", required)
+            //- span.new-poster__error-message There is this topic.
+            //-   a(href="") Would you like to see a topic?
+            hr(noshade)
+
+        .new-poster__submit
+          input(type="submit", value="Create poster").good-button__not-ready
