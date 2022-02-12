@@ -1,5 +1,16 @@
 .good-button {
   background-color: $green;
+  transition: filter 0.3s ease-in-out;
+  cursor: pointer;
+  &:hover {
+    filter: brightness(1.2);
+  }
+}
+
+.good-button__not-ready {
+  background-color: $green;
+  filter: brightness(0.8);
+  cursor: not-allowed;
 }
 
 .cancel-button {

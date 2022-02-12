@@ -6,7 +6,7 @@
   img {
     width: 25px;
     height: 25px;
-    border-radius: 100000000000px;
+    border-radius: $border-radius;
     margin-right: 10px;
   }
   a {
@@ -42,7 +42,7 @@
     img {
       width: 35px;
       height: 35px;
-      border-radius: 100000000000px;
+      border-radius: $border-radius;
       margin-right: 8px;
     }
   }
