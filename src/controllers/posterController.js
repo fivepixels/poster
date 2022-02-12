@@ -2,14 +2,9 @@ import Poster from "../models/Poster";
 import Topic from "../models/Topic";
 import User from "../models/User";
 
-import { Octokit } from "@octokit/core";
-const octokit = new Octokit({
-  auth: `${process.env.GH_PERSONAL_ACCESS_TOKEN}`,
-});
-
-import html2pug from "html2pug";
-
 import { STATUS_CODE } from "./rootController";
+
+import md from "jstransformer-markdown-it";
 
 const BASE_PUG_PATH = "../views/";
 const POSTER_PUG_PATH = BASE_PUG_PATH + "posters/";
@@ -26,7 +21,6 @@ export const randomPoster = async (req, res) => {
         type: "poster",
       });
   }
-
   return res.status(STATUS_CODE.OK_CODE).render(POSTER_PUG_PATH + "watch", {
     pageTitle: `RANDOM POSTER | ${poster.title}`,
     poster,
@@ -50,23 +44,9 @@ export const watchPoster = async (req, res) => {
       });
   }
 
-  const response = await octokit.request("POST /markdown", {
-    text: poster.text,
-  });
-
-  if (response.status !== 200) {
-    return res.status(response.status).render(POSTER_PUG_PATH + "watch", {
-      pageTitle: `Error | ${res.locals.siteName}`,
-      errorMessage: "Error",
-    });
-  }
-
-  const readme = html2pug(response.data);
-
   return res.status(STATUS_CODE.OK_CODE).render(POSTER_PUG_PATH + "watch", {
     pageTitle: `${poster.owner.username} | ${poster.title}`,
     poster,
-    readme,
   });
 };
 

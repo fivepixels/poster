@@ -10,8 +10,10 @@ block content
     .watch-poster
       +topBar(poster)
       .watch-poster__main
+      span=poster.text
         #poster
-          //- Print markdown...bb
+          :markdown-it(linkify langPrefix='highlight-')
+            # 외않되?
       .watch-poster__side-bar
         .side-bar__about
           h4 About
