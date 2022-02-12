@@ -151,3 +151,16 @@
 .optional {
   font-weight: 600;
 }
+
+.good-message {
+  color: $green;
+}
+
+#errorMessage {
+  color: $danger-color;
+  margin: {
+    top: -15px;
+    bottom: 15px;
+  }
+  text-align: center;
+}
