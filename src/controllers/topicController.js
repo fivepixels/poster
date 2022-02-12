@@ -120,3 +120,19 @@ export const psotCreateNewTopic = async (req, res) => {
       });
   }
 };
+
+export const topicExists = async (req, res) => {
+  const {
+    params: { topicname },
+  } = req;
+
+  const topicExists = await Topic.exists({ title: topicname });
+
+  if (!topicExists) {
+    return res.sendStatus(STATUS_CODE.NOT_FOUND_CODE);
+  }
+
+  if (topicExists) {
+    return res.sendStatus(STATUS_CODE.FOUND_CODE);
+  }
+};

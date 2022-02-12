@@ -7,6 +7,7 @@ module.exports = {
   entry: {
     main: `${BASE_JS_PATH}main.js`,
     link: `${BASE_JS_PATH}link.js`,
+    newPoster: `${BASE_JS_PATH}new-poster.js`,
   },
   plugins: [
     new MiniCssExtractPlugin({

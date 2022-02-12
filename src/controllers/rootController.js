@@ -8,9 +8,11 @@ export const STATUS_CODE = {
   OK_CODE: 200,
   CREATED_CODE: 201,
   UPDATED_CODE: 204,
+  NOT_FOUND_CODE: 302,
   BAD_REQUEST_CODE: 400,
   NOT_FOUND_CODE: 404,
   NOT_ACCEPTABLE_CODE: 405,
+  ALEADY_TAKEN_CODE: 409,
 };
 
 export const home = async (req, res) => {

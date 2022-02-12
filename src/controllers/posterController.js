@@ -86,6 +86,7 @@ export const postCreateNewPoster = async (req, res) => {
           pageTitle: "Create a New Poster",
           errorMessage: `Poster Title : ${title} is already taken in your posters. Please choose another poster title.`,
         });
+      no = true;
     }
   }
 
@@ -191,4 +192,25 @@ export const postEditPoster = async (req, res) => {
   return res
     .status(STATUS_CODE.UPDATED_CODE)
     .redirect(`/${username}/${postername}`);
+};
+
+export const posterExists = async (req, res) => {
+  const {
+    params: { postername },
+    session: { loggedInUser },
+  } = req;
+
+  const user = await User.findById(loggedInUser._id);
+
+  let no = false;
+  for (let i = 0; i < user.posters.length; i++) {
+    const element = user.posters[i];
+    if (element.title === title) {
+      return res.sendStatus(STATUS_CODE.ALEADY_TAKEN_CODE);
+    }
+  }
+
+  if (!no) {
+    return res.sendStatus(STATUS_CODE.OK_CODE);
+  }
 };
