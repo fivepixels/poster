@@ -1,9 +1,15 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require("path");
-
+const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 const BASE_JS_PATH = "./src/client/js/";
 
 module.exports = {
+  target: "node",
+  resolve: {
+    alias: {
+      path: require.resolve("path-browserify"),
+    },
+  },
   entry: {
     main: `${BASE_JS_PATH}main.js`,
     link: `${BASE_JS_PATH}link.js`,
@@ -13,14 +19,15 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "css/styles.css",
     }),
+    new NodePolyfillPlugin(),
   ],
-  mode: "development",
-  watch: true,
   output: {
     filename: "js/[name].js",
     path: path.resolve(__dirname, "assets"),
     clean: true,
   },
+  mode: "development",
+  watch: true,
   module: {
     rules: [
       {
