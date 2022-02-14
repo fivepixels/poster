@@ -1,9 +1,13 @@
 import multer from "multer";
 
-export const localsMiddleware = (req, res, next) => {
+export const localsMiddleware = async (req, res, next) => {
+  const {
+    session: { loggedInUser, loggedIn },
+  } = req;
+
   res.locals.siteName = "Poster";
-  res.locals.loggedIn = Boolean(req.session.loggedIn);
-  res.locals.loggedInUser = req.session.loggedInUser || {};
+  res.locals.loggedIn = Boolean(loggedIn);
+  res.locals.loggedInUser = loggedInUser || {};
   next();
 };
 
