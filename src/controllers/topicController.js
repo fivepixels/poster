@@ -136,3 +136,25 @@ export const topicExists = async (req, res) => {
     return res.sendStatus(STATUS_CODE.FOUND_CODE);
   }
 };
+
+export const posterAlreadyTaken = async (req, res) => {
+  const {
+    params: { topicname, postername },
+  } = req;
+
+  const topic = await Topic.findOne({ title: topicname }).populate("posters");
+
+  if (!topic) {
+    return res.sendStatus(STATUS_CODE.NOT_FOUND_CODE);
+  }
+
+  for (let i = 0; i < topic.posters.length; i++) {
+    const element = topic.posters[i];
+    if (element.title === postername) {
+      console.log("===================");
+      return res.sendStatus(STATUS_CODE.ALEADY_TAKEN_CODE);
+    }
+  }
+
+  return res.sendStatus(STATUS_CODE.OK_CODE);
+};

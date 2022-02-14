@@ -1,4 +1,5 @@
 import { async } from "regenerator-runtime";
+
 const STATUS_CODE = {
   OK_CODE: 200,
   CREATED_CODE: 201,
@@ -7,13 +8,13 @@ const STATUS_CODE = {
   BAD_REQUEST_CODE: 400,
   NOT_FOUND_CODE: 404,
   NOT_ACCEPTABLE_CODE: 405,
-  ALEADY_TAKEN_CODE: 409,
+  ALREADY_TAKEN_CODE: 409,
 };
 
 let pass = {
   posterTitle: false,
   posterExists: false,
-  topicTitle: false,
+  posterAlreadyTakenInTopic: false,
   topicExists: false,
 };
 
@@ -36,11 +37,12 @@ const errorMessage = document.querySelector("#errorMessage");
 topicTitleInput.value = defaultTopicTitle;
 
 function submitBtn() {
+  console.log(pass);
   if (
     pass.posterTitle &&
     pass.posterExists &&
-    pass.topicTitle &&
-    pass.topicExists
+    pass.topicExists &&
+    pass.posterAlreadyTakenInTopic
   ) {
     submit.className = KEYWORD.GOOD_BTN;
     submit.disabled = false;
@@ -52,6 +54,8 @@ function submitBtn() {
 
 function handlePosterInput() {
   const posterTitleValue = posterTitleInput.value;
+
+  posterTitle.className = KEYWORD.GOOD_INPUT;
 
   if (posterTitleValue.indexOf(" ") !== -1) {
     errorMessage.innerText = `Poster Title : "${posterTitleValue}" is not available. If you want to set this poster title, you must set it "${posterTitleValue.replace(
@@ -88,12 +92,19 @@ function handlePosterInput() {
 }
 
 async function handleTopicInput() {
-  const topicExists = await checkTopicExists(topicTitleInput.value);
+  topicTitleInput.className = KEYWORD.BAD_INPUT;
+  if (topicTitleInput.value) {
+    checkTopicExists(topicTitleInput.value);
+    checkAlreadyTakenInTopic(topicTitleInput.value, posterTitleInput.value);
+  }
+
   submitBtn();
 }
 
 function cleanErrorMessage() {
   errorMessage.innerText = "";
+
+  submitBtn();
 }
 
 function changeStateOfSubmitBtn(state) {
@@ -106,6 +117,8 @@ function changeStateOfSubmitBtn(state) {
       `State ${state} is not available. you can put arg only "good" or "not-good"`
     );
   }
+
+  submitBtn();
 }
 
 async function checkTopicExists(topicTitle) {
@@ -120,16 +133,18 @@ async function checkTopicExists(topicTitle) {
   if (status === STATUS_CODE.NOT_FOUND_CODE) {
     topicTitleInput.className = KEYWORD.BAD_INPUT;
     pass.topicExists = false;
-    pass.topicTitle = false;
+    errorMessage.innerText = `Topic : ${topicTitle} is not found.`;
     return false;
   }
 
   if (status === STATUS_CODE.FOUND_CODE) {
     topicTitleInput.className = KEYWORD.GOOD_INPUT;
     pass.topicExists = true;
-    pass.topicTitle = true;
+    cleanErrorMessage();
     return true;
   }
+
+  submitBtn();
 }
 
 async function checkPosterExists(posterTitle) {
@@ -141,7 +156,7 @@ async function checkPosterExists(posterTitle) {
     method: "POST",
   });
 
-  if (status === STATUS_CODE.ALEADY_TAKEN_CODE) {
+  if (status === STATUS_CODE.ALREADY_TAKEN_CODE) {
     posterTitleInput.className = KEYWORD.BAD_INPUT;
     errorMessage.innerText = `Poster Title : ${posterTitle} is aleady taken in your posters`;
     pass.posterExists = false;
@@ -155,6 +170,40 @@ async function checkPosterExists(posterTitle) {
     pass.posterTitle = true;
     return true;
   }
+
+  submitBtn();
+}
+
+async function checkAlreadyTakenInTopic(topicTitle, posterTitle) {
+  if (!topicTitle || !posterTitle) {
+    return;
+  }
+
+  const { status } = await fetch(
+    `/api/topics/${topicTitle}/${posterTitle}/already-taken`,
+    {
+      method: "POST",
+    }
+  );
+
+  if (status === STATUS_CODE.ALREADY_TAKEN_CODE) {
+    topicTitleInput.className = KEYWORD.BAD_INPUT;
+    errorMessage.innerText = `Poster Title : ${posterTitle} is already taken in posters of the topic.`;
+    pass.posterAlreadyTakenInTopic = false;
+  }
+
+  if (status === STATUS_CODE.OK_CODE) {
+    topicTitleInput.className = KEYWORD.GOOD_INPUT;
+    pass.posterAlreadyTakenInTopic = true;
+  }
+
+  if (status === STATUS_CODE.NOT_FOUND_CODE) {
+    topicTitleInput.className = KEYWORD.BAD_INPUT;
+    errorMessage.innerText = `Topic Title : ${topicTitle} is not found.`;
+    pass.topicExists = false;
+  }
+
+  submitBtn();
 }
 
 posterTitleInput.addEventListener("input", handlePosterInput);

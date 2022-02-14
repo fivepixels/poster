@@ -202,6 +202,10 @@ export const posterExists = async (req, res) => {
 
   const user = await User.findById(loggedInUser._id).populate("posters");
 
+  if (user.posters.length === 0) {
+    return res.sendStatus(STATUS_CODE.OK_CODE);
+  }
+
   for (let i = 0; i < user.posters.length; i++) {
     const element = user.posters[i];
     if (element.title === postername) {
