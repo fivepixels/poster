@@ -18,7 +18,7 @@ export const randomPoster = async (req, res) => {
     return res
       .status(STATUS_CODE.NOT_FOUND_CODE)
       .render(BASE_PUG_PATH + "404", {
-        type: "poster",
+        type: "Random Poster",
       });
   }
   return res.status(STATUS_CODE.OK_CODE).render(POSTER_PUG_PATH + "watch", {
@@ -205,12 +205,9 @@ export const posterExists = async (req, res) => {
   for (let i = 0; i < user.posters.length; i++) {
     const element = user.posters[i];
     if (element.title === postername) {
-      console.log("NONO");
       return res.sendStatus(STATUS_CODE.ALEADY_TAKEN_CODE);
     }
   }
 
-  console.log("YES");
-  console.log(loggedInUser._id);
   return res.sendStatus(STATUS_CODE.OK_CODE);
 };

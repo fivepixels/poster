@@ -25,7 +25,7 @@ export const randomTopic = async (req, res) => {
     return res
       .status(STATUS_CODE.NOT_FOUND_CODE)
       .render(BASE_PUG_PATH + "404", {
-        type: "topic",
+        type: "Random topic",
       });
   }
 
