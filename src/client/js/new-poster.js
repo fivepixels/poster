@@ -1,10 +1,9 @@
 import { async } from "regenerator-runtime";
-
 const STATUS_CODE = {
   OK_CODE: 200,
   CREATED_CODE: 201,
   UPDATED_CODE: 204,
-  NOT_FOUND_CODE: 302,
+  FOUND_CODE: 302,
   BAD_REQUEST_CODE: 400,
   NOT_FOUND_CODE: 404,
   NOT_ACCEPTABLE_CODE: 405,
@@ -29,12 +28,19 @@ const errorMessage = document.querySelector("#errorMessage");
 
 topicTitleInput.value = defaultTopicTitle;
 
-async function handleSubmitBtnClick() {
-  const posterTitleValue = posterTitleInput.value;
-  const topicTitleValue = topicTitleInput.value;
-
-  await checkPosterExists(posterTitleInput.value);
-  await checkTopicExists(topicTitleInput.value);
+function submitBtn() {
+  if (
+    pass.posterTitle &&
+    pass.posterExists &&
+    pass.topicTitle &&
+    pass.topicExists
+  ) {
+    submit.className = "good-button";
+    submit.disabled = false;
+  } else {
+    submit.className = "good-button__not-ready";
+    submit.disabled = true;
+  }
 }
 
 function handlePosterInput() {
@@ -46,18 +52,37 @@ function handlePosterInput() {
       "-"
     )}".`;
     changeStateOfSubmitBtn(false);
+    posterTitleInput.className = "bad-input";
   } else if (posterTitleValue === "") {
     errorMessage.innerText = "Poster Title is require.";
+    posterTitleInput.className = "bad-input";
     changeStateOfSubmitBtn(false);
     cleanErrorMessage();
   } else {
-    cleanErrorMessage();
+    let no = false;
+    for (let i = 0; i < posterTitleValue.length; i++) {
+      const element = posterTitleValue[i];
+      if (element === "/") {
+        no = true;
+      }
+    }
+
+    if (no) {
+      errorMessage.innerText = "Do not include / in the poster name.";
+      posterTitleInput.className = "bad-input";
+    } else {
+      pass.posterTitle = true;
+      const posterExists = checkPosterExists(posterTitleValue);
+      cleanErrorMessage();
+    }
   }
+
+  submitBtn();
 }
 
 async function handleTopicInput() {
   const topicExists = await checkTopicExists(topicTitleInput.value);
-  console.log(topicExists);
+  submitBtn();
 }
 
 function cleanErrorMessage() {
@@ -86,10 +111,16 @@ async function checkTopicExists(topicTitle) {
   });
 
   if (status === STATUS_CODE.NOT_FOUND_CODE) {
+    topicTitleInput.className = "bad-input";
+    pass.topicExists = false;
+    pass.topicTitle = false;
     return false;
   }
 
   if (status === STATUS_CODE.FOUND_CODE) {
+    topicTitleInput.className = "good-input";
+    pass.topicExists = true;
+    pass.topicTitle = true;
     return true;
   }
 }
@@ -104,14 +135,20 @@ async function checkPosterExists(posterTitle) {
   });
 
   if (status === STATUS_CODE.ALEADY_TAKEN_CODE) {
+    posterTitleInput.className = "bad-input";
+    errorMessage.innerText = `Poster Title : ${posterTitle} is aleady taken in your posters`;
+    pass.posterExists = false;
+    pass.posterTitle = false;
     return false;
   }
 
   if (status === STATUS_CODE.OK_CODE) {
+    posterTitleInput.className = "good-input";
+    pass.posterExists = true;
+    pass.posterTitle = true;
     return true;
   }
 }
 
 posterTitleInput.addEventListener("input", handlePosterInput);
 topicTitleInput.addEventListener("input", handleTopicInput);
-submit.addEventListener("click", handleSubmitBtnClick);

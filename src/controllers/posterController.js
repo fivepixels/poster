@@ -200,17 +200,17 @@ export const posterExists = async (req, res) => {
     session: { loggedInUser },
   } = req;
 
-  const user = await User.findById(loggedInUser._id);
+  const user = await User.findById(loggedInUser._id).populate("posters");
 
-  let no = false;
   for (let i = 0; i < user.posters.length; i++) {
     const element = user.posters[i];
-    if (element.title === title) {
+    if (element.title === postername) {
+      console.log("NONO");
       return res.sendStatus(STATUS_CODE.ALEADY_TAKEN_CODE);
     }
   }
 
-  if (!no) {
-    return res.sendStatus(STATUS_CODE.OK_CODE);
-  }
+  console.log("YES");
+  console.log(loggedInUser._id);
+  return res.sendStatus(STATUS_CODE.OK_CODE);
 };
