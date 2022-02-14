@@ -59,9 +59,9 @@ block content
 
           else
             //- TODO : Pug link "/random/poster"
-            button
+            button.random-btn.new-btn#watchRandomPosterBtn
               i.fas.fa-dice
-              span !There is no suggestion posters. Watch Random Poster?!
+              span Random Poster
 
       .sug-topics
         .sug-topics__title
@@ -87,9 +87,9 @@ block content
             +suggestionTopicCard(sugTopic)
           else
             //- TODO : Pug link "/random/topic"
-            button
+            button.random-btn.new-btn#watchRandomTopicBtn
               i.fas.fa-dice
-              span !There is no suggestion topics. Watch Random Topic?!
+              span Random Topic
 
 block scripts
   script(src="/static/js/link.js")
