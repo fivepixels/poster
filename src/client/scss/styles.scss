@@ -10,3 +10,7 @@
 // Screens
 
 @import "./screens/home.scss", "./screens/new.scss";
+
+header {
+  position: fixed;
+}
