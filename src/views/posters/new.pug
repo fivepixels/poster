@@ -36,9 +36,9 @@ block content
             input(type="text", id="topicTitle", name="topic", required)
             //- span.new-poster__error-message There is this topic.
             //-   a(href="") Would you like to see a topic?
-            hr(noshade)
+          hr(noshade)
 
-          input(type="submit", value="Create poster").good-button__not-ready#newPosterSubmitBtn
+          input(type="submit", value="Create poster", disabled).good-button__not-ready#newPosterSubmitBtn
 
 block scripts
   script(src="/static/js/newPoster.js")

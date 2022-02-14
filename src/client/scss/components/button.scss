@@ -27,3 +27,11 @@ button {
 .cancel-button {
   background-color: $gray;
 }
+
+.good-input {
+  border: 1px solid rgba($color: $green, $alpha: 1);
+}
+
+.bad-input {
+  border: 1px solid rgba($color: $danger-color, $alpha: 1);
+}
