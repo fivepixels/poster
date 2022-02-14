@@ -17,6 +17,13 @@ let pass = {
   topicExists: false,
 };
 
+const KEYWORD = {
+  GOOD_BTN: "good-button",
+  NOT_READY: "good-button__not-ready",
+  GOOD_INPUT: "good-input",
+  BAD_INPUT: "bad-input",
+};
+
 const defaultTopicTitle = new URLSearchParams(
   window.location.href.split("?")[1]
 ).get("topic");
@@ -35,10 +42,10 @@ function submitBtn() {
     pass.topicTitle &&
     pass.topicExists
   ) {
-    submit.className = "good-button";
+    submit.className = KEYWORD.GOOD_BTN;
     submit.disabled = false;
   } else {
-    submit.className = "good-button__not-ready";
+    submit.className = KEYWORD.NOT_READY;
     submit.disabled = true;
   }
 }
@@ -52,10 +59,10 @@ function handlePosterInput() {
       "-"
     )}".`;
     changeStateOfSubmitBtn(false);
-    posterTitleInput.className = "bad-input";
+    posterTitleInput.className = KEYWORD.BAD_INPUT;
   } else if (posterTitleValue === "") {
     errorMessage.innerText = "Poster Title is require.";
-    posterTitleInput.className = "bad-input";
+    posterTitleInput.className = KEYWORD.BAD_INPUT;
     changeStateOfSubmitBtn(false);
     cleanErrorMessage();
   } else {
@@ -69,7 +76,7 @@ function handlePosterInput() {
 
     if (no) {
       errorMessage.innerText = "Do not include / in the poster name.";
-      posterTitleInput.className = "bad-input";
+      posterTitleInput.className = KEYWORD.BAD_INPUT;
     } else {
       pass.posterTitle = true;
       const posterExists = checkPosterExists(posterTitleValue);
@@ -91,9 +98,9 @@ function cleanErrorMessage() {
 
 function changeStateOfSubmitBtn(state) {
   if (state) {
-    submit.className = "good-button";
+    submit.className = KEYWORD.GOOD_BTN;
   } else if (!state) {
-    submit.className = "good-button__not-ready";
+    submit.className = KEYWORD.NOT_READY;
   } else {
     console.error(
       `State ${state} is not available. you can put arg only "good" or "not-good"`
@@ -111,14 +118,14 @@ async function checkTopicExists(topicTitle) {
   });
 
   if (status === STATUS_CODE.NOT_FOUND_CODE) {
-    topicTitleInput.className = "bad-input";
+    topicTitleInput.className = KEYWORD.BAD_INPUT;
     pass.topicExists = false;
     pass.topicTitle = false;
     return false;
   }
 
   if (status === STATUS_CODE.FOUND_CODE) {
-    topicTitleInput.className = "good-input";
+    topicTitleInput.className = KEYWORD.GOOD_INPUT;
     pass.topicExists = true;
     pass.topicTitle = true;
     return true;
@@ -135,7 +142,7 @@ async function checkPosterExists(posterTitle) {
   });
 
   if (status === STATUS_CODE.ALEADY_TAKEN_CODE) {
-    posterTitleInput.className = "bad-input";
+    posterTitleInput.className = KEYWORD.BAD_INPUT;
     errorMessage.innerText = `Poster Title : ${posterTitle} is aleady taken in your posters`;
     pass.posterExists = false;
     pass.posterTitle = false;
@@ -143,7 +150,7 @@ async function checkPosterExists(posterTitle) {
   }
 
   if (status === STATUS_CODE.OK_CODE) {
-    posterTitleInput.className = "good-input";
+    posterTitleInput.className = KEYWORD.GOOD_INPUT;
     pass.posterExists = true;
     pass.posterTitle = true;
     return true;
