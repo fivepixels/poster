@@ -7,8 +7,7 @@ block content
       .new-poster__title
         h1 Create a new poster
       hr(noshade)
-      if errorMessage
-        span#errorMessage=errorMessage
+      span#errorMessage.good-message
       form(method="POST", autocomplete="off")
         .new-poster__inputs-group
           .new-poster__input__top
@@ -23,21 +22,23 @@ block content
               span.separator  / 
 
               div
-                label(for="postername") Poster name
+                label(for="posterTitle") Poster Title
                   span.danger  *
-                input(type="text", placeholder="Awesome poster...", id="poster-name", name="posterTitle", required, maxLength=25)
+                input(type="text", placeholder="Awesome poster...", id="posterTitle", name="title", required, maxLength=25)
             .new-poster__input__top__mid
               label(for="description") Description 
                 span.separator.optional (optional)
-              input(type="text", id="description", name="posterDescription", maxLength=300)
+              input(type="text", id="description", name="description", maxLength=300)
               hr(noshade)
           .new-poster__input__bottom
-            label(for="topic") Topic
+            label(for="topicTitle") Topic
               span.danger  *
-            input(type="text", id="topic", name="topicName", required)
+            input(type="text", id="topicTitle", name="topic", required)
             //- span.new-poster__error-message There is this topic.
             //-   a(href="") Would you like to see a topic?
             hr(noshade)
 
-        .new-poster__submit
-          input(type="submit", value="Create poster").good-button__not-ready
+          input(type="submit", value="Create poster").good-button__not-ready#newPosterSubmitBtn
+
+block scripts
+  script(src="/static/js/newPoster.js")

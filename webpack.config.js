@@ -1,10 +1,9 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const path = require("path");
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
+const path = require("path");
 const BASE_JS_PATH = "./src/client/js/";
 
 module.exports = {
-  target: "node",
   resolve: {
     alias: {
       path: require.resolve("path-browserify"),
