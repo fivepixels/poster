@@ -1,9 +1,9 @@
-.new-poster-main {
+.new-main {
   display: flex;
   justify-content: center;
   background-color: $home-background-color;
   height: calc(100vh - 60px);
-  .new-poster {
+  .new {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,7 +14,7 @@
       margin-bottom: 30px;
       border: 0.1px solid rgba($color: #000000, $alpha: 0.5);
     }
-    .new-poster__title {
+    .new__title {
       display: flex;
       justify-content: left;
       width: 100%;
@@ -27,7 +27,7 @@
     form {
       width: 100%;
       height: 100%;
-      .new-poster__inputs-group {
+      .new__inputs-group {
         label {
           font-size: 14px;
           margin-bottom: 9px;
@@ -35,8 +35,8 @@
             font-size: 14px;
           }
         }
-        .new-poster__input__top {
-          .new-poster__input__top__top {
+        .new__input__top {
+          .new__input__top__top {
             width: 100%;
             display: flex;
             margin-bottom: 20px;
@@ -65,6 +65,7 @@
                 }
               }
             }
+
             .separator {
               padding-top: auto;
               margin: {
@@ -78,7 +79,7 @@
               align-items: center;
             }
           }
-          .new-poster__input__top__mid {
+          .new__input__top__mid {
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -87,15 +88,37 @@
             }
           }
         }
-        .new-poster__input__bottom {
+        .new__input__top__bottom {
+          display: flex;
+          flex-direction: column;
+          label {
+            margin: {
+              bottom: 20px;
+            }
+          }
+          button {
+            background-color: $green;
+            color: white;
+            margin: 0px 10px;
+            &:first-child {
+              margin-left: 0px;
+            }
+          }
+        }
+        .new__input__bottom {
           display: flex;
           flex-direction: column;
           justify-content: center;
           hr {
-            margin-top: +20px;
+            margin-top: +10px;
           }
         }
       }
+    }
+  }
+  .new__hr {
+    margin: {
+      top: 30px;
     }
   }
 }
