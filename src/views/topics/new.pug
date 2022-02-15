@@ -1,35 +1,8 @@
 extends ../base
-//- https://github.com/new
+include ../includes/new
 
 block content
-  .new-topic
-    h1 Create a new topic
-    if errorMessage
-      span#errorMessage=errorMessage
-    form(method="POST")
-      .new-topic__inputs-group
-        .new-topic__input
-          span TODO : Checking if a topic exists through the API(v.JS)
-          label(for="topic-title") Topic title
-          span TODO : Checking for space in the title(v.JS)
-          input(type="text", id="topic", name="title", required=true)
-          span.new-topic__error-message Topic already does exist
-          span TODO : add link after ?(v.JS)
-          a(href=`/new?topic=${topicTitle}`) Write a poster with this topic &rarr;
-      .new-topic__inputs-group
-        .new-topic__input
-          label(for="topic-description")
-            span Description
-            span (optional)
-          input(type="text", id="topic-description", name="description", placeholder="Write a nice description...", maxlength=300, required=true)
-      .new-topic__inputs-group
-        .new-topic__input
-          span TODO : TODOTODOTODOTODO!!!!!!!!!
-          label(for="types") Types
-          span Choose one of the types below
-          span Agree / Disagree
-          span Opinion
-          span Many Positions
-          input(type="text" required=true, name="type")
-      .new-topic__submit
-        input(type="submit", value="Create topic")
+  +new("Topic")
+
+block scripts
+  script(src="/static/js/newTopic.js")

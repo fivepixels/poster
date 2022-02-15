@@ -1,44 +1,8 @@
 extends ../base
-//- https://github.com/new
+include ../includes/new
 
 block content
-  .new-poster-main
-    .new-poster
-      .new-poster__title
-        h1 Create a new poster
-      hr(noshade)
-      span#errorMessage.good-message
-      form(method="POST", autocomplete="off")
-        .new-poster__inputs-group
-          .new-poster__input__top
-            .new-poster__input__top__top
-              div
-                label(for="owner") Owner
-                  span.danger  *
-                button(type="button",id="owner")
-                  img(src=loggedInUser.avatarUrl)
-                  span=loggedInUser.username
-
-              span.separator  / 
-
-              div
-                label(for="posterTitle") Poster Title
-                  span.danger  *
-                input(type="text", placeholder="Awesome poster...", id="posterTitle", name="title", required, maxLength=25)
-            .new-poster__input__top__mid
-              label(for="description") Description 
-                span.separator.optional (optional)
-              input(type="text", id="description", name="description", maxLength=300)
-              hr(noshade)
-          .new-poster__input__bottom
-            label(for="topicTitle") Topic
-              span.danger  *
-            input(type="text", id="topicTitle", name="topic", required)
-            //- span.new-poster__error-message There is this topic.
-            //-   a(href="") Would you like to see a topic?
-          hr(noshade)
-
-          input(type="submit", value="Create poster", disabled).good-button__not-ready#newPosterSubmitBtn
+  +new("Poster")
 
 block scripts
-  script(src="/static/js/newPoster.js")
+  script(src="/static/js/newPoster.js") 
