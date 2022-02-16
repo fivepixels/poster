@@ -6,6 +6,7 @@ const BASE_PUG_PATH = "../views/";
 const TOPIC_PUG_PATH = BASE_PUG_PATH + "topics/";
 
 import { STATUS_CODE } from "./rootController";
+import { async } from "regenerator-runtime";
 
 const topicTypes = ["Agree / Disagree", "Opinion", "Many Positions"];
 
@@ -145,10 +146,26 @@ export const posterAlreadyTaken = async (req, res) => {
   for (let i = 0; i < topic.posters.length; i++) {
     const element = topic.posters[i];
     if (element.title === postername) {
-      console.log("===================");
       return res.sendStatus(STATUS_CODE.ALEADY_TAKEN_CODE);
     }
   }
 
   return res.sendStatus(STATUS_CODE.OK_CODE);
+};
+
+export const getTopic = async (req, res) => {
+  const {
+    params: { topicname },
+  } = req;
+
+  const topic = await Topic.findOne({ title: topicname }, { type: true });
+
+  if (!topic) {
+    return res.sendStatus(STATUS_CODE.NOT_FOUND_CODE);
+  }
+
+  const type = topic.type;
+  console.log(type);
+
+  return res.send({ type });
 };
