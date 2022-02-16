@@ -13,6 +13,7 @@ module.exports = {
     main: `${BASE_JS_PATH}main.js`,
     link: `${BASE_JS_PATH}link.js`,
     newPoster: `${BASE_JS_PATH}new-poster.js`,
+    newTopic: `${BASE_JS_PATH}new-topic.js`,
   },
   plugins: [
     new MiniCssExtractPlugin({

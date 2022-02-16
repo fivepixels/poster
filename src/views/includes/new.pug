@@ -7,7 +7,10 @@ mixin new(types)
       .new__title
         h1 Create a new #{types}
       hr(noshade)
-      span#errorMessage.good-message
+      if errorMessage
+        span#errorMessage.good-message=errorMessage
+      else
+        span#errorMessage.good-message
       form(method="POST", autocomplete="off")
         .new__inputs-group
           .new__input__top
@@ -34,8 +37,8 @@ mixin new(types)
             .new__input__top__bottom
               label(for="positions") Positions
               .positions__buttons#positionsButton
-                button#agreeAndDisagree Agree / Disagree
-                button#manyPositions Many Positions
+                button(type="button")#agreeAndDisagree Agree / Disagree
+                button(type="button")#manyPositions Many Positions
 
           if types === "Poster"
             .new__input__top__bottom
@@ -45,4 +48,4 @@ mixin new(types)
 
         hr(noshade).new__hr
 
-        input(type="submit", value="Create " + types, disabled).good-button_not-ready#newPosterSubmitBtn
+        input(type="submit", value="Create " + types, disabled).good-button__not-ready#newPosterSubmitBtn
