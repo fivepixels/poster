@@ -18,12 +18,6 @@ const topicSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  positions: [
-    {
-      type: String,
-      required: false,
-    },
-  ],
   createdAt: {
     type: Date,
     required: true,

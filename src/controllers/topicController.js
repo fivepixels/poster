@@ -108,16 +108,10 @@ export const psotCreateNewTopic = async (req, res) => {
       topics: req.session.loggedInUser.topics,
     });
 
-    return res
-      .status(STATUS_CODE.CREATED_CODE)
-      .redirect(`/topics/${createdTopic.title}`);
+    return res.sendStatus(STATUS_CODE.CREATED_CODE);
   } catch (error) {
-    return res
-      .status(STATUS_CODE.BAD_REQUEST_CODE)
-      .render(TOPIC_PUG_PATH + "new", {
-        pageTitle: "Create a New Topic",
-        errorMessage: `Error : ${error}`,
-      });
+    console.log(error);
+    return res.sendStatus(STATUS_CODE.BAD_REQUEST_CODE);
   }
 };
 
