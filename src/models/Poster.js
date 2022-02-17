@@ -9,7 +9,6 @@ const posterSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    required: false,
     maxlength: 300,
     trim: true,
   },
@@ -17,6 +16,10 @@ const posterSchema = new mongoose.Schema({
     type: String,
     required: true,
     maxlength: 5000,
+  },
+  position: {
+    type: String,
+    required: true,
   },
   createdAt: {
     type: Date,

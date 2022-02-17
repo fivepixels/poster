@@ -51,28 +51,31 @@ export const watchPoster = async (req, res) => {
 };
 
 export const getCreateNewPoster = (req, res) => {
+  const {
+    session: {
+      loggedInUser: { username },
+    },
+  } = req;
+
   return res.status(STATUS_CODE.OK_CODE).render(POSTER_PUG_PATH + "new", {
     pageTitle: "Create a New Poster",
+    username,
   });
 };
 
 export const postCreateNewPoster = async (req, res) => {
   const {
-    body: { topic, title, description },
+    body: { topic, title, description, position },
+    session: { loggedInUser },
   } = req;
 
   const topicOfPoster = await Topic.findOne({ title: topic });
 
   if (!topicOfPoster) {
-    return res
-      .status(STATUS_CODE.NOT_FOUND_CODE)
-      .render(POSTER_PUG_PATH + "new", {
-        pageTitle: "Create a New Poster",
-        errorMessage: `Topic : ${topic} : is not found. Please choose another topic. or create on?`,
-      });
+    return res.sendStatus(STATUS_CODE.NOT_FOUND_CODE);
   }
 
-  const user = await User.findById(res.locals.loggedInUser._id).populate(
+  const user = await User.findById({ _id: loggedInUser._id }).populate(
     "posters"
   );
 
@@ -80,21 +83,17 @@ export const postCreateNewPoster = async (req, res) => {
   for (let i = 0; i < user.posters.length; i++) {
     const element = user.posters[i];
     if (element.title === title) {
-      return res
-        .status(STATUS_CODE.BAD_REQUEST_CODE)
-        .render(POSTER_PUG_PATH + "new", {
-          pageTitle: "Create a New Poster",
-          errorMessage: `Poster Title : ${title} is already taken in your posters. Please choose another poster title.`,
-        });
-      no = true;
+      return res.status(STATUS_CODE.BAD_REQUEST_CODE);
     }
   }
 
-  const text = `# ${title}`;
+  const text = `# ${title}\n${description}`;
+
   const createdPoster = await Poster.create({
     title,
     description,
     text,
+    position,
     topic: topicOfPoster._id,
     owner: req.session.loggedInUser._id,
   });
@@ -113,9 +112,7 @@ export const postCreateNewPoster = async (req, res) => {
     posters: topicOfPoster.posters,
   });
 
-  return res
-    .status(STATUS_CODE.CREATED_CODE)
-    .redirect(`/${req.session.loggedInUser.username}/${createdPoster.title}`);
+  return res.sendStatus(STATUS_CODE.CREATED_CODE);
 };
 
 export const getEditPoster = async (req, res) => {
