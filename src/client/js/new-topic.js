@@ -34,7 +34,6 @@ let pass = {
 };
 
 function submit() {
-  console.log(pass);
   if (pass.topic && pass.positions) {
     submitBtn.className = KEYWORD.GOOD_BTN;
     submitBtn.disabled = false;
@@ -105,10 +104,7 @@ async function handleSubmit(event) {
     },
   });
 
-  console.log(response.status);
-
   if (response.status === STATUS_CODE.CREATED_CODE) {
-    console.log("HI");
     window.location.href = `/topics/${data.title}`;
   }
 
