@@ -25,5 +25,10 @@ if (createNewPosterBtn) {
   }
 }
 
-randomPosterBtn.addEventListener("click", handleClickRandomPosterBtn);
-randomTopicBtn.addEventListener("click", handleClickRandomTopicBtn);
+if (randomPosterBtn) {
+  randomPosterBtn.addEventListener("click", handleClickRandomPosterBtn);
+}
+
+if (randomTopicBtn) {
+  randomTopicBtn.addEventListener("click", handleClickRandomTopicBtn);
+}
