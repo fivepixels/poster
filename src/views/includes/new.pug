@@ -44,13 +44,13 @@ mixin new(types)
             .new__input__top__bottom
               label(for="topicTitle") Topic
                 span.danger  * 
-              input(type="text", id="topicTitle", name="topic", required)
+              input(type="text", id="topicTitle", name="topic")
             hr(noshade).new__hr
             .new__input__top__bottom
               label(for="positions")#newPosterExp Choose your position
                 span.danger  * 
               .new-poster__positions#positionBox.none-display
-                input(type="text", id="positions", name="positions", required)
+                input(type="text", id="positions", name="positions")
               .new-poster__agree-disagree#agreeDisagreeBtns.none-display
                 button(type="button")#agree Agree
                 button(type="button")#disagree Disagree
@@ -59,4 +59,4 @@ mixin new(types)
               hr(noshade).new__hr
 
 
-        input(type="submit", value="Create " + types, disabled).good-button__not-ready#newPosterSubmitBtn
+        input(type="submit", value="Create " + types, disabled, data-username=username).good-button__not-ready#newPosterSubmitBtn

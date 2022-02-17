@@ -5,6 +5,7 @@ const explainLabel = document.querySelector("#newPosterExp");
 const chooseTopicLabel = document.querySelector("#chooseTopic");
 
 const posterTitleInput = document.querySelector("#posterTitle");
+const posterDescriptionInput = document.querySelector("#description");
 const topicTitleInput = document.querySelector("#topicTitle");
 
 const positionsInput = document.querySelector("#positions");
@@ -125,6 +126,8 @@ function changeStateOfSubmitBtn(state) {
 
 function handlePositionInput() {
   pass.position = positionsInput.value;
+
+  submitBtn();
 }
 
 function handleADBClick() {
@@ -277,8 +280,8 @@ function submitBtn() {
     pass.posterExists &&
     pass.topicExists &&
     pass.posterAlreadyTakenInTopic &&
-    pass.type.trim() !== "" &&
-    pass.position.trim() !== ""
+    pass.type !== "" &&
+    pass.position !== ""
   ) {
     submit.className = KEYWORD.GOOD_BTN;
     submit.disabled = false;
@@ -288,8 +291,33 @@ function submitBtn() {
   }
 }
 
+async function handelSubmit(event) {
+  event.preventDefault();
+
+  const data = {
+    topic: topicTitleInput.value,
+    title: posterTitleInput.value,
+    description: posterDescriptionInput.value,
+    position: pass.position,
+  };
+
+  const { status } = await fetch("/new", {
+    method: KEYWORD.POST,
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (status === STATUS_CODE.CREATED_CODE) {
+    const username = submit.dataset.username;
+    window.location.href = `${username}/${data.title}`;
+  }
+}
+
 posterTitleInput.addEventListener("input", handlePosterInput);
 topicTitleInput.addEventListener("input", handleTopicInput);
 positionsInput.addEventListener("input", handlePositionInput);
 agreeBtn.addEventListener("click", handleADBClick);
 disagreeBtn.addEventListener("click", handleDABClick);
+submit.addEventListener("click", handelSubmit);
