@@ -14,6 +14,7 @@ module.exports = {
     link: `${BASE_JS_PATH}link.js`,
     newPoster: `${BASE_JS_PATH}new-poster.js`,
     newTopic: `${BASE_JS_PATH}new-topic.js`,
+    copy: `${BASE_JS_PATH}copy.js`,
   },
   plugins: [
     new MiniCssExtractPlugin({
