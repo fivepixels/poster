@@ -25,7 +25,12 @@ mixin rating(rating)
 mixin views(views)
   #views.infos
     i.far.fa-eye
-    span=views
+    if views === 0
+      span No views
+    if views === 1
+      span #{views} view
+    if views > 1
+      span #{views} views
 
 mixin book(book)
   #book.infos

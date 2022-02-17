@@ -8,26 +8,35 @@ block content
     span#errorMessage=errorMessage
   else
     .watch-poster
-      +topBar(poster)
+      +posterTopBar(poster)
       .watch-poster__main
-      span=poster.text
-        #poster
-          :markdown-it(linkify langPrefix='highlight-')
-            # 외않되?
-      .watch-poster__side-bar
-        .side-bar__about
-          h4 About
-          p=poster.description
-        .side-bar
-          +info(poster.meta.views, poster.meta.rating, poster.meta.star)
-        .side-bar
-          //- TODO : (v.JS)
-          span Copy this url of the poster?
-        .side-bar
-          h4 Types
-          span=poster.topic.type
-        if String(poster.owner._id) === String(loggedInUser._id)
-          .side-bar
-            span Want to make this poster better?
-            span
-              a(href=`${poster.title}/edit`) If so, edit your poster!
+        .watch-poster__main__content
+          .poster__title
+            .poster__title__element
+              i.fas.fa-list
+              span=poster.title
+            .poster__title__element
+              i.fas.fa-expand
+          #poster
+            h1 Welcome to POSTER
+              //- TODO : Put htmel readme with vanilla javascript
+        .watch-poster__side-bar
+          .side-bar__element.side-bar__about
+            h4 About
+            //- p=poster.description
+            p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          .side-bar__element.side-bar__info
+            +info(poster.meta.views, poster.meta.rating, poster.meta.star)
+          hr(noshade)
+          .side-bar__element.side-bar__link
+            span Click to Share this poster!
+          hr(noshade)
+          .side-bar__element.side-bar__type
+            h4 Types
+            span=poster.topic.type
+          hr(noshade)
+          if String(poster.owner._id) === String(loggedInUser._id)
+            .side-bar__element.side-bar__edit
+              h4 Edit Poster
+              button(type="button").good-button Edit Poster
+              button(type='button').danger-button Delete Poster

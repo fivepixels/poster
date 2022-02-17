@@ -1,0 +1,120 @@
+.watch-poster {
+  background-color: $home-background-color;
+  height: 100vh;
+
+  .watch-poster__main {
+    width: 1200px;
+    margin: 0px auto;
+    margin-top: 50px;
+    display: flex;
+    .watch-poster__main__content {
+      width: 80%;
+      border-radius: 10px;
+      border: 0.8px solid rgba($color: $defocus-color, $alpha: 1);
+      display: flex;
+      flex-direction: column;
+      margin-bottom: auto;
+      .poster__title {
+        border-bottom: 0.4px solid rgba($color: $defocus-color, $alpha: 1);
+        padding: 20px 25px;
+        display: flex;
+        align-items: center;
+        align-items: center;
+        justify-content: space-between;
+        i {
+          font-size: 18px;
+          margin-right: 10px;
+          &.fa-expand {
+            cursor: pointer;
+          }
+        }
+        span {
+          font-size: 18px;
+          margin: auto 0px;
+        }
+      }
+      #poster {
+        padding: 10px 30px;
+      }
+    }
+    .watch-poster__side-bar {
+      width: 20%;
+      padding: 0px 20px;
+      hr {
+        margin-left: -5px;
+      }
+      .side-bar__element {
+        margin: 0px;
+      }
+      .side-bar__about {
+        h4 {
+          font-size: 20px;
+          margin: 0px;
+          margin-top: 5px;
+        }
+        p {
+          word-break: keep-all;
+          line-height: 20px;
+        }
+      }
+      .side-bar__info {
+        #info {
+          margin-bottom: 20px;
+          div {
+            margin: 10px 0px;
+            i {
+              margin: 0px 10px 0px 0px;
+            }
+          }
+        }
+      }
+      .side-bar__link {
+        margin: 20px 0px;
+        background-color: #4fb370;
+        padding: 10px 20px;
+        text-align: center;
+        border-radius: 5px;
+        color: black;
+        cursor: pointer;
+      }
+      .side-bar__edit {
+        h4 {
+          margin-bottom: 5px;
+        }
+        button {
+          margin: 10px 0px;
+        }
+      }
+      .side-bar__type {
+        margin-bottom: 23px;
+      }
+    }
+  }
+}
+
+#posterTopBar {
+  padding: 20px 35px;
+  display: flex;
+  justify-self: space-between;
+  align-items: center;
+  border-bottom: 0.5px solid rgba($color: $defocus-color, $alpha: 1);
+  .top-bar__user-info {
+    font-size: 20px;
+    margin-right: auto;
+    i {
+      margin-right: 10px;
+    }
+  }
+  #info {
+    display: flex;
+    div {
+      margin: +5px;
+      background-color: $defocus-color;
+      border-radius: 5px;
+      padding: 5px 18px;
+      i {
+        margin-right: 6px;
+      }
+    }
+  }
+}

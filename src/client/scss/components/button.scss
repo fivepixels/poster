@@ -9,6 +9,7 @@ button {
 }
 
 .good-button {
+  color: white;
   background-color: $green;
   transition: filter 0.3s ease-in-out;
   cursor: pointer;
@@ -19,6 +20,7 @@ button {
 }
 
 .good-button__not-ready {
+  color: white;
   background-color: $green;
   filter: brightness(0.8);
   cursor: not-allowed;
@@ -26,6 +28,11 @@ button {
 
 .cancel-button {
   background-color: $gray;
+}
+
+.danger-button {
+  color: white;
+  background-color: rgb(255, 55, 44);
 }
 
 .good-input {
