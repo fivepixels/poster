@@ -16,13 +16,25 @@ let pass = {
   posterExists: false,
   posterAlreadyTakenInTopic: false,
   topicExists: false,
+  type: "",
+  position: "",
 };
+
+const agreeDisagreeBtns = document.querySelector("#agreeDisagreeBtns");
+const agreeBtn = document.querySelector("#agree");
+const disagreeBtn = document.querySelector("#disagree");
+const positions = document.querySelector("#positionBox");
+const chooseTopicLabel = document.querySelector("#chooseTopic");
+const explainLabel = document.querySelector("#newPosterExp");
+const positionsInput = document.querySelector("#positions");
 
 const KEYWORD = {
   GOOD_BTN: "good-button",
   NOT_READY: "good-button__not-ready",
   GOOD_INPUT: "good-input",
   BAD_INPUT: "bad-input",
+  NONE_DISPLAY: "none-display",
+  POST: "POST",
 };
 
 const defaultTopicTitle = new URLSearchParams(
@@ -35,14 +47,16 @@ const submit = document.querySelector("#newPosterSubmitBtn");
 const errorMessage = document.querySelector("#errorMessage");
 
 topicTitleInput.value = defaultTopicTitle;
+let topicType = "";
 
 function submitBtn() {
-  console.log(pass);
   if (
     pass.posterTitle &&
     pass.posterExists &&
     pass.topicExists &&
-    pass.posterAlreadyTakenInTopic
+    pass.posterAlreadyTakenInTopic &&
+    pass.type.trim() !== "" &&
+    pass.position.trim() !== ""
   ) {
     submit.className = KEYWORD.GOOD_BTN;
     submit.disabled = false;
@@ -50,6 +64,8 @@ function submitBtn() {
     submit.className = KEYWORD.NOT_READY;
     submit.disabled = true;
   }
+
+  console.log(pass);
 }
 
 function handlePosterInput() {
@@ -92,10 +108,14 @@ function handlePosterInput() {
 }
 
 async function handleTopicInput() {
+  console.log(topicTitleInput);
   topicTitleInput.className = KEYWORD.BAD_INPUT;
-  if (topicTitleInput.value) {
-    checkTopicExists(topicTitleInput.value);
-    checkAlreadyTakenInTopic(topicTitleInput.value, posterTitleInput.value);
+  const value = topicTitleInput.value;
+
+  if (value) {
+    checkTopicExists(value);
+    checkAlreadyTakenInTopic(value, posterTitleInput.value);
+    getTopicType(topicTitle.value);
   }
 
   submitBtn();
@@ -127,7 +147,7 @@ async function checkTopicExists(topicTitle) {
   }
 
   const { status } = await fetch(`/api/topics/${topicTitle}/exists`, {
-    method: "POST",
+    method: KEYWORD.POST,
   });
 
   if (status === STATUS_CODE.NOT_FOUND_CODE) {
@@ -153,7 +173,7 @@ async function checkPosterExists(posterTitle) {
   }
 
   const { status } = await fetch(`/api/posters/${posterTitle}/exists`, {
-    method: "POST",
+    method: KEYWORD.POST,
   });
 
   if (status === STATUS_CODE.ALREADY_TAKEN_CODE) {
@@ -182,7 +202,7 @@ async function checkAlreadyTakenInTopic(topicTitle, posterTitle) {
   const { status } = await fetch(
     `/api/topics/${topicTitle}/${posterTitle}/already-taken`,
     {
-      method: "POST",
+      method: KEYWORD.POST,
     }
   );
 
@@ -206,5 +226,65 @@ async function checkAlreadyTakenInTopic(topicTitle, posterTitle) {
   submitBtn();
 }
 
+function handlePositionInput(event) {
+  const {
+    taget: { value },
+  } = event;
+}
+
+async function getTopicType(topicTitle) {
+  if (!topicTitle) {
+    positions.className = KEYWORD.NONE_DISPLAY;
+    agreeDisagreeBtns.className = KEYWORD.NONE_DISPLAY;
+    explainLabel.innerText = "";
+  } else {
+    await fetch(`/api/topics/${topicTitle}/topic-type`, {
+      method: KEYWORD.POST,
+    })
+      .then((res) => res.json())
+      .then((data) => (topicType = data.type));
+
+    if (!topicType) {
+      positions.className = KEYWORD.NONE_DISPLAY;
+      agreeDisagreeBtns.className = KEYWORD.NONE_DISPLAY;
+      chooseTopicLabel.className = KEYWORD.NONE_DISPLAY;
+    } else {
+      chooseTopicLabel.className = KEYWORD.NONE_DISPLAY;
+      explainLabel.innerText = `This type is ${topicType} type. Choose your positions.`;
+
+      if (topicType === "Agree / Disagree") {
+        positions.className = KEYWORD.NONE_DISPLAY;
+        agreeDisagreeBtns.className = "";
+        pass.type = "Agree / Disagree";
+      }
+
+      if (topicType === "Many Positions") {
+        positions.className = "";
+        agreeDisagreeBtns.className = KEYWORD.NONE_DISPLAY;
+        pass.type = "Many Positions";
+      }
+    }
+  }
+}
+
+function handleADBClick() {
+  disagreeBtn.className = KEYWORD.NOT_READY;
+  agreeBtn.className = KEYWORD.GOOD_BTN;
+  pass.position = "Agree";
+
+  submitBtn();
+}
+
+function handleDABClick() {
+  disagreeBtn.className = KEYWORD.GOOD_BTN;
+  agreeBtn.className = KEYWORD.NOT_READY;
+  pass.position = "Disagree";
+
+  submitBtn();
+}
+
 posterTitleInput.addEventListener("input", handlePosterInput);
 topicTitleInput.addEventListener("input", handleTopicInput);
+positionsInput.addEventListener("input", handlePositionInput);
+agreeBtn.addEventListener("click", handleADBClick);
+disagreeBtn.addEventListener("click", handleDABClick);
