@@ -68,15 +68,6 @@
           }
         }
       }
-      .side-bar__link {
-        margin: 20px 0px;
-        background-color: #4fb370;
-        padding: 10px 20px;
-        text-align: center;
-        border-radius: 5px;
-        color: black;
-        cursor: pointer;
-      }
       .side-bar__edit {
         h4 {
           margin-bottom: 5px;
@@ -115,6 +106,57 @@
       i {
         margin-right: 6px;
       }
+    }
+  }
+}
+
+////////////////////////////////////////////////////////////////////
+
+.watch-topic {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  .watch-topics {
+    margin-top: 30px;
+    display: flex;
+    width: 80%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    .watch-topic__main {
+      width: 70%;
+      height: 100%;
+      &__title {
+        margin-bottom: 20px;
+        &__top-bar {
+          display: flex;
+          align-items: center;
+          margin-bottom: 20px;
+          i {
+            background-color: #15223a;
+            border: 1px solid rgba($color: $defocus-color, $alpha: 1);
+            color: $defocus-color + (50, 50, 50);
+            font-size: 20px;
+            padding: 12px 15px;
+            margin-right: 15px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: min-content;
+          }
+        }
+        &__bottom-bar {
+          font-weight: 500;
+          font-size: 20px;
+        }
+      }
+    }
+    .watch-topic__side-bar {
+      width: 30%;
+      height: 100%;
+      margin-top: 275px;
     }
   }
 }

@@ -1,0 +1,46 @@
+#posterCard {
+  margin: 30px 0px;
+  border: 1px solid rgba($color: $defocus-color, $alpha: 1);
+  border-radius: 10px;
+  width: 95%;
+  .poster-card__top-bar {
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: $light;
+    &__title {
+      font-size: 20px;
+      padding: 15px 18px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      i {
+        margin-right: 8px;
+        font-size: 16px;
+      }
+    }
+    &__info {
+      #star {
+        margin-right: 20px;
+        i {
+          margin-right: 6px;
+        }
+      }
+    }
+  }
+  .poster-card__bottom-bar {
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    padding: 7px 15px 15px 15px;
+    .poster-card__bottom-bar__description {
+    }
+    .poster-card__bottom-bar__created-at {
+      span {
+        font-size: 10px;
+        color: $description-color;
+      }
+    }
+  }
+}

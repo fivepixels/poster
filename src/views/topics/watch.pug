@@ -1,27 +1,28 @@
 extends ../base
 include ../components/info
+include ../components/poster-card
 //- https://github.com/topics/topics
 
 block content
-  include ../components/poster-card
   .watch-topic
-    .watch-topic__main
-      .watch-topic__main__title
-        .watch-topic__main__title__top-bar
-          div
+    .watch-topics
+      .watch-topic__main
+        .watch-topic__main__title
+          .watch-topic__main__title__top-bar
             i.far.fa-lightbulb
-              h1
-                a(href=`/${topic.owner.username}`)=topic.owner.username
-                span.separator / 
-                a(href=`/topics/${topic.title}`)=topic.title
-              p=topic.description
-          +info(topic.meta.views, topic.meta.rating, topic.meta.star)
-        .watch-topic__main__title__bottom-bar
-          span Here are #{topic.posters.length} posters matching this topic...
-      .watch-topic__main__posters
-        each poster in topic.posters
-          +posterCard(poster)
-    .watch-topic-side-bar
-      div
-        h4
-          a(href=`/new?topic=${topic.title}`) Would you like to make a poster on this topic?
+            h1
+              a(href=`/${topic.owner.username}`)=topic.owner.username
+              span.separator  / 
+              a(href=`/topics/${topic.title}`)=topic.title
+          .watch-topic__main__title__bottom-bar
+            span Here are #{topic.posters.length} posters matching this topic...
+        .watch-topic__main__posters
+          each poster in topic.posters
+            +posterCard(poster)
+      .watch-topic__side-bar
+        +info(topic.meta.views, topic.meta.rating, topic.meta.star)
+        div
+          h4
+            a(href=`/new?topic=${topic.title}`) Would you like to make a poster on this topic?
+        div#copycopy(data-copy-this=`/topics/${topic.title}`)
+          span Click to Share this poster!

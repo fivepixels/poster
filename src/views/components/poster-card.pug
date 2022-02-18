@@ -1,18 +1,21 @@
 include ../components/info
+include ../components/info-info
 
 mixin posterCard(poster)
-  //- CSS TODO : add invert color style to text
-  #posterCard(style=`background-color: ${poster.uniqeColor};`)
+  #posterCard
     .poster-card__top-bar
-      div
+      .poster-card__top-bar__title
         i.fa.fa-book
         a(href=`/${poster.owner.username}`)=poster.owner.username
-        span.separator /
+        span.separator  /
         a(href=`/${poster.owner.username}/${poster.title}`)=poster.title
-      div
-        +info(poster.meta.views, poster.meta.rating, poster.meta.star)
+      .poster-card__top-bar__info
+        +star(poster.meta.star)
     .poster-card__bottom-bar
-      div
-        p=poster.description
-      div
+      .poster-card__bottom-bar__description
+        if !poster.descriptiown
+          p This poster have no description
+        else
+          p=poster.descriptiown
+      .poster-card__bottom-bar__created-at
         span=poster.createdAt
