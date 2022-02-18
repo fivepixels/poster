@@ -315,6 +315,10 @@ async function handelSubmit(event) {
   }
 }
 
+submitBtn();
+handlePosterInput();
+handleTopicInput();
+
 posterTitleInput.addEventListener("input", handlePosterInput);
 topicTitleInput.addEventListener("input", handleTopicInput);
 positionsInput.addEventListener("input", handlePositionInput);
