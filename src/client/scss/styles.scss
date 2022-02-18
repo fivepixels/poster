@@ -10,6 +10,10 @@
 
 @import "./screens/home.scss", "./screens/new.scss", "./screens/watch.scss";
 
+// API Styles
+
+@import "/node_modules/github-markdown-css/github-markdown.css";
+
 header {
   position: fixed;
 }

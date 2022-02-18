@@ -17,9 +17,11 @@ block content
               span=poster.title
             .poster__title__element
               i.fas.fa-expand
-          #poster
-            h1 Welcome to POSTER
-              //- TODO : Put htmel readme with vanilla javascript
+          #poster(data-content=poster.text)
+            .markdown-body
+              :markdown-it(linkify langPrefix='highlight-')
+                # abcdef
+                abcdef
         .watch-poster__side-bar
           .side-bar__element.side-bar__about
             h4 About
@@ -37,8 +39,9 @@ block content
           if String(poster.owner._id) === String(loggedInUser._id)
             .side-bar__element.side-bar__edit
               h4 Edit Poster
-              button(type="button").good-button Edit Poster
-              button(type='button').danger-button Delete Poster
+              button(type="button", data-redirect-to=`/${poster.owner.username}/${poster.title}/edit`).good-button#editBtn Edit Poster
+              button(type='button', data-redirect-to=`/${poster.owner.username}/${poster.title}/delete`).danger-button#DelteBtn Delete Poster
 
 block scripts
   script(src="/static/js/copy.js")
+  script(src="/static/js/markdown.js")

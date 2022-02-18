@@ -1,17 +1,23 @@
 const createNewPosterBtn = document.querySelectorAll("#createNewPosterBtn");
 const randomPosterBtn = document.querySelector("#watchRandomPosterBtn");
 const randomTopicBtn = document.querySelector("#watchRandomTopicBtn");
+const editPosterBtn = document.querySelector("#editBtn");
+const editPosterTo = editPosterBtn.dataset.redirectTo;
 
 function redirectTo(url) {
   window.location.href = url;
 }
 
-function handleClickRandomPosterBtn(event) {
+function handleClickRandomPosterBtn() {
   redirectTo("/random/poster");
 }
 
-function handleClickRandomTopicBtn(event) {
+function handleClickRandomTopicBtn() {
   redirectTo("/random/topic");
+}
+
+function handleClickEditPosterBtn() {
+  redirectTo(editPosterTo);
 }
 
 const handleNewClick = () => {
@@ -31,4 +37,8 @@ if (randomPosterBtn) {
 
 if (randomTopicBtn) {
   randomTopicBtn.addEventListener("click", handleClickRandomTopicBtn);
+}
+
+if (editPosterBtn) {
+  editPosterBtn.addEventListener("click", handleClickEditPosterBtn);
 }
