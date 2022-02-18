@@ -1,0 +1,51 @@
+@keyframes hides {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes shows {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes wide {
+  from {
+    width: 80%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes short {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 75%;
+  }
+}
+
+.hide {
+  animation: hides 0.4s ease-in-out forwards;
+}
+
+.show {
+  animation: shows 0.4s ease-in-out forwards;
+}
+
+.wide {
+  animation: wide 0.4s ease-in-out forwards;
+}
+
+.short {
+  animation: short 0.4s ease-in-out forwards;
+}

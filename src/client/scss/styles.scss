@@ -9,7 +9,10 @@
 
 // Screens
 
-@import "./screens/home.scss", "./screens/new.scss", "./screens/watch.scss";
+
+// Animations
+
+@import "./animations/hide.scss";
 
 // API Styles
 

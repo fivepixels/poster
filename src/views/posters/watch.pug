@@ -15,32 +15,34 @@ block content
             .poster__title__element
               i.fas.fa-list
               span=poster.title
-            .poster__title__element
+            .poster__title__element#posterFullScreen
               i.fas.fa-expand
           #poster(data-content=poster.text)
             .markdown-body
               :markdown-it(linkify langPrefix='highlight-')
-                # abcdef
-                abcdef
+                # Hello Everyone!
+                Welcome to POSTER!
+                Here is amazing site!
         .watch-poster__side-bar
-          .side-bar__element.side-bar__about
-            h4 About
-            p=poster.description
-          .side-bar__element.side-bar__info
-            +info(poster.meta.views, poster.meta.rating, poster.meta.star)
-          hr(noshade)
-          .side-bar__element.side-bar__link#copycopy(data-copy-this=`/${poster.owner.username}/${poster.title}`)
-            span Click to Share this poster!
-          hr(noshade)
-          .side-bar__element.side-bar__type
-            h4 Types
-            span=poster.topic.type
-          hr(noshade)
-          if String(poster.owner._id) === String(loggedInUser._id)
-            .side-bar__element.side-bar__edit
-              h4 Edit Poster
-              button(type="button", data-redirect-to=`/${poster.owner.username}/${poster.title}/edit`).good-button#editBtn Edit Poster
-              button(type='button', data-redirect-to=`/${poster.owner.username}/${poster.title}/delete`).danger-button#DelteBtn Delete Poster
+          .watch-poster__side-bar__ok
+            .side-bar__element.side-bar__about
+              h4 About
+              p=poster.description
+            .side-bar__element.side-bar__info
+              +info(poster.meta.views, poster.meta.rating, poster.meta.star)
+            hr(noshade)
+            .side-bar__element.side-bar__link#copycopy(data-copy-this=`/${poster.owner.username}/${poster.title}`)
+              span Click to Share this poster!
+            hr(noshade)
+            .side-bar__element.side-bar__type
+              h4 Types
+              span #{poster.topic.type} - #{poster.position}
+            hr(noshade)
+            if String(poster.owner._id) === String(loggedInUser._id)
+              .side-bar__element.side-bar__edit
+                h4 Edit Poster
+                button(type="button", data-redirect-to=`/${poster.owner.username}/${poster.title}/edit`).good-button#editBtn Edit Poster
+                button(type='button', data-redirect-to=`/${poster.owner.username}/${poster.title}/delete`).danger-button#DelteBtn Delete Poster
 
 block scripts
   script(src="/static/js/copy.js")

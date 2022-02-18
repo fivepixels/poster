@@ -24,9 +24,7 @@
         i {
           font-size: 18px;
           margin-right: 10px;
-          &.fa-expand {
-            cursor: pointer;
-          }
+          cursor: pointer;
         }
         span {
           font-size: 18px;
@@ -40,44 +38,46 @@
     .watch-poster__side-bar {
       width: 20%;
       padding: 0px 20px;
-      hr {
-        margin-left: -5px;
-      }
-      .side-bar__element {
-        margin: 0px;
-      }
-      .side-bar__about {
-        h4 {
-          font-size: 20px;
+      .watch-poster__side-bar__ok {
+        hr {
+          margin-left: -5px;
+        }
+        .side-bar__element {
           margin: 0px;
-          margin-top: 5px;
         }
-        p {
-          word-break: keep-all;
-          line-height: 20px;
+        .side-bar__about {
+          h4 {
+            font-size: 20px;
+            margin: 0px;
+            margin-top: 5px;
+          }
+          p {
+            word-break: keep-all;
+            line-height: 20px;
+          }
         }
-      }
-      .side-bar__info {
-        #info {
-          margin-bottom: 20px;
-          div {
-            margin: 10px 0px;
-            i {
-              margin: 0px 10px 0px 0px;
+        .side-bar__info {
+          #info {
+            margin-bottom: 20px;
+            div {
+              margin: 10px 0px;
+              i {
+                margin: 0px 10px 0px 0px;
+              }
             }
           }
         }
-      }
-      .side-bar__edit {
-        h4 {
-          margin-bottom: 5px;
+        .side-bar__edit {
+          h4 {
+            margin-bottom: 5px;
+          }
+          button {
+            margin: 10px 0px;
+          }
         }
-        button {
-          margin: 10px 0px;
+        .side-bar__type {
+          margin-bottom: 23px;
         }
-      }
-      .side-bar__type {
-        margin-bottom: 23px;
       }
     }
   }
@@ -157,6 +157,11 @@
       width: 30%;
       height: 100%;
       margin-top: 275px;
+      #info {
+        div {
+          margin: 5px 0px;
+        }
+      }
     }
   }
 }
