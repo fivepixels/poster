@@ -8,13 +8,16 @@ const sideBar = document.querySelector(".watch-poster__side-bar");
  * false = not full screen mode
  */
 let mode = false;
+let touched = false;
 
-function handleClickFullScreenBtn() {
+function handleClickFullScreenBtn(event) {
+  if (event) {
+    touched = true;
+  }
+
   if (mode) {
     posterBox.classList.remove("wide");
     posterBox.classList.add("short");
-
-    console.log("HIHIHHI");
 
     setTimeout(() => {
       sideBar.classList.add("none-display");
@@ -51,4 +54,23 @@ function handleClickFullScreenBtn() {
   }
 }
 
+function handleWindowResize(event) {
+  if (touched) {
+    return;
+  }
+
+  const windowWidth = window.innerWidth;
+
+  if (windowWidth <= 1125) {
+    if (!mode) {
+      handleClickFullScreenBtn();
+    }
+  } else {
+    if (mode) {
+      handleClickFullScreenBtn();
+    }
+  }
+}
+
 fullScreenBtn.addEventListener("click", handleClickFullScreenBtn);
+window.addEventListener("resize", handleWindowResize);
