@@ -19,10 +19,7 @@ block content
               i.fas.fa-expand
           #poster(data-content=poster.text)
             .markdown-body
-              :markdown-it(linkify langPrefix='highlight-')
-                # Hello Everyone!
-                Welcome to POSTER!
-                Here is amazing site!
+              :markdown-it(linkify langPrefix='highlight-')=poster.text
         .watch-poster__side-bar
           .watch-poster__side-bar__ok
             .side-bar__element.side-bar__about

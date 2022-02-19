@@ -4,16 +4,35 @@ include ../components/top-bar
 
 block content
   .edit-poster
-    +topBar(poster)
+    +posterTopBar(poster)
     .edit-poster__main
       .edit-poster__address
         span
           a(href=`/${loggedInUser.username}`)=loggedInUser.username
-        span.separator / 
+        span.separator  / 
         span
           a(href=`/${loggedInUser.username}/${poster.title}`)=poster.title
       #edit
-        form(method="POST")
-          //- TODO : Render the edit poster section
-          textarea(name="content", cols="30", rows="10")=poster.text
-          input(type="submit", value="Save changes")
+        .edit-poster__title
+          .watch-poster__main__content
+            .poster__title
+              .poster__title__element
+                i.fas.fa-list
+                span=poster.title
+              .poster__title__element
+                i.fas.fa-code.selected
+                i.fas.fa-eye.selected
+        .edit-poster__main
+          .edit-poster__edit
+            form(method="POST")
+              textarea(name="content", cols="30", rows="10")=poster.text
+          .edit-poster__preview.none-display
+            .watch-poster__main__content
+              #poster(data-content=poster.text)
+                .markdown-body
+                  :markdown-it(linkify langPrefix='highlight-')=poster.text
+
+        hr(noshade)
+        .edit-poster__submit
+          input(type="submit", value="Save changes").good-button
+          input(type="submit", value="Cancel").cancel-button

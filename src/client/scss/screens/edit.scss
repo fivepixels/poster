@@ -1,0 +1,72 @@
+.edit-poster {
+  .edit-poster__main {
+    // background-color: red;
+    width: 80vw;
+    margin: 0px auto;
+    .edit-poster__address {
+      padding: 20px 30px;
+      font-size: 20px;
+    }
+    #edit {
+      .edit-poster__title {
+        width: 100%;
+        .watch-poster__main__content {
+          border-bottom-left-radius: 0px;
+          border-bottom-right-radius: 0px;
+          .poster__title {
+            padding: 15px 20px;
+            .poster__title__element {
+              &:last-child {
+                i {
+                  padding: 7px;
+                  font-size: 15px;
+                  border-radius: 5px;
+                  border: 0.5px solid rgba($color: $defocus-color, $alpha: 1);
+                }
+              }
+            }
+          }
+        }
+      }
+      .edit-poster__main {
+        display: flex;
+        .edit-poster__edit {
+          width: 100%;
+          form {
+            textarea {
+              background-color: inherit;
+              color: white;
+              width: calc(100% - 20px);
+              padding: 10px;
+              resize: none;
+              border-bottom-left-radius: 5px;
+              border-bottom-right-radius: 5px;
+              &:focus {
+                outline: none;
+              }
+            }
+          }
+        }
+        .edit-poster__preview {
+          width: 100%;
+          .watch-poster__main__content {
+            border-top-right-radius: 0px;
+            border-top-left-radius: 0px;
+            width: 100%;
+            border-top: none;
+          }
+        }
+      }
+      hr {
+        margin: 20px 0px;
+      }
+      .edit-poster__submit {
+        display: flex;
+        justify-content: center;
+        input {
+          margin: 0px 10px;
+        }
+      }
+    }
+  }
+}
