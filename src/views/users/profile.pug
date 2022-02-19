@@ -1,36 +1,46 @@
 extends ../base
 include ../components/pin
+include ../components/info-info
 //- https://github.com/Novelier-Webbelier
 
 block content
-  .top-bar
-    nav
-      ul
-        li
-          a(href=`/${user.username}`) Overview
-        li
-          a(href=`/${user.username}?tab=posters`) Posters
-        li
-          a(href=`/${user.username}?tab=topics`) Topics
-        li
-          a(href=`/${user.username}?tab=stars`) Stars
-  #profile(data-user-id=user._id, data-logged-in-user-id=loggedInUser._id)
-    .user-info
-      span User Image
-      div
-        h1=user.name
-        span=user.username
-      div
-        p=user.bio
-      if String(user._id) === String(loggedInUser._id)
-        div
-          button#edit-profile-btn Edit Profile
-      div
-        i.fa.fa-book
-        span #{user.posters.length} Posters
-        i.far.fa-lightbulb
-        span #{user.topics.length} Topics
-    .main
-      #overview
-        +pinPoster(user.posters)
-        +pinTopic(user.topics)
+  .profile
+    .top-bar
+      nav
+        ul
+          li.now
+            i.fas.fa-book-open
+            a(href=`/${user.username}`) Overview
+          li
+            i.fas.fa-book
+            a(href=`/${user.username}?tab=posters`) Posters
+          li
+            i.far.fa-lightbulb
+            a(href=`/${user.username}?tab=topics`) Topics
+          li
+            i.fas.fa-star
+            a(href=`/${user.username}?tab=stars`) Stars
+    #profile
+      .user-info
+        .user-info__avatar
+          img(src=user.avatarUrl)
+        .user-info__names
+          h1=user.name
+          span=user.username
+        .user-info__bio
+          if !user.bio
+            //- p This user have no bio
+            p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          else
+            p=user.bio
+        if String(user._id) === String(loggedInUser._id)
+          .user-info__edit-btn
+            button.cancel-button#edit-profile-btn Edit Profile
+        .user-info__nums
+          +posterNum(user.posters)
+          +topicNum(user.topics)
+      .main
+        #overview
+          +pinPoster(user.posters)
+          hr(noshade)
+          +pinTopic(user.topics)
