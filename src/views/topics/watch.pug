@@ -24,5 +24,8 @@ block content
         div
           h4
             a(href=`/new?topic=${topic.title}`) Would you like to make a poster on this topic?
+        div
+          h4 Types
+          span=topic.type
         div#copycopy(data-copy-this=`/topics/${topic.title}`)
           span Click to Share this topic!
