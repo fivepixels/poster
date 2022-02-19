@@ -36,3 +36,18 @@ mixin book(book)
   #book.infos
     i.fa.fa-book
     span=book.length
+
+mixin topic(topic)
+  #topic.infos
+    i.far.fa-lightbulb
+    span=topic.length
+
+mixin topicNum(topic)
+  #topic.infos
+    i.far.fa-lightbulb
+    span #{topic.length} 개
+
+mixin posterNum(poster)
+  #boo.infos 
+    i.fa.fa-book
+    span #{poster.length} 개
