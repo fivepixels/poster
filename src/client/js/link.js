@@ -3,42 +3,34 @@ const randomPosterBtn = document.querySelector("#watchRandomPosterBtn");
 const randomTopicBtn = document.querySelector("#watchRandomTopicBtn");
 const editPosterBtn = document.querySelector("#editBtn");
 const editPosterTo = editPosterBtn.dataset.redirectTo;
+const editProfileBtn = document.querySelector("#edit-profile-btn");
 
 function redirectTo(url) {
   window.location.href = url;
 }
 
-function handleClickRandomPosterBtn() {
-  redirectTo("/random/poster");
-}
-
-function handleClickRandomTopicBtn() {
-  redirectTo("/random/topic");
-}
-
-function handleClickEditPosterBtn() {
-  redirectTo(editPosterTo);
-}
-
-const handleNewClick = () => {
-  redirectTo("/new");
-};
-
 if (createNewPosterBtn) {
   for (let i = 0; i < createNewPosterBtn.length; i++) {
     const element = createNewPosterBtn[i];
-    element.addEventListener("click", handleNewClick);
+    element.addEventListener("click", redirectTo("/new"));
   }
 }
 
 if (randomPosterBtn) {
-  randomPosterBtn.addEventListener("click", handleClickRandomPosterBtn);
+  randomPosterBtn.addEventListener("click", redirectTo("/random/poster"));
 }
 
 if (randomTopicBtn) {
-  randomTopicBtn.addEventListener("click", handleClickRandomTopicBtn);
+  randomTopicBtn.addEventListener("click", redirectTo("/random/topic"));
 }
 
 if (editPosterBtn) {
-  editPosterBtn.addEventListener("click", handleClickEditPosterBtn);
+  function handleEditPosterBtnClick() {
+    redirectTo(editPosterTo);
+  }
+  editPosterBtn.addEventListener("click", handleEditPosterBtnClick);
+}
+
+if (editProfileBtn) {
+  editProfileBtn.addEventListener("click", redirectTo("/edit"));
 }
