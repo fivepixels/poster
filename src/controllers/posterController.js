@@ -159,36 +159,48 @@ export const getEditPoster = async (req, res) => {
 
 export const postEditPoster = async (req, res) => {
   const {
-    params: { username, postername },
-    body: { content },
+    body: { editingUserId, text },
+    params: { postername },
+    session: {
+      loggedInUser: { _id },
+    },
   } = req;
 
-  const writeUser = await User.findOne({ username });
-
-  if (String(writeUser._id) !== String(req.session.loggedInUser._id)) {
+  console.log("HI");
+  if (_id !== editingUserId) {
     return res.sendStatus(STATUS_CODE.NOT_ACCEPTABLE_CODE);
   }
 
-  const user = await writeUser.populate("posters");
-  const poster = await Poster.findOne({
-    title: postername,
-    owner: req.session.loggedInUser._id,
-  });
+  const poster = await Poster.findOne({ title: postername });
 
   if (!poster) {
     return res.sendStatus(STATUS_CODE.NOT_FOUND_CODE);
   }
 
-  const editedPoster = await Poster.findOneAndUpdate(
+  const editingUser = await User.findById(_id).populate("posters");
+
+  let no = true;
+  for (let i = 0; i < editingUser.posters.length; i++) {
+    const element = editingUser.posters[i];
+    if (element.title === postername) {
+      no = false;
+    }
+  }
+
+  if (no) {
+    return res.sendStatus(STATUS_CODE.NOT_FOUND_CODE);
+  }
+
+  const updatedPoster = await Poster.findOneAndUpdate(
     { title: postername },
     {
-      text: content,
+      text,
     }
   );
 
-  return res
-    .status(STATUS_CODE.UPDATED_CODE)
-    .redirect(`/${username}/${postername}`);
+  console.log(text);
+  console.log(updatedPoster);
+  return res.sendStatus(STATUS_CODE.UPDATED_CODE);
 };
 
 export const posterExists = async (req, res) => {

@@ -1,3 +1,16 @@
+import { async } from "regenerator-runtime";
+
+export const STATUS_CODE = {
+  OK_CODE: 200,
+  CREATED_CODE: 201,
+  UPDATED_CODE: 204,
+  FOUND_CODE: 302,
+  BAD_REQUEST_CODE: 400,
+  NOT_FOUND_CODE: 404,
+  NOT_ACCEPTABLE_CODE: 405,
+  ALEADY_TAKEN_CODE: 409,
+};
+
 const posterInfo = JSON.parse(
   document.querySelector("#edit").dataset.posterInfo
 );
@@ -20,6 +33,10 @@ const KEYWORDS = {
   NONE_DISPLAY: "none-display",
   SELECTED: "selected",
 };
+
+function redirectToWatchPoster() {
+  window.location.href = `/${posterInfo.owner}/${posterInfo.title}`;
+}
 
 function changeModeTo(modes) {
   if (modes === "edit") {
@@ -59,25 +76,24 @@ function handleClickPreviewBtn() {
   changeModeTo("preview");
 }
 
-async function handleClickSubmitBtn() {
-  // TODO : Fetch
-
+async function handleClickSubmitBtn(event) {
   const data = {
-    editingUserUsername: posterInfo.editingUser,
-    text: textarea.innerHTML,
+    editingUserId: posterInfo.editingUserId,
+    text: textarea.value,
   };
 
-  await fetch(`/${posterInfo.owner}/${posterInfo.title}/edit`, {
-    method: "POST",
-    body: JSON.stringify(data),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-}
+  const { status } = await fetch(
+    `/${posterInfo.owner}/${posterInfo.title}/edit`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }
+  );
 
-function handleClickCancelBtn() {
-  window.location.href = `/${posterInfo.owner}/${posterInfo.title}`;
+  redirectToWatchPoster();
 }
 
 function handleKeydown(event) {
@@ -94,7 +110,7 @@ editBtn.addEventListener("click", handleClickEditBtn);
 previewBtn.addEventListener("click", handleClickPreviewBtn);
 
 submitBtn.addEventListener("click", handleClickSubmitBtn);
-cancelBtn.addEventListener("click", handleClickCancelBtn);
+cancelBtn.addEventListener("click", redirectToWatchPoster);
 
 document.addEventListener("keydown", handleKeydown);
 

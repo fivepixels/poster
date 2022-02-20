@@ -14,7 +14,7 @@ block content
           a(href=`/${loggedInUser.username}/${poster.title}`)=poster.title
       #edit(data-poster-info={
         owner: poster.owner.username,
-        editingUser: loggedInUser.username,
+        editingUserId: loggedInUser._id,
         title: poster.title
       })
         .edit-poster__title
