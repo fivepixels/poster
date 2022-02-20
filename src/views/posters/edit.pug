@@ -12,7 +12,11 @@ block content
         span.separator  / 
         span
           a(href=`/${loggedInUser.username}/${poster.title}`)=poster.title
-      #edit
+      #edit(data-poster-info={
+        owner: poster.owner.username,
+        editingUser: loggedInUser.username,
+        title: poster.title
+      })
         .edit-poster__title
           .watch-poster__main__content
             .poster__title
@@ -20,12 +24,14 @@ block content
                 i.fas.fa-list
                 span=poster.title
               .poster__title__element
-                i.fas.fa-code.selected
-                i.fas.fa-eye.selected
+                i.fas.fa-code#editPosterBtn.selected
+                  span Edit Poster
+                i.fas.fa-eye#previewBtn
+                  span Preview Poster
         .edit-poster__main
           .edit-poster__edit
             form(method="POST")
-              textarea(name="content", cols="30", rows="10")=poster.text
+              textarea(name="content", cols="30", rows="10")#content=poster.text
           .edit-poster__preview.none-display
             .watch-poster__main__content
               #poster(data-content=poster.text)
@@ -33,6 +39,10 @@ block content
                   :markdown-it(linkify langPrefix='highlight-')=poster.text
 
         hr(noshade)
+
         .edit-poster__submit
-          input(type="submit", value="Save changes").good-button
-          input(type="submit", value="Cancel").cancel-button
+          input(type="submit", value="Save changes")#saveChanges.good-button
+          input(type="submit", value="Cancel")#cancel.cancel-button
+
+block scripts
+  script(src="/static/js/edit.js")
