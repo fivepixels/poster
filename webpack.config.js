@@ -17,6 +17,7 @@ module.exports = {
     copy: `${BASE_JS_PATH}copy.js`,
     markdown: `${BASE_JS_PATH}markdown.js`,
     edit: `${BASE_JS_PATH}edit.js`,
+    deletePoster: `${BASE_JS_PATH}delete-poster.js`,
   },
   plugins: [
     new MiniCssExtractPlugin({

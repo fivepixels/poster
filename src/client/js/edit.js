@@ -1,6 +1,6 @@
 import { async } from "regenerator-runtime";
 
-export const STATUS_CODE = {
+const STATUS_CODE = {
   OK_CODE: 200,
   CREATED_CODE: 201,
   UPDATED_CODE: 204,

@@ -17,7 +17,11 @@ block content
               span=poster.title
             .poster__title__element#posterFullScreen
               i.fas.fa-expand
-          #poster(data-content=poster.text)
+          #poster(data-content=poster.text, data-poster-info={
+            owner: poster.owner.username,
+            editingUserId: loggedInUser._id,
+            title: poster.title
+          })
             .markdown-body
               :markdown-it(linkify langPrefix='highlight-')=poster.text
         .watch-poster__side-bar
@@ -39,8 +43,9 @@ block content
               .side-bar__element.side-bar__edit
                 h4 Edit Poster
                 button(type="button", data-redirect-to=`/${poster.owner.username}/${poster.title}/edit`).good-button#editBtn Edit Poster
-                button(type='button', data-redirect-to=`/${poster.owner.username}/${poster.title}/delete`).danger-button#DelteBtn Delete Poster
+                button(type='button', data-redirect-to=`/${poster.owner.username}/${poster.title}/delete`).danger-button#deleteBtn Delete Poster
 
 block scripts
   script(src="/static/js/copy.js")
   script(src="/static/js/markdown.js")
+  script(src="/static/js/deletePoster.js")
