@@ -44,6 +44,8 @@ export const watchPoster = async (req, res) => {
       });
   }
 
+  console.log(poster);
+
   return res.status(STATUS_CODE.OK_CODE).render(POSTER_PUG_PATH + "watch", {
     pageTitle: `${poster.owner.username} | ${poster.title}`,
     poster,
@@ -79,11 +81,10 @@ export const postCreateNewPoster = async (req, res) => {
     "posters"
   );
 
-  let no = false;
   for (let i = 0; i < user.posters.length; i++) {
     const element = user.posters[i];
     if (element.title === title) {
-      return res.status(STATUS_CODE.BAD_REQUEST_CODE);
+      return res.sendStatus(STATUS_CODE.BAD_REQUEST_CODE);
     }
   }
 
@@ -200,6 +201,57 @@ export const postEditPoster = async (req, res) => {
 
   console.log(text);
   console.log(updatedPoster);
+  return res.sendStatus(STATUS_CODE.UPDATED_CODE);
+};
+
+export const deleteDeletePoster = async (req, res) => {
+  const {
+    params: { username, postername },
+    session: { loggedInUser },
+  } = req;
+
+  const poster = await Poster.findOne({ title: postername });
+
+  if (!poster) {
+    return res.sendStatus(STATUS_CODE.NOT_FOUND_CODE);
+  }
+
+  if (String(loggedInUser._id) !== String(poster.owner._id)) {
+    return res.sendStatus(STATUS_CODE.NOT_ACCEPTABLE_CODE);
+  }
+
+  poster.populate("topic");
+
+  const topic = await Topic.findById(poster.topic._id);
+
+  for (let i = 0; i < topic.posters.length; i++) {
+    const element = topic.posters[i];
+    if (element.title === postername) {
+      topic.posters.splice(i, 1);
+    }
+  }
+
+  const updatedTopic = await Topic.findByIdAndUpdate(topic._id, {
+    posters: topic.posters,
+  });
+
+  const user = await User.findById(loggedInUser._id);
+
+  for (let i = 0; i < user.posters.length; i++) {
+    const element = user.posters[i];
+    if (element.title === postername) {
+      user.posters.splice(i, 1);
+    }
+  }
+
+  const updatedUser = await User.findByIdAndUpdate(loggedInUser._id, {
+    posters: user.posters,
+  });
+
+  const deletePoster = await Poster.findByIdAndDelete(poster._id);
+
+  loggedInUser.posters = updatedUser.posters;
+
   return res.sendStatus(STATUS_CODE.UPDATED_CODE);
 };
 

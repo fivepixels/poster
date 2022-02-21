@@ -2,6 +2,7 @@ import express from "express";
 
 import {
   getEditPoster,
+  deleteDeletePoster,
   postEditPoster,
   watchPoster,
 } from "../controllers/posterController";
@@ -25,5 +26,7 @@ userRotuer
   .route("/:username/:postername/edit")
   .get(getEditPoster)
   .post(postEditPoster);
+
+userRotuer.route("/:username/:postername/delete").delete(deleteDeletePoster);
 
 export default userRotuer;
