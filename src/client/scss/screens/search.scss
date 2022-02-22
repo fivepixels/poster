@@ -1,0 +1,107 @@
+.search {
+  display: flex;
+  margin: 0px auto;
+  justify-content: center;
+  padding-top: 20px;
+  .review {
+    width: 230px;
+    height: min-content;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin-right: 20px;
+    border: 1px solid $gray;
+    .selected {
+      border-left: 1px solid orange;
+    }
+    &__element {
+      cursor: pointer;
+      padding: 10px;
+      padding-right: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      span {
+        &:last-child {
+          background-color: $gray;
+          padding: 5px 10px;
+          border-radius: $border-radius;
+        }
+      }
+      &:first-child {
+        border-top-right-radius: 10px;
+      }
+      &:last-child {
+        border-bottom-right-radius: 10px;
+      }
+    }
+  }
+
+  .result {
+    width: 720px;
+    margin-right: 20px;
+    &__element {
+      .result__title {
+        font-size: 20px;
+        padding-bottom: 10px;
+      }
+      .search-card {
+        display: flex;
+        padding: 20px 0px;
+        border: {
+          top: 1px solid $defocus-color;
+          bottom: 1px solid $defocus-color;
+        }
+        &__icon {
+          margin-right: 5px;
+        }
+        &__main {
+          &__mid-bar {
+            p {
+              margin: 10px 0px;
+            }
+          }
+          &__bottom-bar {
+            display: flex;
+            color: $description-color;
+            div {
+              margin: 0px 5px;
+              &:first-child {
+                margin-left: 0px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // &__element {
+    // .search-poster-card {
+    //   padding: 20px 0px;
+    //   border-bottom: 1px solid $defocus-color;
+    //   border-top: 1px solid $defocus-color;
+    //   display: flex;
+    //   &__icon {
+    //     margin-right: 10px;
+    //   }
+    //   &__bottom-bar {
+    //     display: flex;
+    //     #topics {
+    //       margin-right: 5px;
+    //     }
+    //   }
+    //   &:first-child {
+    //     background-color: red;
+    //   }
+    // }
+    // .search-topic-card {
+    //   background-color: green;
+    // }
+    // .search-topic-card {
+    //   padding: 20px 0px;
+    //   border-bottom: 1px solid $defocus-color;
+    //   border-top: 1px solid $defocus-color;
+    //   display: flex;
+    // }
+    // }
+  }
+}
