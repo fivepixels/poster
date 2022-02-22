@@ -51,7 +51,7 @@ export const search = async (req, res) => {
     query: { q },
   } = req;
 
-  const searchRegExp = new RegExp(`${q}`);
+  const searchRegExp = new RegExp(`\\+w(${q})`);
 
   const searchPoster = await Poster.find({ search: searchRegExp })
     .populate("owner")
