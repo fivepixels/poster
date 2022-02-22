@@ -191,7 +191,7 @@ export const watch = async (req, res) => {
   }
 
   return res.status(STATUS_CODE.OK_CODE).render(USER_PUG_PATH + "profile", {
-    pageTitle: `${user.username}`,
+    pageTitle: `Profile | ${user.username}`,
     user,
   });
 };

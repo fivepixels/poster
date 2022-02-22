@@ -1,17 +1,23 @@
-extends ../base
+extends ../base-not-login
 
 block content
-  .signin-box
+  .account
+    .logo
+    img(src="/uploads/logo.png")
     h1 Sign in to Poster
     if errorMessage
       span#errorMessage=errorMessage
-    .login-box__input
+    .account-box
       form(method="POST")
-        label(for="usernameOrEmail")  Username or email address
-        input(type="text", id="usernameOrEmail", name="usernameOrEmail")
-        label(for="password")  Password
-        input(type="password", id="password", name="password")
-        input(type="submit", value="Sign in")
-      .create-an-account
-        span New to Poster?
-          a(href="/join") Create an account.
+        .account-box__element
+          label(for="usernameOrEmail")  Username or email address
+          input(type="text", id="usernameOrEmail", name="usernameOrEmail")
+        .account-box__element
+          label(for="password")  Password
+          input(type="password", id="password", name="password")
+        .account-box__element
+          input(type="submit", value="Sign in").good-button
+    .create-an-account
+      span New to Poster?
+      a(href="/join")
+        span Create an account now &rarr;

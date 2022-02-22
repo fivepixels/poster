@@ -1,25 +1,35 @@
-extends ../base
+extends ../base-not-login
 
 block content
-  .signup-box
+  .account
+    .logo
+    img(src="/uploads/logo.png")
     h1 Sign up to Poster
-    .login-box__input
-      if errorMessage
-        span#errorMessage=errorMessage
+    if errorMessage
+      span#errorMessage=errorMessage
+    .account-box
       form(method="POST")
-        label(for="email")  Email address 
-        input(type="email", id="email", name="email", required=true)
-        label(for="password")  Password
-        input(type="password", id="password", name="password", required=true)
-        label(for="confirm-password")  Confirm Password
-        input(type="password", id="confirm-password", name="confirmPassword", required=true)
-        label(for="name")  Name
-        input(type="text", id="name", name="name", required=true)
-        label(for="username")  Username
-        input(type="text", id="username", name="username", required=true)
-        label(for="location")  Location
-        input(type="text", id="location", name="location")
-        input(type="submit", value="Sign in")
-      .create-an-account
-        span Already have an account?
-          a(href="/login") Sign in &rarr;
+        .account-box__element
+          label(for="email")  Email address 
+          input(type="email", id="email", name="email", required=true)
+        .account-box__element
+          label(for="password")  Password
+          input(type="password", id="password", name="password", required=true)
+        .account-box__element
+          label(for="confirm-password")  Confirm Password
+          input(type="password", id="confirm-password", name="confirmPassword", required=true)
+        .account-box__element
+          label(for="name")  Name
+          input(type="text", id="name", name="name", required=true)
+        .account-box__element
+          label(for="username")  Username
+          input(type="text", id="username", name="username", required=true)
+        .account-box__element
+          label(for="location")  Location
+          input(type="text", id="location", name="location")
+        .account-box__element
+          input(type="submit", value="Sign in").good-button
+    .create-an-account
+      span Already have an account?
+      a(href="/login")
+        span Sign in &rarr;

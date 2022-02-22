@@ -29,8 +29,7 @@ block content
           span=user.username
         .user-info__bio
           if !user.bio
-            //- p This user have no bio
-            p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            p This user have no bio
           else
             p=user.bio
         if String(user._id) === String(loggedInUser._id)
