@@ -44,6 +44,12 @@ header {
       }
       input {
         padding-right: 90px;
+        transition: 0.4s ease-in-out;
+        width: 200px;
+        min-width: 200px;
+        &:focus {
+          width: calc(100vw - 1000px);
+        }
       }
     }
   }

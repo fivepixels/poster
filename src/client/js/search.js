@@ -15,6 +15,8 @@ const KEYWORD = {
   NONE_DISPLAY: "none-display",
 };
 
+search.value = new URLSearchParams(location.search).get("q");
+
 function handleSubmitSearch(event) {
   event.preventDefault();
   window.location.href = `/search?q=${search.value}`;
