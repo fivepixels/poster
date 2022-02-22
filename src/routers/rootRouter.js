@@ -21,8 +21,8 @@ const rootRouter = express.Router();
 
 rootRouter.route("/").get(home);
 rootRouter.route("/new").get(getCreateNewPoster).post(postCreateNewPoster);
-rootRouter.route("/join").get(getJoin).post(postJoin);
-rootRouter.route("/login").get(getLogin).post(postLogin);
+rootRouter.route("/signup").get(getJoin).post(postJoin);
+rootRouter.route("/signin").get(getLogin).post(postLogin);
 rootRouter.route("/logout").get(logout);
 rootRouter.route("/search").get(search);
 rootRouter.use(userRotuer);
