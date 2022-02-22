@@ -37,17 +37,32 @@ mixin book(book)
     i.fa.fa-book
     span=book.length
 
+mixin bookWithTitle(book) 
+  #books.infos
+    a(href=`/${book.owner.username}`)=book.owner.username
+    span.separator  / 
+    a(href=`/${book.title}`)=book.title
+
 mixin topic(topic)
   #topic.infos
     i.far.fa-lightbulb
-    span=topic.length
+    span=topic.title
+
+mixin topicWithTitle(topic)
+  #topics.infos
+    a(href=`/topics/${topic.title}`)
+      span=topic.title
 
 mixin topicNum(topic)
   #topic.infos
     i.far.fa-lightbulb
-    span #{topic.length} 개
+    span=topic.length
 
 mixin posterNum(poster)
   #boo.infos 
     i.fa.fa-book
     span #{poster.length} 개
+
+mixin timeAgo(time)
+  #timeAgo
+    span=time

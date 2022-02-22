@@ -21,10 +21,9 @@ mixin suggestionTopicCard(suggestionTopic)
   include ./info
   #sugTopicCard
     .sug-topic-card__top-bar
-      a(href=`/${suggestionTopic.owner.username}`)
-        span=suggestionTopic.owner.username
+      span topics
       span.separator  / 
-      a(href=`/${suggestionTopic.owner.username}/${suggestionTopic.title}`)
+      a(href=`/topics/${suggestionTopic.title}`)
         span=suggestionTopic.title
     .sug-topic-card__description
       p.description=suggestionTopic.description

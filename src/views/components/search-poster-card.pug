@@ -1,30 +1,25 @@
-mixin searchPosterCard(poster)
-  include ./star
-  #searchPosterCard
-    div
-      i.fa.fa-book
-      a(href=`/${poster.owner.username}`)=poster.owner.username
-      span.separator / 
-      a(href=`/${poster.title}`)=poster.title
-    div
-      p=poster.description
-    div
-      div
+mixin searchCard(type, value)
+  include ./info-info
+  #searchCard.search-card
+    .search-card__icon
+      if type === "poster"
+        i.fa.fa-book
+      else if type === "topic"
         i.fa.fa-lightbulb
-        a(href=`/topics/${poster.topic.title}`)
-          span=poster.topic.title
-      +star(poster.meta.star)
-      div
-        span=poster.createdAt
-
-mixin searchTopicCard(topic)
-  include ./star
-  #searchTopicCard
-    div
-      div
-        i.fa.fa-lightbulb
-        a(href=`/topics/${topic.title}`)=topic.title
-      div
-        span #{topic.posters.length} Posters
-    div
-      +star(topic.meta.star)
+    .search-card__main
+      .search-card__main__top-bar
+        if type === "poster"
+          +bookWithTitle(value)
+        else if type === "topic"
+          +topicWithTitle(value)
+      .search-card__main__mid-bar
+        p.description=value.description
+      .search-card__main__bottom-bar
+        +star(value.meta.star)
+        span.separator |
+        if type === "poster"
+          +topicWithTitle(value.topic)
+        else if type === "topic"
+          +posterNum(value.posters)
+        span.separator |
+        +timeAgo(value.createdAt)

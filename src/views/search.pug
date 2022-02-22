@@ -3,20 +3,26 @@ include ./components/search-poster-card
 //- https://github.com/search?q=a
 
 block content
-  h1 Search
+  .search
+    .review
+      .review__element.selected#postersBtn
+        span Posters
+        span=searchPoster.length
+      .review__element#topicsBtn
+        span Topics
+        span=searchTopic.length
 
-  .review
-    //- TODO : Add link (v.JS)
-    div
-      span Posters
-    div
-      span Topics
+    .result
+      .result__element#postersBox
+        .result__title
+          span #{searchPoster.length} poster results
+        .result__main
+          for poster in searchPoster
+            +searchCard("poster", poster)
 
-  .result
-    //- TODO : Visible or invisible according to the queryString of the URL - Google Translator (v.JS)
-    .posters
-      for poster in searchPoster
-        +searchPosterCard(poster)
-    .topics
-      for topic in searchTopic
-        +searchTopicCard(topic)
+      .result__element.none-display#topicsBox
+        .result__title
+          span #{searchTopic.length} topic results
+        .result__main
+          for topic in searchTopic
+            +searchCard("topic", topic)
