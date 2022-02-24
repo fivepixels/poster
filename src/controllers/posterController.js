@@ -44,8 +44,6 @@ export const watchPoster = async (req, res) => {
       });
   }
 
-  console.log(poster);
-
   return res.status(STATUS_CODE.OK_CODE).render(POSTER_PUG_PATH + "watch", {
     pageTitle: `${poster.owner.username} | ${poster.title}`,
     poster,

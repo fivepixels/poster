@@ -1,3 +1,4 @@
+import "regenerator-runtime";
 import dotenv from "dotenv/config";
 import "./db";
 import "./models/Poster";

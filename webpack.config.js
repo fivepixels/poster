@@ -31,8 +31,6 @@ module.exports = {
     path: path.resolve(__dirname, "assets"),
     clean: true,
   },
-  mode: "development",
-  watch: true,
   module: {
     rules: [
       {
