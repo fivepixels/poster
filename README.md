@@ -14,6 +14,8 @@
 
 ## How to use Poster
 
+- ### [Click Here](https://best-poster.herokuapp.com)
+
 - ### [Create account](https://best-poster.herokuapp.com/join)
 
   1. [Join](https://best-poster.herokuapp.com/join) and [Login](https://best-poster.herokuapp.com/login) to Poster
