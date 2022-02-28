@@ -2,6 +2,10 @@ const fullScreenBtn = document.querySelector("#posterFullScreen");
 const fullScreenBtnIcon = fullScreenBtn.querySelector("i");
 const posterBox = document.querySelector(".watch-poster__main__content");
 const sideBar = document.querySelector(".watch-poster__side-bar");
+const poster = document.querySelector("#poster");
+const posterInfo = JSON.parse(poster.dataset.posterInfo);
+const content = posterInfo.content;
+const markdownBody = document.querySelector(".markdown-body");
 
 /**
  * true = full screen mode
@@ -71,6 +75,12 @@ function handleWindowResize(event) {
     }
   }
 }
+
+function showMarkdown() {
+  markdownBody.innerHTML = content;
+}
+
+showMarkdown();
 
 fullScreenBtn.addEventListener("click", handleClickFullScreenBtn);
 window.addEventListener("resize", handleWindowResize);
