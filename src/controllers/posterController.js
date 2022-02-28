@@ -4,7 +4,8 @@ import User from "../models/User";
 
 import { STATUS_CODE } from "./rootController";
 
-import md from "jstransformer-markdown-it";
+import { Octokit } from "@octokit/core";
+const octokit = new Octokit({ auth: process.env.GH_TOKEN });
 
 const BASE_PUG_PATH = "../views/";
 const POSTER_PUG_PATH = BASE_PUG_PATH + "posters/";
@@ -44,9 +45,23 @@ export const watchPoster = async (req, res) => {
       });
   }
 
+  const response = await octokit.request("POST /markdown", {
+    text: poster.text,
+  });
+
+  if (response.status !== 200) {
+    return res
+      .status(STATUS_CODE.BAD_REQUEST_CODE)
+      .render(POSTER_PUG_PATH + "watch", {
+        pageTitle: `Not Rendering`,
+        errorMessage: "Error : Please refresh.",
+      });
+  }
+
   return res.status(STATUS_CODE.OK_CODE).render(POSTER_PUG_PATH + "watch", {
     pageTitle: `${poster.owner.username} | ${poster.title}`,
     poster,
+    content: response.data,
   });
 };
 

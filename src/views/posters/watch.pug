@@ -20,10 +20,10 @@ block content
           #poster(data-content=poster.text, data-poster-info={
             owner: poster.owner.username,
             editingUserId: loggedInUser._id,
-            title: poster.title
+            title: poster.title,
+            content: content
           })
             .markdown-body
-              :markdown-it(linkify langPrefix='highlight-')=poster.text
         .watch-poster__side-bar
           .watch-poster__side-bar__ok
             .side-bar__element.side-bar__about
