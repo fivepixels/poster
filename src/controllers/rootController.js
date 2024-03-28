@@ -12,7 +12,7 @@ export const STATUS_CODE = {
   BAD_REQUEST_CODE: 400,
   NOT_FOUND_CODE: 404,
   NOT_ACCEPTABLE_CODE: 405,
-  ALEADY_TAKEN_CODE: 409,
+  ALEADY_TAKEN_CODE: 409
 };
 
 export const home = async (req, res) => {
@@ -20,18 +20,18 @@ export const home = async (req, res) => {
     return res
       .status(STATUS_CODE.OK_CODE)
       .render(BASE_PUG_PATH + "home-not-login", {
-        pageTitle: "Login First",
+        pageTitle: "Login First"
       });
   }
 
   const {
-    session: { loggedInUser },
+    session: { loggedInUser }
   } = req;
 
   const user = User.findById(loggedInUser._id);
 
   const myPosters = await Poster.find({
-    owner: loggedInUser._id,
+    owner: loggedInUser._id
   }).populate("owner");
 
   const sugPosters = await Poster.find({}).populate("owner");
@@ -42,13 +42,13 @@ export const home = async (req, res) => {
     myPosters,
     sugPosters,
     sugTopics,
-    user,
+    user
   });
 };
 
 export const search = async (req, res) => {
   const {
-    query: { q },
+    query: { q }
   } = req;
 
   const searchRegExp = new RegExp(`\\+w(${q})`);
@@ -67,6 +67,6 @@ export const search = async (req, res) => {
     pageTitle: `Search | ${q}`,
     searchPoster,
     searchTopic,
-    searchUser,
+    searchUser
   });
 };

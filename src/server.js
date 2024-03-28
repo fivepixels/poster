@@ -3,14 +3,12 @@ import morgan from "morgan";
 
 import rootRouter from "./routers/rootRouter";
 import topicRouter from "./routers/topicRouter";
-import userRotuer from "./routers/userRouter";
 import randomRouter from "./routers/randomRouter";
 import apiRouter from "./routers/apiRouter";
 
 import session from "express-session";
 import MongoStore from "connect-mongo";
 import { localsMiddleware } from "./middlewares";
-import { home } from "./controllers/rootController";
 
 const app = express();
 
@@ -26,11 +24,11 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      maxAge: 604800000,
+      maxAge: 604800000
     },
     store: MongoStore.create({
-      mongoUrl: process.env.DB_URL,
-    }),
+      mongoUrl: process.env.DB_URL
+    })
   })
 );
 

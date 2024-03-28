@@ -14,7 +14,7 @@
 
 ## Stacks in this repo
 
-I use NodeJS, Express, MongoDB and ES6
+I use NodeJS, Express, and MongoDB.
 
 ## How to Contribute
 

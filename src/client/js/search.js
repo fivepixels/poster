@@ -1,4 +1,3 @@
-const searchInMyPoster = document.querySelector("#searchInMyPoster");
 const searchForm = document.querySelector("#searchForm");
 const search = document.querySelector("#search");
 
@@ -12,7 +11,7 @@ const topicsBtn = document.querySelector("#topicsBtn");
 let mode = "posters";
 const KEYWORD = {
   SELECTED: "selected",
-  NONE_DISPLAY: "none-display",
+  NONE_DISPLAY: "none-display"
 };
 
 search.value = new URLSearchParams(location.search).get("q");

@@ -2,12 +2,12 @@ import mongoose from "mongoose";
 
 mongoose.connect(process.env.DB_URL, {
   useNewUrlParser: true,
-  useUnifiedTopology: true,
+  useUnifiedTopology: true
 });
 
 const db = mongoose.connection;
 
-const handleError = (error) => {
+const handleError = error => {
   console.log(`❌ DB Error : ${error}`);
 };
 

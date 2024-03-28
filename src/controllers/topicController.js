@@ -1,12 +1,10 @@
 import Topic from "../models/Topic";
-import Poster from "../models/Poster";
 import User from "../models/User";
 
 const BASE_PUG_PATH = "../views/";
 const TOPIC_PUG_PATH = BASE_PUG_PATH + "topics/";
 
 import { STATUS_CODE } from "./rootController";
-import { async } from "regenerator-runtime";
 
 const topicTypes = ["Agree / Disagree", "Opinion", "Many Positions"];
 
@@ -15,8 +13,8 @@ export const randomTopic = async (req, res) => {
     .populate({
       path: "posters",
       populate: {
-        path: "owner",
-      },
+        path: "owner"
+      }
     })
     .populate("owner");
 
@@ -26,27 +24,27 @@ export const randomTopic = async (req, res) => {
     return res
       .status(STATUS_CODE.NOT_FOUND_CODE)
       .render(BASE_PUG_PATH + "404", {
-        type: "Random topic",
+        type: "Random topic"
       });
   }
 
   return res.status(STATUS_CODE.OK_CODE).render(TOPIC_PUG_PATH + "watch", {
     pageTitle: `RANDOM TOPIC | ${topic.title}`,
-    topic,
+    topic
   });
 };
 
 export const watchTopic = async (req, res) => {
   const {
-    params: { topicname },
+    params: { topicname }
   } = req;
 
   const topic = await Topic.findOne({ title: topicname })
     .populate({
       path: "posters",
       populate: {
-        path: "owner",
-      },
+        path: "owner"
+      }
     })
     .populate("owner");
 
@@ -54,25 +52,25 @@ export const watchTopic = async (req, res) => {
     return res
       .status(STATUS_CODE.NOT_FOUND_CODE)
       .render(BASE_PUG_PATH + "404", {
-        type: "Topic",
+        type: "Topic"
       });
   }
 
   return res.status(STATUS_CODE.OK_CODE).render(TOPIC_PUG_PATH + "watch", {
     pageTitle: `Topic | ${topic.title}`,
-    topic,
+    topic
   });
 };
 
 export const getCreateNewTopic = (req, res) => {
   return res.status(STATUS_CODE.OK_CODE).render(TOPIC_PUG_PATH + "new", {
-    pageTitle: "Create a New Topic",
+    pageTitle: "Create a New Topic"
   });
 };
 
 export const psotCreateNewTopic = async (req, res) => {
   const {
-    body: { title, description, type },
+    body: { title, description, type }
   } = req;
 
   const sameTitleTopic = await Topic.find({ title });
@@ -81,16 +79,16 @@ export const psotCreateNewTopic = async (req, res) => {
       .status(STATUS_CODE.BAD_REQUEST_CODE)
       .render(TOPIC_PUG_PATH + "new", {
         pageTitle: "Create a New Topic",
-        errorMessage: `Topic Title : ${title} is already taken. Please choose another title`,
+        errorMessage: `Topic Title : ${title} is already taken. Please choose another title`
       });
   }
 
-  if (!type in topicTypes) {
+  if ((!type) in topicTypes) {
     return res
       .status(STATUS_CODE.BAD_REQUEST_CODE)
       .render(TOPIC_PUG_PATH + "new", {
         pageTitle: "Create a New Topic",
-        errorMessage: `Topic Type : ${type} was not provided. Please select one ot Agree / Disagree, Opinion, and Many Position`,
+        errorMessage: `Topic Type : ${type} was not provided. Please select one ot Agree / Disagree, Opinion, and Many Position`
       });
   }
 
@@ -101,12 +99,12 @@ export const psotCreateNewTopic = async (req, res) => {
       title,
       description,
       type,
-      owner: user,
+      owner: user
     });
 
     req.session.loggedInUser.topics.push(createdTopic);
     await User.findByIdAndUpdate(req.session.loggedInUser._id, {
-      topics: req.session.loggedInUser.topics,
+      topics: req.session.loggedInUser.topics
     });
 
     return res.sendStatus(STATUS_CODE.CREATED_CODE);
@@ -118,7 +116,7 @@ export const psotCreateNewTopic = async (req, res) => {
 
 export const topicExists = async (req, res) => {
   const {
-    params: { topicname },
+    params: { topicname }
   } = req;
 
   const topicExists = await Topic.exists({ title: topicname });
@@ -134,7 +132,7 @@ export const topicExists = async (req, res) => {
 
 export const posterAlreadyTaken = async (req, res) => {
   const {
-    params: { topicname, postername },
+    params: { topicname, postername }
   } = req;
 
   const topic = await Topic.findOne({ title: topicname }).populate("posters");
@@ -155,7 +153,7 @@ export const posterAlreadyTaken = async (req, res) => {
 
 export const getTopic = async (req, res) => {
   const {
-    params: { topicname },
+    params: { topicname }
   } = req;
 
   const topic = await Topic.findOne({ title: topicname }, { type: true });

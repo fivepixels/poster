@@ -2,7 +2,7 @@ import express from "express";
 import {
   getCreateNewTopic,
   psotCreateNewTopic,
-  watchTopic,
+  watchTopic
 } from "../controllers/topicController";
 
 const topicRouter = express.Router();

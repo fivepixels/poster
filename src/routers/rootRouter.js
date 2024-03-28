@@ -4,7 +4,7 @@ import { home, search } from "../controllers/rootController";
 
 import {
   getCreateNewPoster,
-  postCreateNewPoster,
+  postCreateNewPoster
 } from "../controllers/posterController";
 
 import {
@@ -12,7 +12,7 @@ import {
   postJoin,
   getLogin,
   postLogin,
-  logout,
+  logout
 } from "../controllers/userController";
 
 import userRotuer from "./userRouter";

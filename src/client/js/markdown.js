@@ -58,7 +58,7 @@ function handleClickFullScreenBtn(event) {
   }
 }
 
-function handleWindowResize(event) {
+function handleWindowResize() {
   if (touched) {
     return;
   }

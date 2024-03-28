@@ -5,57 +5,57 @@ const userSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
-    unique: true,
+    unique: true
   },
   name: {
     type: String,
-    required: true,
+    required: true
   },
   bio: {
     type: String,
     required: false,
-    trim: true,
+    trim: true
   },
   socialOnly: {
     type: Boolean,
     default: false,
-    required: true,
+    required: true
   },
   email: {
     type: String,
     required: true,
-    unique: true,
+    unique: true
   },
   password: {
     type: String,
-    required: false,
+    required: false
   },
   location: {
-    type: String,
+    type: String
   },
   avatarUrl: {
     type: String,
     default: "/uploads/avatars/base-user.png",
-    required: false,
+    required: false
   },
   joinedAt: {
     type: Date,
     default: Date.now,
-    required: true,
+    required: true
   },
   posters: [
     {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "Poster",
-    },
+      ref: "Poster"
+    }
   ],
   topics: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Topic",
-    },
-  ],
+      ref: "Topic"
+    }
+  ]
 });
 
 userSchema.pre("save", async function () {

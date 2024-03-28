@@ -2,7 +2,7 @@ import multer from "multer";
 
 export const localsMiddleware = async (req, res, next) => {
   const {
-    session: { loggedInUser, loggedIn },
+    session: { loggedInUser, loggedIn }
   } = req;
 
   res.locals.siteName = "Poster";
@@ -28,5 +28,5 @@ export const publicOnlyMiddleware = (req, res, next) => {
 };
 
 export const uploadFiles = multer({
-  dest: "uploads/avatars/",
+  dest: "uploads/avatars/"
 });

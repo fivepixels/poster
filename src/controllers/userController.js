@@ -28,20 +28,20 @@ const notUsernameArray = [
   "[",
   "]",
   "{",
-  "}",
+  "}"
 ];
 
 const keywordsArray = ["new", "join", "login", "logout", "search"];
 
-export const getJoin = (req, res) => {
+export const getJoin = (_, res) => {
   return res.status(STATUS_CODE.OK_CODE).render(USER_PUG_PATH + "join", {
-    pageTitle: "Sign up to Poster",
+    pageTitle: "Sign up to Poster"
   });
 };
 
 export const postJoin = async (req, res) => {
   const {
-    body: { email, password, confirmPassword, username, name, location },
+    body: { email, password, confirmPassword, username, name, location }
   } = req;
 
   // Check Password
@@ -50,7 +50,7 @@ export const postJoin = async (req, res) => {
       .status(STATUS_CODE.BAD_REQUEST_CODE)
       .render(USER_PUG_PATH + "join", {
         pageTitle: "Sign up to Poster",
-        errorMessage: `Password does not match.`,
+        errorMessage: `Password does not match.`
       });
   }
 
@@ -62,7 +62,7 @@ export const postJoin = async (req, res) => {
       .status(STATUS_CODE.BAD_REQUEST_CODE)
       .render(USER_PUG_PATH + "join", {
         pageTitle: "Sign up to Poster",
-        errorMessage: `Email : ${email} is already taken. Are you the owner of this email? <a href="/login?">If so, log in with this email &rarr;</a>`,
+        errorMessage: `Email : ${email} is already taken. Are you the owner of this email? <a href="/login?">If so, log in with this email &rarr;</a>`
       });
   }
 
@@ -73,7 +73,7 @@ export const postJoin = async (req, res) => {
       .status(STATUS_CODE.BAD_REQUEST_CODE)
       .render(USER_PUG_PATH + "join", {
         pageTitle: "Sign up to Poster",
-        errrorMessage: `Username : ${username} is already taken. Are you the owner of this username? <a href="/login?">If so, log in with this username &rarr;</a>`,
+        errrorMessage: `Username : ${username} is already taken. Are you the owner of this username? <a href="/login?">If so, log in with this username &rarr;</a>`
       });
   }
 
@@ -93,17 +93,17 @@ export const postJoin = async (req, res) => {
       .status(STATUS_CODE.BAD_REQUEST_CODE)
       .render(USER_PUG_PATH + "join", {
         pageTitle: "Sign up to Poster",
-        errorMessage: `Username  : ${username} is not available.`,
+        errorMessage: `Username  : ${username} is not available.`
       });
   }
 
   try {
-    const createdUser = User.create({
+    User.create({
       email,
       name,
       username,
       password,
-      location,
+      location
     });
 
     return res.status(STATUS_CODE.CREATED_CODE).redirect("/login");
@@ -112,20 +112,20 @@ export const postJoin = async (req, res) => {
       .status(STATUS_CODE.BAD_REQUEST_CODE)
       .render(USER_PUG_PATH + "join", {
         pageTitle: "Sign up to Poster",
-        errorMessage: `Error : ${error}`,
+        errorMessage: `Error : ${error}`
       });
   }
 };
 
-export const getLogin = (req, res) => {
+export const getLogin = (_, res) => {
   return res.status(STATUS_CODE.OK_CODE).render(USER_PUG_PATH + "login", {
-    pageTitle: "Sign in to Poster",
+    pageTitle: "Sign in to Poster"
   });
 };
 
 export const postLogin = async (req, res) => {
   const {
-    body: { usernameOrEmail, password },
+    body: { usernameOrEmail, password }
   } = req;
 
   // The code below will be replaced by the API
@@ -154,7 +154,7 @@ export const postLogin = async (req, res) => {
       .status(STATUS_CODE.BAD_REQUEST_CODE)
       .render(USER_PUG_PATH + "login", {
         pageTitle: "Sign up to Poster",
-        errorMessage: `Password  : "${password}" does not match.`,
+        errorMessage: `Password  : "${password}" does not match.`
       });
   }
 
@@ -170,15 +170,15 @@ export const logout = (req, res) => {
 
 export const watch = async (req, res) => {
   const {
-    params: { username },
+    params: { username }
   } = req;
 
   const user = await User.findOne({ username })
     .populate({
       path: "posters",
       populate: {
-        path: "topic",
-      },
+        path: "topic"
+      }
     })
     .populate("topics");
 
@@ -186,19 +186,19 @@ export const watch = async (req, res) => {
     return res
       .status(STATUS_CODE.NOT_FOUND_CODE)
       .render(BASE_PUG_PATH + "404", {
-        type: "User",
+        type: "User"
       });
   }
 
   return res.status(STATUS_CODE.OK_CODE).render(USER_PUG_PATH + "profile", {
     pageTitle: `Profile | ${user.username}`,
-    user,
+    user
   });
 };
 
-export const getEditProfile = (req, res) => {
+export const getEditProfile = (_, res) => {
   return res.render(USER_PUG_PATH + "edit", {
-    pageTitle: "Edit Profile",
+    pageTitle: "Edit Profile"
   });
 };
 
@@ -213,9 +213,9 @@ export const postEditProfile = async (req, res) => {
       location,
       oldPassword,
       newPassword,
-      confirmNewPassword,
+      confirmNewPassword
     },
-    file,
+    file
   } = req;
 
   const user = await User.findById(loggedInUser._id);
@@ -226,11 +226,11 @@ export const postEditProfile = async (req, res) => {
         .status(STATUS_CODE.BAD_REQUEST_CODE)
         .render(USER_PUG_PATH + "edit", {
           pageTitle: "Edit Profile",
-          errorMessage: "Password does not match.",
+          errorMessage: "Password does not match."
         });
     }
 
-    const hashedOldPassword = await bcrypt.hash(oldPassword, 5);
+    await bcrypt.hash(oldPassword, 5);
     const match = await bcrypt.compare(oldPassword, user.password);
 
     if (!match) {
@@ -238,7 +238,7 @@ export const postEditProfile = async (req, res) => {
         .status(STATUS_CODE.BAD_REQUEST_CODE)
         .render(USER_PUG_PATH + "edit", {
           pageTitle: "Edit Profile",
-          errrorMessage: "Old password does not match.",
+          errrorMessage: "Old password does not match."
         });
     }
   }
@@ -251,7 +251,7 @@ export const postEditProfile = async (req, res) => {
         .status(STATUS_CODE.BAD_REQUEST_CODE)
         .render(USER_PUG_PATH + "edit", {
           pageTitle: "Edit Profile",
-          errrorMessage: `Username : ${username} is already taken.`,
+          errrorMessage: `Username : ${username} is already taken.`
         });
     }
   }
@@ -263,7 +263,7 @@ export const postEditProfile = async (req, res) => {
         .status(STATUS_CODE.BAD_REQUEST_CODE)
         .render(USER_PUG_PATH + "edit", {
           pageTitle: "Edit Profile",
-          errorMessage: `Email:  ${email} is already taken.`,
+          errorMessage: `Email:  ${email} is already taken.`
         });
     }
   }
@@ -277,7 +277,7 @@ export const postEditProfile = async (req, res) => {
     location,
     password: newPassword
       ? await bcrypt.hash(newPassword, 5)
-      : loggedInUser.password,
+      : loggedInUser.password
   });
 
   req.session.loggedInUser = updatedUser;

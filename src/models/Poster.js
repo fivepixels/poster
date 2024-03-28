@@ -5,58 +5,58 @@ const posterSchema = new mongoose.Schema({
     type: String,
     required: true,
     maxlength: 25,
-    trim: true,
+    trim: true
   },
   description: {
     type: String,
     maxlength: 300,
-    trim: true,
+    trim: true
   },
   text: {
     type: String,
     required: true,
-    maxlength: 5000,
+    maxlength: 5000
   },
   position: {
     type: String,
-    required: true,
+    required: true
   },
   createdAt: {
     type: Date,
     required: true,
-    default: Date.now,
+    default: Date.now
   },
   meta: {
     views: {
       type: Number,
       default: 0,
       min: 0,
-      required: true,
+      required: true
     },
     rating: {
       type: Number,
       default: 2.5,
       min: 0,
       max: 5,
-      required: true,
+      required: true
     },
     star: {
       type: Number,
       default: 0,
       min: 0,
-      required: true,
-    },
+      required: true
+    }
   },
   topic: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
-    ref: "Topic",
+    ref: "Topic"
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
-    ref: "User",
-  },
+    ref: "User"
+  }
 });
 
 posterSchema.pre("save", function () {

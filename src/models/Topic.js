@@ -6,56 +6,56 @@ const topicSchema = new mongoose.Schema({
     requried: true,
     maxlength: 25,
     trim: true,
-    unique: true,
+    unique: true
   },
   description: {
     type: String,
     required: false,
     maxlength: 300,
-    trim: true,
+    trim: true
   },
   type: {
     type: String,
-    required: true,
+    required: true
   },
   createdAt: {
     type: Date,
     required: true,
-    default: Date.now,
+    default: Date.now
   },
   meta: {
     views: {
       type: Number,
       default: 0,
       min: 0,
-      required: true,
+      required: true
     },
     rating: {
       type: Number,
       default: 2.5,
       min: 0,
       max: 5,
-      required: true,
+      required: true
     },
     star: {
       type: Number,
       default: 0,
       min: 0,
-      required: true,
-    },
+      required: true
+    }
   },
   posters: [
     {
       type: mongoose.Schema.Types.ObjectId,
       required: false,
-      ref: "Poster",
-    },
+      ref: "Poster"
+    }
   ],
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
-    ref: "User",
-  },
+    ref: "User"
+  }
 });
 
 topicSchema.pre("save", function () {

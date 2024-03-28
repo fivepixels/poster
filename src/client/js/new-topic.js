@@ -1,5 +1,3 @@
-import { async } from "regenerator-runtime";
-
 const topicTitle = document.querySelector("#posterTitle");
 const description = document.querySelector("#description");
 const manyPositionsBtn = document.querySelector("#manyPositions");
@@ -18,19 +16,19 @@ const STATUS_CODE = {
   BAD_REQUEST_CODE: 400,
   NOT_FOUND_CODE: 404,
   NOT_ACCEPTABLE_CODE: 405,
-  ALREADY_TAKEN_CODE: 409,
+  ALREADY_TAKEN_CODE: 409
 };
 
 const KEYWORD = {
   GOOD_BTN: "good-button",
   NOT_READY: "good-button__not-ready",
   GOOD_INPUT: "good-input",
-  BAD_INPUT: "bad-input",
+  BAD_INPUT: "bad-input"
 };
 
 let pass = {
   topic: false,
-  positions: "",
+  positions: ""
 };
 
 function submit() {
@@ -45,11 +43,11 @@ function submit() {
 
 async function handleTopicInput(event) {
   const {
-    target: { value },
+    target: { value }
   } = event;
 
   const { status } = await fetch(`/api/topics/${value}/exists`, {
-    method: "POST",
+    method: "POST"
   });
 
   if (!value) {
@@ -93,15 +91,15 @@ async function handleSubmit(event) {
   let data = {
     title: topicTitle.value,
     description: description.value,
-    type: pass.positions,
+    type: pass.positions
   };
 
   const response = await fetch("/topics/new", {
     method: "POST",
     body: JSON.stringify(data),
     headers: {
-      "Content-Type": "application/json",
-    },
+      "Content-Type": "application/json"
+    }
   });
 
   if (response.status === STATUS_CODE.CREATED_CODE) {

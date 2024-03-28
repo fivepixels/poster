@@ -1,5 +1,3 @@
-import { async } from "regenerator-runtime";
-
 const STATUS_CODE = {
   OK_CODE: 200,
   CREATED_CODE: 201,
@@ -8,7 +6,7 @@ const STATUS_CODE = {
   BAD_REQUEST_CODE: 400,
   NOT_FOUND_CODE: 404,
   NOT_ACCEPTABLE_CODE: 405,
-  ALEADY_TAKEN_CODE: 409,
+  ALEADY_TAKEN_CODE: 409
 };
 
 const posterInfo = JSON.parse(
@@ -35,8 +33,8 @@ async function handleClickDeleteBtn() {
     {
       method: "DELETE",
       headers: {
-        "Content-type": "application/json",
-      },
+        "Content-type": "application/json"
+      }
     }
   );
 

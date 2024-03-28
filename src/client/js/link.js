@@ -10,6 +10,10 @@ function redirectTo(url) {
   window.location.href = url;
 }
 
+function handleEditPosterBtnClick() {
+  redirectTo(editPosterTo);
+}
+
 if (createNewPosterBtn) {
   for (let i = 0; i < createNewPosterBtn.length; i++) {
     const element = createNewPosterBtn[i];
@@ -33,9 +37,6 @@ if (randomTopicBtn) {
 
 if (editPosterBtn) {
   editPosterTo = editPosterBtn.dataset.redirectTo || null;
-  function handleEditPosterBtnClick() {
-    redirectTo(editPosterTo);
-  }
   editPosterBtn.addEventListener("click", handleEditPosterBtnClick);
 }
 

@@ -1,5 +1,6 @@
-import "regenerator-runtime";
+// eslint-disable-next-line no-unused-vars
 import dotenv from "dotenv/config";
+import "regenerator-runtime";
 import "./db";
 import "./models/Poster";
 import "./models/Topic";

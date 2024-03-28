@@ -1,16 +1,19 @@
 // Configuration
 
-@import "./configuration/_variables.scss", "./configuration/_reset.scss", "./configuration/_default.scss";
+@import "./configuration/_variables.scss", "./configuration/_reset.scss",
+  "./configuration/_default.scss";
 
 // Components
 
-@import "./components/header.scss", "./components/button.scss", "./components/inputs.scss", "./components/mixins.scss",
+@import "./components/header.scss", "./components/button.scss",
+  "./components/inputs.scss", "./components/mixins.scss",
   "./components/poster-card.scss";
 
 // Screens
 
-@import "./screens/home.scss", "./screens/new.scss", "./screens/watch.scss", "./screens/profile.scss",
-  "./screens/edit.scss", "./screens/search.scss", "./screens/login.scss", "./screens/not-found.scss";
+@import "./screens/home.scss", "./screens/new.scss", "./screens/watch.scss",
+  "./screens/profile.scss", "./screens/edit.scss", "./screens/search.scss",
+  "./screens/login.scss", "./screens/not-found.scss";
 
 // Animations
 

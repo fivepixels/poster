@@ -6,8 +6,8 @@ const BASE_JS_PATH = "./src/client/js/";
 module.exports = {
   resolve: {
     alias: {
-      path: require.resolve("path-browserify"),
-    },
+      path: require.resolve("path-browserify")
+    }
   },
   entry: {
     main: `${BASE_JS_PATH}main.js`,
@@ -18,18 +18,18 @@ module.exports = {
     markdown: `${BASE_JS_PATH}markdown.js`,
     edit: `${BASE_JS_PATH}edit.js`,
     deletePoster: `${BASE_JS_PATH}delete-poster.js`,
-    search: `${BASE_JS_PATH}search.js`,
+    search: `${BASE_JS_PATH}search.js`
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "css/styles.css",
+      filename: "css/styles.css"
     }),
-    new NodePolyfillPlugin(),
+    new NodePolyfillPlugin()
   ],
   output: {
     filename: "js/[name].js",
     path: path.resolve(__dirname, "assets"),
-    clean: true,
+    clean: true
   },
   module: {
     rules: [
@@ -38,14 +38,14 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            presets: [["@babel/preset-env", { targets: "defaults" }]],
-          },
-        },
+            presets: [["@babel/preset-env", { targets: "defaults" }]]
+          }
+        }
       },
       {
         test: /\.scss$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
-      },
-    ],
-  },
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"]
+      }
+    ]
+  }
 };

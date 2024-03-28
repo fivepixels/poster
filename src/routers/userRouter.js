@@ -4,13 +4,13 @@ import {
   getEditPoster,
   deleteDeletePoster,
   postEditPoster,
-  watchPoster,
+  watchPoster
 } from "../controllers/posterController";
 
 import {
   getEditProfile,
   postEditProfile,
-  watch,
+  watch
 } from "../controllers/userController";
 import { uploadFiles } from "../middlewares";
 

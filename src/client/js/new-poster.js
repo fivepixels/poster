@@ -1,5 +1,3 @@
-import { async } from "regenerator-runtime";
-
 const errorMessage = document.querySelector("#errorMessage");
 const explainLabel = document.querySelector("#newPosterExp");
 const chooseTopicLabel = document.querySelector("#chooseTopic");
@@ -25,7 +23,7 @@ const STATUS_CODE = {
   BAD_REQUEST_CODE: 400,
   NOT_FOUND_CODE: 404,
   NOT_ACCEPTABLE_CODE: 405,
-  ALREADY_TAKEN_CODE: 409,
+  ALREADY_TAKEN_CODE: 409
 };
 
 let pass = {
@@ -34,7 +32,7 @@ let pass = {
   posterAlreadyTakenInTopic: false,
   topicExists: false,
   type: "",
-  position: "",
+  position: ""
 };
 
 const KEYWORD = {
@@ -43,7 +41,7 @@ const KEYWORD = {
   GOOD_INPUT: "good-input",
   BAD_INPUT: "bad-input",
   NONE_DISPLAY: "none-display",
-  POST: "POST",
+  POST: "POST"
 };
 
 const defaultTopicTitle = new URLSearchParams(
@@ -56,7 +54,7 @@ topicTitleInput.value = defaultTopicTitle;
 function handlePosterInput() {
   const posterTitleValue = posterTitleInput.value;
 
-  posterTitle.className = KEYWORD.GOOD_INPUT;
+  pass.posterTitle.className = KEYWORD.GOOD_INPUT;
 
   if (posterTitleValue.indexOf(" ") !== -1) {
     errorMessage.innerText = `Poster Title : "${posterTitleValue}" is not available. If you want to set this poster title, you must set it "${posterTitleValue.replace(
@@ -84,7 +82,7 @@ function handlePosterInput() {
       posterTitleInput.className = KEYWORD.BAD_INPUT;
     } else {
       pass.posterTitle = true;
-      const posterExists = checkPosterExists(posterTitleValue);
+      checkPosterExists(posterTitleValue);
       cleanErrorMessage();
     }
   }
@@ -99,7 +97,7 @@ async function handleTopicInput() {
   if (value) {
     checkTopicExists(value);
     checkAlreadyTakenInTopic(value, posterTitleInput.value);
-    getTopicType(topicTitle.value);
+    getTopicType(value);
   } else {
     positions.className = KEYWORD.NONE_DISPLAY;
     agreeDisagreeBtns.className = KEYWORD.NONE_DISPLAY;
@@ -159,10 +157,10 @@ async function getTopicType(topicTitle) {
     explainLabel.innerText = "";
   } else {
     await fetch(`/api/topics/${topicTitle}/topic-type`, {
-      method: KEYWORD.POST,
+      method: KEYWORD.POST
     })
-      .then((res) => res.json())
-      .then((data) => (topicType = data.type));
+      .then(res => res.json())
+      .then(data => (topicType = data.type));
 
     if (!topicType) {
       positions.className = KEYWORD.NONE_DISPLAY;
@@ -193,7 +191,7 @@ async function checkTopicExists(topicTitle) {
   }
 
   const { status } = await fetch(`/api/topics/${topicTitle}/exists`, {
-    method: KEYWORD.POST,
+    method: KEYWORD.POST
   });
 
   if (status === STATUS_CODE.NOT_FOUND_CODE) {
@@ -221,7 +219,7 @@ async function checkPosterExists(posterTitle) {
   }
 
   const { status } = await fetch(`/api/posters/${posterTitle}/exists`, {
-    method: KEYWORD.POST,
+    method: KEYWORD.POST
   });
 
   if (status === STATUS_CODE.ALREADY_TAKEN_CODE) {
@@ -250,7 +248,7 @@ async function checkAlreadyTakenInTopic(topicTitle, posterTitle) {
   const { status } = await fetch(
     `/api/topics/${topicTitle}/${posterTitle}/already-taken`,
     {
-      method: KEYWORD.POST,
+      method: KEYWORD.POST
     }
   );
 
@@ -298,15 +296,15 @@ async function handelSubmit(event) {
     topic: topicTitleInput.value,
     title: posterTitleInput.value,
     description: posterDescriptionInput.value,
-    position: pass.position,
+    position: pass.position
   };
 
   const { status } = await fetch("/new", {
     method: KEYWORD.POST,
     body: JSON.stringify(data),
     headers: {
-      "Content-Type": "application/json",
-    },
+      "Content-Type": "application/json"
+    }
   });
 
   if (status === STATUS_CODE.CREATED_CODE) {

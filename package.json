@@ -1,17 +1,32 @@
 {
   "name": "poster",
-  "version": "1.0.0",
   "description": "Poster is a community site where you can share your Thoughts & Opinions about topics with others.",
+  "version": "1.0.0",
   "main": "index.js",
-  "author": "Novelier Webbelier<novelier.webbelier@gmail.com>",
+  "private": true,
   "license": "MIT",
-  "homepage": "https://github.com/Novelier-Webbelier/poster#readme",
-  "bugs": {
-    "url": "https://github.com/Novelier-Webbelier/poster/issues"
+  "homepage": "https://best-poster.vercel.app/",
+  "keywords": [
+    "social media",
+    "express",
+    "mongodb"
+  ],
+  "author": {
+    "name": "Seol SO",
+    "url": "https://fivepixels.dev",
+    "email": "hi@fivepixels.dev"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/fivepixels"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Novelier-Webbelier/poster.git"
+    "url": "https://github.com/fivepixels/poster"
+  },
+  "bugs": {
+    "url": "https://github.com/fivepixels/poster/issues/new",
+    "email": "hi@fivepixels.dev"
   },
   "scripts": {
     "start": "node build/init.js",
@@ -19,7 +34,8 @@
     "build:server": "babel src -d build",
     "build:assets": "webpack --mode=production",
     "dev:server": "nodemon",
-    "dev:assets": "webpack --mode=development -w"
+    "dev:assets": "webpack --mode=development -w",
+    "format": "prettier --write . && eslint --fix ."
   },
   "dependencies": {
     "@octokit/core": "^3.5.1",
@@ -47,9 +63,14 @@
     "@babel/core": "^7.17.5",
     "@babel/node": "^7.16.8",
     "@babel/preset-env": "^7.16.11",
+    "@babel/eslint-parser": "^7.24.1",
+    "babel-eslint": "^10.1.0",
     "css-loader": "^6.6.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
     "mini-css-extract-plugin": "^2.5.3",
     "nodemon": "^2.0.15",
+    "prettier": "^3.2.5",
     "sass": "^1.49.7",
     "sass-loader": "^12.4.0",
     "style-loader": "^3.3.1",

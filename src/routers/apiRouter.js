@@ -2,7 +2,7 @@ import express from "express";
 import {
   topicExists,
   posterAlreadyTaken,
-  getTopic,
+  getTopic
 } from "../controllers/topicController";
 import { posterExists } from "../controllers/posterController";
 

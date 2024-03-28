@@ -1,0 +1,1 @@
+(()=>{var t=document.querySelectorAll("#copycopy");function e(t){var e=t.path[1].dataset.copyThis,r=t.path[0];navigator.clipboard.writeText("localhost:4000"+String(e)),r.innerText="The url is copied!"}for(var r=0;r<t.length;r++)t[r].addEventListener("click",e)})();
